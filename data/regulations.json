@@ -1,0 +1,51 @@
+{
+  "syllabusVersion": "2.0",
+  "syllabusDate": "2026-09-04",
+  "sourceSection": "§10",
+  "preamble": "Regulasi berikut tidak menentukan daftar algoritma OSN, tetapi relevan bagi penyelenggaraan program pendidikan, manajemen talenta, platform digital, dan perlindungan data peserta.",
+  "minorParticipantsCallout": "Data peserta di bawah umur - Terapkan data minimization, role-based access, log akses, retensi terbatas, keamanan akun, proses persetujuan/otorisasi sesuai konteks, dan kebijakan privasi yang mudah dipahami.",
+  "regulations": [
+    {
+      "id": "uu-20-2003",
+      "title": "UU No. 20 Tahun 2003 - Sistem Pendidikan Nasional",
+      "relevance": "Kerangka pendidikan nasional, mutu, relevansi, dan pengembangan potensi peserta didik.",
+      "citation": "R15"
+    },
+    {
+      "id": "perpres-108-2024",
+      "title": "Perpres No. 108 Tahun 2024 - Desain Besar Manajemen Talenta Nasional",
+      "relevance": "Konteks manajemen talenta menuju Indonesia Emas 2045.",
+      "citation": "R16"
+    },
+    {
+      "id": "permendikdasmen-25-2025",
+      "title": "Permendikdasmen No. 25 Tahun 2025 - Manajemen Talenta Murid",
+      "relevance": "Identifikasi, pengembangan, aktualisasi, apresiasi dan kapitalisasi talenta murid.",
+      "citation": "R17"
+    },
+    {
+      "id": "permen-ppn-kepala-bappenas-1-2026",
+      "title": "Permen PPN/Kepala Bappenas No. 1 Tahun 2026",
+      "relevance": "Rencana aksi DBMTN 2025-2029 dan konteks integrasi program/data talenta.",
+      "citation": "R18"
+    },
+    {
+      "id": "uu-27-2022",
+      "title": "UU No. 27 Tahun 2022 - Pelindungan Data Pribadi",
+      "relevance": "Dasar pengelolaan data siswa, akun, submission, dan analytics secara proporsional.",
+      "citation": "R19"
+    },
+    {
+      "id": "uu-1-2024",
+      "title": "UU No. 1 Tahun 2024 - perubahan kedua UU ITE",
+      "relevance": "Konteks penyelenggaraan sistem elektronik dan aktivitas digital.",
+      "citation": "R20"
+    },
+    {
+      "id": "pp-71-2019",
+      "title": "PP No. 71 Tahun 2019 - PSTE",
+      "relevance": "Tata kelola penyelenggaraan sistem dan transaksi elektronik.",
+      "citation": "R21"
+    }
+  ]
+}

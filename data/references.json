@@ -1,0 +1,376 @@
+{
+  "syllabusVersion": "2.0",
+  "syllabusDate": "2026-09-04",
+  "sourceSection": "§99",
+  "references": [
+    {
+      "id": "R1",
+      "kind": "official-syllabus",
+      "title": "Silabus OSN Informatika 2026",
+      "authors": "IA TOKI",
+      "year": null,
+      "url": "https://osn.toki.id/silabus",
+      "notes": null
+    },
+    {
+      "id": "R2",
+      "kind": "official-syllabus",
+      "title": "Silabus OSN-K Informatika 2026",
+      "authors": "IA TOKI",
+      "year": null,
+      "url": "https://osn.toki.id/silabus/kota",
+      "notes": null
+    },
+    {
+      "id": "R3",
+      "kind": "official-syllabus",
+      "title": "Silabus OSN-P Informatika 2026",
+      "authors": "IA TOKI",
+      "year": null,
+      "url": "https://osn.toki.id/silabus/provinsi",
+      "notes": null
+    },
+    {
+      "id": "R4",
+      "kind": "archive",
+      "title": "Arsip Olimpiade Sains Nasional Informatika",
+      "authors": "IA TOKI",
+      "year": null,
+      "url": "https://osn.toki.id/arsip",
+      "notes": null
+    },
+    {
+      "id": "R5",
+      "kind": "archive",
+      "title": "Problemsets and competition archive",
+      "authors": "TLX TOKI",
+      "year": null,
+      "url": "https://tlx.toki.id/problems/problemsets?archive=inc",
+      "notes": null
+    },
+    {
+      "id": "R6",
+      "kind": "official-syllabus",
+      "title": "Portal OSN Informatika dan jalur kompetisi",
+      "authors": "IA TOKI",
+      "year": null,
+      "url": "https://osn.toki.id/",
+      "notes": null
+    },
+    {
+      "id": "R7",
+      "kind": "official-syllabus",
+      "title": "Official Syllabus page",
+      "authors": "International Olympiad in Informatics",
+      "year": null,
+      "url": "https://ioinformatics.org/page/syllabus/12",
+      "notes": null
+    },
+    {
+      "id": "R8",
+      "kind": "official-syllabus",
+      "title": "IOI Syllabus 2025 (official PDF available at time of review)",
+      "authors": "IOI International Scientific Committee",
+      "year": null,
+      "url": "https://ioinformatics.org/files/ioi-syllabus-2025.pdf",
+      "notes": null
+    },
+    {
+      "id": "R9",
+      "kind": "journal",
+      "title": "Indonesian Olympiad in Informatics. Olympiads in Informatics, 4, 67-75",
+      "authors": "Kurnia, I. W.; Marshal, B.",
+      "year": 2010,
+      "url": "https://ioinformatics.org/journal/INFOL051.pdf",
+      "notes": null
+    },
+    {
+      "id": "R10",
+      "kind": "journal",
+      "title": "Reshaping Indonesian Students Training for IOI. Olympiads in Informatics, 10, 195-205. DOI: 10.15388/ioi.2016.12",
+      "authors": "Liem, M. M. I.",
+      "year": 2016,
+      "url": "https://ioi.te.lv/oi/shtm/v10_2016_195_205.shtml",
+      "notes": null
+    },
+    {
+      "id": "R11",
+      "kind": "journal",
+      "title": "Programming Trainings and Informatics Teaching Through Online Contests. Olympiads in Informatics, 8, 21-34",
+      "authors": "Combefis, S.; Wautelet, J.",
+      "year": 2014,
+      "url": "https://www.researchgate.net/publication/283595158_Programming_Trainings_and_Informatics_Teaching_Through_Online_Contests",
+      "notes": null
+    },
+    {
+      "id": "R12",
+      "kind": "journal",
+      "title": "Building Competitive Programmers from Day One: The FACOMpetindo Training Model. Olympiads in Informatics, 20",
+      "authors": "Falcao et al.",
+      "year": 2026,
+      "url": "https://ioinformatics.org/journal/v20_2026_17_30_Falcao.pdf",
+      "notes": null
+    },
+    {
+      "id": "R13",
+      "kind": "journal",
+      "title": "Empirical Study of Coding Behavior Under Time Constraints in the IOI. Olympiads in Informatics, 20",
+      "authors": "Azizova, Muradov, Hasanov",
+      "year": 2026,
+      "url": "https://ioinformatics.org/journal/v20_2026_1_15_Azizova.pdf",
+      "notes": null
+    },
+    {
+      "id": "R14",
+      "kind": "historical",
+      "title": "Historical material on the first IOI, Pravetz, Bulgaria, May 1989",
+      "authors": "Kenderov, P. S.",
+      "year": null,
+      "url": "https://ioinformatics.org/files/volume11si.pdf",
+      "notes": null
+    },
+    {
+      "id": "R15",
+      "kind": "law",
+      "title": "UU No. 20 Tahun 2003 tentang Sistem Pendidikan Nasional",
+      "authors": "Republik Indonesia",
+      "year": 2003,
+      "url": "https://peraturan.bpk.go.id/Details/43920/uu-no-20-tahun-2003",
+      "notes": null
+    },
+    {
+      "id": "R16",
+      "kind": "law",
+      "title": "Perpres No. 108 Tahun 2024 tentang Desain Besar Manajemen Talenta Nasional",
+      "authors": "Republik Indonesia",
+      "year": 2024,
+      "url": "https://peraturan.bpk.go.id/Details/303037/perpres-no-108-tahun-2024",
+      "notes": null
+    },
+    {
+      "id": "R17",
+      "kind": "law",
+      "title": "Permendikdasmen No. 25 Tahun 2025 tentang Manajemen Talenta Murid - informasi resmi",
+      "authors": "Kemendikdasmen",
+      "year": 2025,
+      "url": "https://www.kemendikdasmen.go.id/siaran-pers/14504-kemendikdasmen-tetapkan-permendikdasmen-nomor-25-tahun-2025-tentang-manajemen-talenta-murid",
+      "notes": null
+    },
+    {
+      "id": "R18",
+      "kind": "law",
+      "title": "Permen PPN/Kepala Bappenas No. 1 Tahun 2026 tentang Rencana Aksi DBMTN 2025-2029",
+      "authors": "Republik Indonesia",
+      "year": 2026,
+      "url": "https://peraturan.bpk.go.id/Details/341437/permen-ppnkepala-bappenas-no-1-tahun-2026",
+      "notes": null
+    },
+    {
+      "id": "R19",
+      "kind": "law",
+      "title": "UU No. 27 Tahun 2022 tentang Pelindungan Data Pribadi",
+      "authors": "Republik Indonesia",
+      "year": 2022,
+      "url": "https://peraturan.bpk.go.id/Details/229798/uu-no-27-tahun-2022",
+      "notes": null
+    },
+    {
+      "id": "R20",
+      "kind": "law",
+      "title": "UU No. 1 Tahun 2024 tentang Perubahan Kedua atas UU ITE",
+      "authors": "Republik Indonesia",
+      "year": 2024,
+      "url": "https://peraturan.bpk.go.id/Details/274494/uu-no-1-tahun-2024",
+      "notes": null
+    },
+    {
+      "id": "R21",
+      "kind": "law",
+      "title": "PP No. 71 Tahun 2019 tentang Penyelenggaraan Sistem dan Transaksi Elektronik",
+      "authors": "Republik Indonesia",
+      "year": 2019,
+      "url": "https://peraturan.bpk.go.id/Details/122030/Pp-No-71-Tahun-2019",
+      "notes": null
+    },
+    {
+      "id": "R22",
+      "kind": "standard",
+      "title": "ISO 21001:2025 - Educational organizations - Management systems for educational organizations",
+      "authors": null,
+      "year": 2025,
+      "url": "https://www.iso.org/standard/21001",
+      "notes": null
+    },
+    {
+      "id": "R23",
+      "kind": "standard",
+      "title": "ISO/IEC 27001:2022 - Information security management systems - Requirements",
+      "authors": null,
+      "year": 2022,
+      "url": "https://www.iso.org/standard/27001",
+      "notes": null
+    },
+    {
+      "id": "R24",
+      "kind": "standard",
+      "title": "ISO/IEC 27002:2022 - Information security controls",
+      "authors": null,
+      "year": 2022,
+      "url": "https://www.iso.org/standard/75652.html",
+      "notes": null
+    },
+    {
+      "id": "R25",
+      "kind": "standard",
+      "title": "ISO/IEC 27005:2022 - Guidance on managing information security risks",
+      "authors": null,
+      "year": 2022,
+      "url": "https://www.iso.org/standard/80585.html",
+      "notes": null
+    },
+    {
+      "id": "R26",
+      "kind": "standard",
+      "title": "ISO/IEC 27017:2026 - Information security controls for cloud services",
+      "authors": null,
+      "year": 2026,
+      "url": "https://www.iso.org/standard/27017",
+      "notes": null
+    },
+    {
+      "id": "R27",
+      "kind": "standard",
+      "title": "ISO/IEC 27018:2025 - Protection of PII in public clouds",
+      "authors": null,
+      "year": 2025,
+      "url": "https://www.iso.org/standard/27018",
+      "notes": null
+    },
+    {
+      "id": "R28",
+      "kind": "standard",
+      "title": "ISO/IEC 27701:2025 - Privacy information management systems",
+      "authors": null,
+      "year": 2025,
+      "url": "https://www.iso.org/standard/27701",
+      "notes": null
+    },
+    {
+      "id": "R29",
+      "kind": "standard",
+      "title": "ISO/IEC 27034-1:2011 - Application security - Concepts and principles",
+      "authors": null,
+      "year": 2011,
+      "url": "https://www.iso.org/standard/44378.html",
+      "notes": null
+    },
+    {
+      "id": "R30",
+      "kind": "standard",
+      "title": "ISO/IEC 20000-1:2018 - Service management system requirements",
+      "authors": null,
+      "year": 2018,
+      "url": "https://www.iso.org/standard/70636.html",
+      "notes": null
+    },
+    {
+      "id": "R31",
+      "kind": "standard",
+      "title": "ISO 22301:2019 - Business continuity management systems - Requirements",
+      "authors": null,
+      "year": 2019,
+      "url": "https://www.iso.org/standard/75106.html",
+      "notes": null
+    },
+    {
+      "id": "R32",
+      "kind": "standard",
+      "title": "ISO/IEC 15408 series:2026 - Common Criteria for Information Technology Security Evaluation",
+      "authors": null,
+      "year": 2026,
+      "url": "https://www.iso.org/standard/15408-1",
+      "notes": null
+    },
+    {
+      "id": "R33",
+      "kind": "standard",
+      "title": "ISO/IEC 25010:2023 - Product quality model",
+      "authors": null,
+      "year": 2023,
+      "url": "https://www.iso.org/standard/78176.html",
+      "notes": null
+    },
+    {
+      "id": "R34",
+      "kind": "standard",
+      "title": "ISO/IEC/IEEE 12207:2026 - Software life cycle processes",
+      "authors": null,
+      "year": 2026,
+      "url": "https://www.iso.org/standard/90219.html",
+      "notes": null
+    },
+    {
+      "id": "R35",
+      "kind": "standard",
+      "title": "ISO/IEC 40500:2025 - Web Content Accessibility Guidelines (WCAG) 2.2",
+      "authors": null,
+      "year": 2025,
+      "url": "https://www.iso.org/standard/91029.html",
+      "notes": null
+    },
+    {
+      "id": "R36",
+      "kind": "book",
+      "title": "Competitive Programming 4 companion site",
+      "authors": "Halim, S.; Halim, F.; Effendy, S.",
+      "year": null,
+      "url": "https://www.cpbook.net/",
+      "notes": null
+    },
+    {
+      "id": "R37",
+      "kind": "book",
+      "title": "Guide to Competitive Programming, 3rd ed. Springer, 2024",
+      "authors": "Laaksonen, A.",
+      "year": null,
+      "url": "https://link.springer.com/book/10.1007/978-3-031-61794-2",
+      "notes": null
+    },
+    {
+      "id": "R38",
+      "kind": "book",
+      "title": "Introduction to Algorithms, 4th ed. MIT Press, 2022",
+      "authors": "Cormen, T. H.; Leiserson, C. E.; Rivest, R. L.; Stein, C.",
+      "year": null,
+      "url": "https://mitpress.mit.edu/9780262046305/introduction-to-algorithms/",
+      "notes": null
+    },
+    {
+      "id": "R39",
+      "kind": "platform",
+      "title": "Algorithms for Competitive Programming",
+      "authors": "CP-Algorithms",
+      "year": null,
+      "url": "https://cp-algorithms.com/",
+      "notes": null
+    },
+    {
+      "id": "R40",
+      "kind": "platform",
+      "title": "Competitive programming contest platform",
+      "authors": "AtCoder",
+      "year": null,
+      "url": "https://atcoder.jp/",
+      "notes": null
+    },
+    {
+      "id": "R41",
+      "kind": "platform",
+      "title": "Competitive programming platform",
+      "authors": "Codeforces",
+      "year": null,
+      "url": "https://codeforces.com/",
+      "notes": null
+    }
+  ]
+}

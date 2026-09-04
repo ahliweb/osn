@@ -1,0 +1,76 @@
+{
+  "syllabusVersion": "2.0",
+  "syllabusDate": "2026-09-04",
+  "sourceSection": "§12",
+  "priorities": [
+    {
+      "priority": 1,
+      "source": "Silabus OSN Informatika 2026",
+      "usage": "Source of truth cakupan lokal dan perubahan tahunan.",
+      "citations": ["R1"]
+    },
+    {
+      "priority": 2,
+      "source": "Silabus OSN-K / OSN-P",
+      "usage": "Format kompetensi dan strategi latihan tahap seleksi.",
+      "citations": ["R2", "R3"]
+    },
+    {
+      "priority": 3,
+      "source": "TLX TOKI + arsip OSN",
+      "usage": "Latihan Indonesia dan benchmark historis.",
+      "citations": ["R4", "R5"]
+    },
+    {
+      "priority": 4,
+      "source": "IOI Syllabus",
+      "usage": "Benchmark internasional; periksa versi terbaru sebelum extension.",
+      "citations": ["R7", "R8"]
+    },
+    {
+      "priority": 5,
+      "source": "Buku/CP resources",
+      "usage": "Pendalaman algoritma, struktur data, implementation patterns.",
+      "citations": ["R36", "R37", "R38", "R39", "R40", "R41"]
+    }
+  ],
+  "books": [
+    {
+      "title": "Halim, Halim, Effendy. Competitive Programming 4",
+      "usage": "referensi breadth dan latihan.",
+      "citation": "R36"
+    },
+    {
+      "title": "Laaksonen. Guide to Competitive Programming, 3rd ed., Springer, 2024",
+      "usage": "teknik programming, efficiency, algorithms, data structures, contest prep.",
+      "citation": "R37"
+    },
+    {
+      "title": "Cormen et al. Introduction to Algorithms, 4th ed., MIT Press, 2022",
+      "usage": "rigor dan analisis; digunakan selektif, bukan textbook linear pemula.",
+      "citation": "R38"
+    }
+  ],
+  "platforms": [
+    {
+      "name": "TLX TOKI",
+      "usage": "prioritas untuk ekosistem Indonesia dan arsip OSN/TOKI."
+    },
+    {
+      "name": "AtCoder",
+      "usage": "problem statement/constraint bersih dan set latihan terstruktur."
+    },
+    {
+      "name": "Codeforces",
+      "usage": "volume contest dan variasi pola; wajib kurasi difficulty/topic."
+    },
+    {
+      "name": "CP-Algorithms",
+      "usage": "referensi teknis algoritma/data structure, bukan silabus resmi."
+    },
+    {
+      "name": "Arsip IOI/APIO/TOKI Open",
+      "usage": "digunakan setelah fondasi dan core sesuai level."
+    }
+  ]
+}
