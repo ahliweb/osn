@@ -1,0 +1,50 @@
+{
+  "syllabusVersion": "2.0",
+  "syllabusDate": "2026-09-04",
+  "sourceSection": "§5.2",
+  "steps": [
+    {
+      "order": 1,
+      "instruction": "Mulai dari problem yang membutuhkan teknik tersebut, bukan definisi algoritma terlebih dahulu."
+    },
+    {
+      "order": 2,
+      "instruction": "Minta siswa menulis constraint analysis dan baseline solution sebelum diperlihatkan solusi optimal."
+    },
+    {
+      "order": 3,
+      "instruction": "Tentukan invariant/state/operasi yang harus didukung; baru pilih algoritma/struktur data."
+    },
+    {
+      "order": 4,
+      "instruction": "Tulis complexity waktu dan memori sebelum coding."
+    },
+    {
+      "order": 5,
+      "instruction": "Implementasikan dari pemahaman, bukan copy template; template boleh dipakai setelah siswa pernah membangun sendiri."
+    },
+    {
+      "order": 6,
+      "instruction": "Uji minimal: contoh, batas minimum, batas maksimum konseptual, duplikasi, urutan buruk, overflow, disconnected/negative-edge bila relevan."
+    },
+    {
+      "order": 7,
+      "instruction": "Setelah Accepted, wajib jawab: mengapa benar, mengapa cukup cepat, apa alternatifnya, dan kapan teknik ini tidak berlaku."
+    }
+  ],
+  "minimumTests": [
+    "contoh",
+    "batas minimum",
+    "batas maksimum konseptual",
+    "duplikasi",
+    "urutan buruk",
+    "overflow",
+    "disconnected/negative-edge bila relevan"
+  ],
+  "postAcceptedQuestions": [
+    "mengapa benar",
+    "mengapa cukup cepat",
+    "apa alternatifnya",
+    "kapan teknik ini tidak berlaku"
+  ]
+}

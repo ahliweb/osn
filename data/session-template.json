@@ -1,0 +1,69 @@
+{
+  "syllabusVersion": "2.0",
+  "syllabusDate": "2026-09-04",
+  "sourceSection": "§5.1",
+  "sessions": [
+    {
+      "sessionNo": 1,
+      "focus": "konsep & guided practice",
+      "segments": [
+        {
+          "startMinute": 0,
+          "endMinute": 15,
+          "activity": "Retrieval quiz topik lama; 2-3 pertanyaan constraint/complexity."
+        },
+        {
+          "startMinute": 15,
+          "endMinute": 45,
+          "activity": "Konsep inti + worked example; fokus invariant/state/correctness."
+        },
+        {
+          "startMinute": 45,
+          "endMinute": 90,
+          "activity": "Guided problems bertingkat dari contoh ke transfer."
+        },
+        {
+          "startMinute": 90,
+          "endMinute": 115,
+          "activity": "Independent problem + mentor observation."
+        },
+        {
+          "startMinute": 115,
+          "endMinute": 120,
+          "activity": "Exit ticket: 3 poin yang dipahami + 1 gap."
+        }
+      ]
+    },
+    {
+      "sessionNo": 2,
+      "focus": "problem solving & feedback",
+      "segments": [
+        {
+          "startMinute": 0,
+          "endMinute": 15,
+          "activity": "Review error minggu lalu; pilih 1 counterexample/bug untuk dibedah."
+        },
+        {
+          "startMinute": 15,
+          "endMinute": 45,
+          "activity": "Timed problem 1-2: siswa bekerja independen."
+        },
+        {
+          "startMinute": 45,
+          "endMinute": 90,
+          "activity": "Review solusi: baseline, alternatif, complexity, edge cases."
+        },
+        {
+          "startMinute": 90,
+          "endMinute": 115,
+          "activity": "Timed problem berikutnya / mini-contest."
+        },
+        {
+          "startMinute": 115,
+          "endMinute": 120,
+          "activity": "Assign upsolve/re-solve dan target minggu berikutnya."
+        }
+      ]
+    }
+  ]
+}
