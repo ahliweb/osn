@@ -13,13 +13,16 @@
     "test": "bun test",
     "test:coverage": "bun test --coverage",
     "build": "bun build ./src/index.ts --outdir dist --target bun",
-    "validate": "echo \"validate: not yet implemented (see issue #19)\""
+    "validate": "echo \"validate: not yet implemented (see issue #19)\"",
+    "changeset": "changeset",
+    "version": "changeset version"
   },
   "dependencies": {
     "zod": "^3.23.8"
   },
   "devDependencies": {
     "@biomejs/biome": "^1.9.4",
+    "@changesets/cli": "^3.0.2",
     "@types/bun": "^1.1.6",
     "typescript": "^5.5.4"
   },
