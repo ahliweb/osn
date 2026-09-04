@@ -1,0 +1,189 @@
+// Bun Snapshot v1, https://bun.sh/docs/test/snapshots
+
+exports[`renderWeeklyPlan: snapshots week 1 matches its committed snapshot 1`] = `
+"# Week 1: Orientasi CP & C++ dasar
+
+Topic families: dasar-pemrograman
+
+## Content
+- Algoritma/pseudocode
+- I/O
+- variabel
+- tipe data
+- operator
+- integer overflow
+- format solusi.
+
+## Outcome
+Menulis program dasar, dry-run, membedakan int/long long.
+
+## Practice / evaluation target
+6-10 soal dasar + diagnosis OSN-K.
+Curated problem-load target: 6-10 soal (internal workload guidance for mentors, not an official pass/fail threshold -- §4).
+
+## Session templates (§5.1)
+
+### Session 1 -- konsep & guided practice
+
+| Minutes | Activity |
+| --- | --- |
+| 0-15 | Retrieval quiz topik lama; 2-3 pertanyaan constraint/complexity. |
+| 15-45 | Konsep inti + worked example; fokus invariant/state/correctness. |
+| 45-90 | Guided problems bertingkat dari contoh ke transfer. |
+| 90-115 | Independent problem + mentor observation. |
+| 115-120 | Exit ticket: 3 poin yang dipahami + 1 gap. |
+
+### Session 2 -- problem solving & feedback
+
+| Minutes | Activity |
+| --- | --- |
+| 0-15 | Review error minggu lalu; pilih 1 counterexample/bug untuk dibedah. |
+| 15-45 | Timed problem 1-2: siswa bekerja independen. |
+| 45-90 | Review solusi: baseline, alternatif, complexity, edge cases. |
+| 90-115 | Timed problem berikutnya / mini-contest. |
+| 115-120 | Assign upsolve/re-solve dan target minggu berikutnya. |
+
+## Exit ticket (§5.1)
+Exit ticket: 3 poin yang dipahami + 1 gap.
+
+## SOP reminder (§5.2)
+1. Mulai dari problem yang membutuhkan teknik tersebut, bukan definisi algoritma terlebih dahulu.
+2. Minta siswa menulis constraint analysis dan baseline solution sebelum diperlihatkan solusi optimal.
+3. Tentukan invariant/state/operasi yang harus didukung; baru pilih algoritma/struktur data.
+4. Tulis complexity waktu dan memori sebelum coding.
+5. Implementasikan dari pemahaman, bukan copy template; template boleh dipakai setelah siswa pernah membangun sendiri.
+6. Uji minimal: contoh, batas minimum, batas maksimum konseptual, duplikasi, urutan buruk, overflow, disconnected/negative-edge bila relevan.
+7. Setelah Accepted, wajib jawab: mengapa benar, mengapa cukup cepat, apa alternatifnya, dan kapan teknik ini tidak berlaku.
+
+## Hint policy ladder (§5.3)
+1. pertanyaan pemodelan
+2. arah complexity
+3. observasi kunci
+4. pseudocode parsial -- requires a hint-free re-solve at the next interval
+5. editorial -- requires a hint-free re-solve at the next interval"
+`;
+
+exports[`renderWeeklyPlan: snapshots week 14 matches its committed snapshot 1`] = `
+"# Week 14: Dynamic Programming II
+
+Topic families: strategi-problem-solving
+
+## Content
+- Knapsack patterns
+- grid DP
+- coin change
+- reconstruction
+- space optimization.
+
+## Outcome
+Menghubungkan state design dengan constraint dan memori.
+
+## Practice / evaluation target
+8-10 soal + state worksheet.
+Curated problem-load target: 8-10 soal (internal workload guidance for mentors, not an official pass/fail threshold -- §4).
+
+## Session templates (§5.1)
+
+### Session 1 -- konsep & guided practice
+
+| Minutes | Activity |
+| --- | --- |
+| 0-15 | Retrieval quiz topik lama; 2-3 pertanyaan constraint/complexity. |
+| 15-45 | Konsep inti + worked example; fokus invariant/state/correctness. |
+| 45-90 | Guided problems bertingkat dari contoh ke transfer. |
+| 90-115 | Independent problem + mentor observation. |
+| 115-120 | Exit ticket: 3 poin yang dipahami + 1 gap. |
+
+### Session 2 -- problem solving & feedback
+
+| Minutes | Activity |
+| --- | --- |
+| 0-15 | Review error minggu lalu; pilih 1 counterexample/bug untuk dibedah. |
+| 15-45 | Timed problem 1-2: siswa bekerja independen. |
+| 45-90 | Review solusi: baseline, alternatif, complexity, edge cases. |
+| 90-115 | Timed problem berikutnya / mini-contest. |
+| 115-120 | Assign upsolve/re-solve dan target minggu berikutnya. |
+
+## Exit ticket (§5.1)
+Exit ticket: 3 poin yang dipahami + 1 gap.
+
+## SOP reminder (§5.2)
+1. Mulai dari problem yang membutuhkan teknik tersebut, bukan definisi algoritma terlebih dahulu.
+2. Minta siswa menulis constraint analysis dan baseline solution sebelum diperlihatkan solusi optimal.
+3. Tentukan invariant/state/operasi yang harus didukung; baru pilih algoritma/struktur data.
+4. Tulis complexity waktu dan memori sebelum coding.
+5. Implementasikan dari pemahaman, bukan copy template; template boleh dipakai setelah siswa pernah membangun sendiri.
+6. Uji minimal: contoh, batas minimum, batas maksimum konseptual, duplikasi, urutan buruk, overflow, disconnected/negative-edge bila relevan.
+7. Setelah Accepted, wajib jawab: mengapa benar, mengapa cukup cepat, apa alternatifnya, dan kapan teknik ini tidak berlaku.
+
+## Hint policy ladder (§5.3)
+1. pertanyaan pemodelan
+2. arah complexity
+3. observasi kunci
+4. pseudocode parsial -- requires a hint-free re-solve at the next interval
+5. editorial -- requires a hint-free re-solve at the next interval"
+`;
+
+exports[`renderWeeklyPlan: snapshots week 28 matches its committed snapshot 1`] = `
+"# Week 28: Final readiness & individualized repair
+
+Topic families: strategi-problem-solving
+
+## Content
+- Weak-topic repair
+- re-solve C/B problems
+- template hygiene
+- contest strategy
+- readiness review.
+
+## Outcome
+Profil mastery akhir dan rencana lanjutan individual.
+
+## Practice / evaluation target
+Final simulation + Checkpoint 7.
+Curated problem-load: no fixed count for this week -- the practice/evaluation activity above is a simulation or contest, not a numeric problem target.
+
+## Session templates (§5.1)
+
+### Session 1 -- konsep & guided practice
+
+| Minutes | Activity |
+| --- | --- |
+| 0-15 | Retrieval quiz topik lama; 2-3 pertanyaan constraint/complexity. |
+| 15-45 | Konsep inti + worked example; fokus invariant/state/correctness. |
+| 45-90 | Guided problems bertingkat dari contoh ke transfer. |
+| 90-115 | Independent problem + mentor observation. |
+| 115-120 | Exit ticket: 3 poin yang dipahami + 1 gap. |
+
+### Session 2 -- problem solving & feedback
+
+| Minutes | Activity |
+| --- | --- |
+| 0-15 | Review error minggu lalu; pilih 1 counterexample/bug untuk dibedah. |
+| 15-45 | Timed problem 1-2: siswa bekerja independen. |
+| 45-90 | Review solusi: baseline, alternatif, complexity, edge cases. |
+| 90-115 | Timed problem berikutnya / mini-contest. |
+| 115-120 | Assign upsolve/re-solve dan target minggu berikutnya. |
+
+## Exit ticket (§5.1)
+Exit ticket: 3 poin yang dipahami + 1 gap.
+
+## SOP reminder (§5.2)
+1. Mulai dari problem yang membutuhkan teknik tersebut, bukan definisi algoritma terlebih dahulu.
+2. Minta siswa menulis constraint analysis dan baseline solution sebelum diperlihatkan solusi optimal.
+3. Tentukan invariant/state/operasi yang harus didukung; baru pilih algoritma/struktur data.
+4. Tulis complexity waktu dan memori sebelum coding.
+5. Implementasikan dari pemahaman, bukan copy template; template boleh dipakai setelah siswa pernah membangun sendiri.
+6. Uji minimal: contoh, batas minimum, batas maksimum konseptual, duplikasi, urutan buruk, overflow, disconnected/negative-edge bila relevan.
+7. Setelah Accepted, wajib jawab: mengapa benar, mengapa cukup cepat, apa alternatifnya, dan kapan teknik ini tidak berlaku.
+
+## Hint policy ladder (§5.3)
+1. pertanyaan pemodelan
+2. arah complexity
+3. observasi kunci
+4. pseudocode parsial -- requires a hint-free re-solve at the next interval
+5. editorial -- requires a hint-free re-solve at the next interval
+
+## Gate evidence (§4.1, checkpoint 7)
+- Menyelesaikan simulasi sesuai tahap target, melakukan postmortem dan upsolve mandiri."
+`;

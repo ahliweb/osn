@@ -4,6 +4,9 @@
   "private": true,
   "type": "module",
   "description": "Curriculum-as-code for the OSN Informatika 2026 operational syllabus: schema, domain model, and rendering pipeline.",
+  "bin": {
+    "osn": "src/cli/index.ts"
+  },
   "scripts": {
     "typecheck": "tsc --noEmit",
     "lint": "biome lint .",
@@ -13,7 +16,7 @@
     "test": "bun test",
     "test:coverage": "bun test --coverage",
     "build": "bun build ./src/index.ts --outdir dist --target bun",
-    "validate": "echo \"validate: not yet implemented (see issue #19)\"",
+    "validate": "bun run src/cli/index.ts validate",
     "check:requirements": "bun run scripts/check-requirements.ts",
     "changeset": "changeset",
     "version": "changeset version"

@@ -1,0 +1,74 @@
+// Bun Snapshot v1, https://bun.sh/docs/test/snapshots
+
+exports[`renderCheckpointSheet: snapshots checkpoint 1 matches its committed snapshot 1`] = `
+"# Checkpoint 1 (after week 4: Search/sort dasar & recursion)
+
+## Gate evidence required (§4.1)
+- Dapat coding dasar tanpa template berlebihan
+- memahami Big-O dasar
+- binary search/recursion sederhana
+- tracing C++.
+
+## Rubric weights (§6.1)
+| Component | Weight | Evidence |
+| --- | --- | --- |
+| Computational thinking & konsep | 20% | Tracing; modeling; quiz logika/complexity. |
+| Problem solving & algorithm selection | 25% | Constraint analysis; alasan pemilihan algoritma; subtask plan; proof sketch. |
+| Implementation correctness | 25% | Accepted rate; edge-case coverage; error taxonomy; code clarity. |
+| Contest performance | 20% | Score; time-to-first-correct; partial score; time allocation; stability. |
+| Upsolve & learning process | 10% | Re-solve; error log; ability to explain solution without editorial. |
+
+## A/B/C/D recording grid (§6.2)
+| Code | Meaning | Follow-up action |
+| --- | --- | --- |
+| A | Solved independently | Review singkat; tandai pola transfer. |
+| B | Solved after hint | Re-solve 3-7 hari tanpa hint. |
+| C | Solved after editorial/solution | Wajib reimplement + jelaskan invariant/state + re-solve terjadwal. |
+| D | Unsolved/blocked | Diagnosis gap: konsep, modeling, complexity, implementation, debugging. |
+
+## KPI snapshot fields (§6.3)
+| Metric | Unit | Direction | Purpose |
+| --- | --- | --- | --- |
+| A/B/C/D per topic | distribution | neutral | Mengukur independensi dan dependency pada bantuan. |
+| Time-to-first-correct | seconds | lower-better | Mengukur kecepatan modeling dan implementasi. |
+| WA/TLE/RE frequency | distribution | lower-better | Mengidentifikasi failure mode teknis. |
+| Upsolve completion | percent | higher-better | Mengukur pembelajaran setelah contest. |
+| Repeat-solve retention | percent | higher-better | Memastikan solusi tidak hanya dihafal dari editorial. |
+| Complexity-selection accuracy | percent | higher-better | Mengukur kemampuan membaca constraint. |
+| Contest time allocation | distribution | neutral | Menilai strategi pemilihan soal dan keputusan berhenti/pindah. |"
+`;
+
+exports[`renderCheckpointSheet: snapshots checkpoint 7 matches its committed snapshot 1`] = `
+"# Checkpoint 7 (after week 28: Final readiness & individualized repair)
+
+## Gate evidence required (§4.1)
+- Menyelesaikan simulasi sesuai tahap target, melakukan postmortem dan upsolve mandiri.
+
+## Rubric weights (§6.1)
+| Component | Weight | Evidence |
+| --- | --- | --- |
+| Computational thinking & konsep | 20% | Tracing; modeling; quiz logika/complexity. |
+| Problem solving & algorithm selection | 25% | Constraint analysis; alasan pemilihan algoritma; subtask plan; proof sketch. |
+| Implementation correctness | 25% | Accepted rate; edge-case coverage; error taxonomy; code clarity. |
+| Contest performance | 20% | Score; time-to-first-correct; partial score; time allocation; stability. |
+| Upsolve & learning process | 10% | Re-solve; error log; ability to explain solution without editorial. |
+
+## A/B/C/D recording grid (§6.2)
+| Code | Meaning | Follow-up action |
+| --- | --- | --- |
+| A | Solved independently | Review singkat; tandai pola transfer. |
+| B | Solved after hint | Re-solve 3-7 hari tanpa hint. |
+| C | Solved after editorial/solution | Wajib reimplement + jelaskan invariant/state + re-solve terjadwal. |
+| D | Unsolved/blocked | Diagnosis gap: konsep, modeling, complexity, implementation, debugging. |
+
+## KPI snapshot fields (§6.3)
+| Metric | Unit | Direction | Purpose |
+| --- | --- | --- | --- |
+| A/B/C/D per topic | distribution | neutral | Mengukur independensi dan dependency pada bantuan. |
+| Time-to-first-correct | seconds | lower-better | Mengukur kecepatan modeling dan implementasi. |
+| WA/TLE/RE frequency | distribution | lower-better | Mengidentifikasi failure mode teknis. |
+| Upsolve completion | percent | higher-better | Mengukur pembelajaran setelah contest. |
+| Repeat-solve retention | percent | higher-better | Memastikan solusi tidak hanya dihafal dari editorial. |
+| Complexity-selection accuracy | percent | higher-better | Mengukur kemampuan membaca constraint. |
+| Contest time allocation | distribution | neutral | Menilai strategi pemilihan soal dan keputusan berhenti/pindah. |"
+`;

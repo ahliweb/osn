@@ -1,0 +1,40 @@
+// Bun Snapshot v1, https://bun.sh/docs/test/snapshots
+
+exports[`renderSopCard: snapshot matches its committed snapshot 1`] = `
+"# Mentor SOP card
+
+## 7-step SOP (§5.2)
+1. Mulai dari problem yang membutuhkan teknik tersebut, bukan definisi algoritma terlebih dahulu.
+2. Minta siswa menulis constraint analysis dan baseline solution sebelum diperlihatkan solusi optimal.
+3. Tentukan invariant/state/operasi yang harus didukung; baru pilih algoritma/struktur data.
+4. Tulis complexity waktu dan memori sebelum coding.
+5. Implementasikan dari pemahaman, bukan copy template; template boleh dipakai setelah siswa pernah membangun sendiri.
+6. Uji minimal: contoh, batas minimum, batas maksimum konseptual, duplikasi, urutan buruk, overflow, disconnected/negative-edge bila relevan.
+7. Setelah Accepted, wajib jawab: mengapa benar, mengapa cukup cepat, apa alternatifnya, dan kapan teknik ini tidak berlaku.
+
+## Minimum test checklist (§5.2, step 6)
+- contoh
+- batas minimum
+- batas maksimum konseptual
+- duplikasi
+- urutan buruk
+- overflow
+- disconnected/negative-edge bila relevan
+
+## Post-Accepted questions (§5.2, step 7)
+- mengapa benar
+- mengapa cukup cepat
+- apa alternatifnya
+- kapan teknik ini tidak berlaku
+
+## Hint policy ladder (§5.3)
+Progressive hinting - Gunakan urutan: pertanyaan pemodelan -> arah complexity -> observasi kunci -> pseudocode parsial -> editorial. Solusi penuh adalah opsi terakhir. Semua soal yang membutuhkan editorial wajib dire-solve tanpa bantuan pada interval berikutnya.
+
+1. pertanyaan pemodelan
+2. arah complexity
+3. observasi kunci
+4. pseudocode parsial -- requires a hint-free re-solve at the next interval
+5. editorial -- requires a hint-free re-solve at the next interval
+
+Re-solve obligation: every problem that reached a hint level requiring re-solve above must be re-solved without help at the next interval."
+`;
