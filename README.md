@@ -80,7 +80,7 @@ test`). This table matches `package.json` exactly.
 | `bun test` | `bun test` | Full test suite. |
 | `bun run test:coverage` | `bun test --coverage` | Enforces the coverage gate in `bunfig.toml` (see `docs/development/testing.md`). |
 | `bun run build` | `bun build ./src/index.ts --outdir dist --target bun` | — |
-| `bun run validate` | placeholder script | **Not yet implemented.** Currently prints a TODO and exits 0. Real implementation tracked in [issue #19](https://github.com/ahliweb/osn/issues/19). |
+| `bun run validate` | `osn validate` | Validates every `data/*.json` file (schema, structural invariants, referential integrity). Exits 0 clean / 1 on any finding. See `docs/cli/README.md`. |
 | `bun run changeset` | `changeset` | Interactive changeset creation. See `docs/development/releasing.md`. |
 | `bun run version` | `changeset version` | Consumes changesets into `CHANGELOG.md` and bumps `package.json` version. |
 

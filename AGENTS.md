@@ -23,6 +23,7 @@ Tables, not prose — drift should be visible at a glance.
 | `data/` | Curriculum data files (schema-validated content, not code). |
 | `tests/unit/` | One module tested in isolation. Mirrors `src/` loosely. |
 | `tests/integration/` | Cross-module tests (schema → domain → CLI/render). |
+| `docs/cli/` | `osn` CLI command reference (issue #19). |
 | `docs/development/` | Engineering process docs (testing, CI/CD, releasing). |
 | `docs/*.pdf` | The source syllabus document. |
 | `.changeset/` | Pending changesets — one Markdown file per user-visible change. |
@@ -48,7 +49,7 @@ table.
 | `bun test` | Run the full test suite. |
 | `bun run test:coverage` | `bun test --coverage`; enforces the 85% lines/functions gate in `bunfig.toml`. |
 | `bun run build` | `bun build ./src/index.ts --outdir dist --target bun`. |
-| `bun run validate` | **Placeholder** — not yet implemented. Prints a TODO, exits 0. Real implementation: [#19](https://github.com/ahliweb/osn/issues/19). |
+| `bun run validate` | `osn validate` — validates the whole `data/*.json` corpus (schema, structural invariants, referential integrity); exits 0 clean / 1 on any finding. See `docs/cli/README.md`. |
 | `bun run changeset` | Create a changeset (interactive). |
 | `bun run version` | Consume changesets into `CHANGELOG.md` / bump version. |
 
@@ -123,7 +124,7 @@ not duplicate that policy here; that document is the source of truth.
 - [ ] `bun run typecheck` passes.
 - [ ] `bun test` (or `bun run test:coverage`) passes, coverage gate met.
 - [ ] `bun run build` passes.
-- [ ] `bun run validate` passes (currently a no-op placeholder — still run it).
+- [ ] `bun run validate` passes (real corpus validation as of issue #19).
 - [ ] Every command and path mentioned in any doc you touched actually
       exists — verify, don't assume.
 - [ ] Tests added/updated for the change (per `docs/development/testing.md`).

@@ -25,10 +25,17 @@ The workflow is defined in `.github/workflows/ci.yml`. It has a single job,
    `docs/development/testing.md`.
 8. **Build** — `bun run build` (`bun build ./src/index.ts --outdir dist
    --target bun`).
-9. **Validate curriculum data** — `bun run validate`. Until the curriculum
-   validation CLI lands (issue #19), this script is a no-op placeholder that
-   prints a TODO and exits `0`; it is wired into CI now so that landing the
-   real implementation requires no workflow changes.
+9. **Validate curriculum data** — `bun run validate` (`osn validate`,
+   issue #19). Parses every `data/*.json` file against its schema, checks
+   the fixed structural invariants (28 weeks, 7 gates, 10 topic families,
+   41 references, and so on), and checks referential integrity across the
+   corpus (week → topic family, week checkpoint numbering ↔ gate weeks,
+   assessment-bank kind → competition stage, every `Rnn` citation → the
+   reference register) — see `docs/cli/README.md` for the full command
+   reference. Exits `0` on a clean corpus, `1` if any finding exists. No
+   workflow change was needed to land the real implementation: this step
+   already called `bun run validate` while that script was still a
+   placeholder.
 
 Steps run in this order deliberately: cheaper, faster checks (formatting,
 lint, typecheck) fail fast before the more expensive test and build steps
