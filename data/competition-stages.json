@@ -1,0 +1,82 @@
+{
+  "syllabusVersion": "2.0",
+  "syllabusDate": "2026-09-04",
+  "sourceSection": "§2.2",
+  "stages": [
+    {
+      "id": "osn-k",
+      "name": "OSN-K",
+      "dominantCompetencies": [
+        "Computational thinking",
+        "modeling",
+        "logika",
+        "membaca algoritma C++",
+        "tracing",
+        "kompleksitas"
+      ],
+      "practiceModel": [
+        "Worksheet analitis",
+        "dry-run",
+        "Bebras-style",
+        "short coding",
+        "quiz kompleksitas."
+      ],
+      "citations": ["R2"],
+      "contestFormat": {
+        "kind": "problem-set",
+        "minItems": 30,
+        "maxItems": 50,
+        "durationMinutes": 150
+      }
+    },
+    {
+      "id": "osn-p",
+      "name": "OSN-P",
+      "dominantCompetencies": [
+        "5-8 studi kasus/3 jam",
+        "tiap kasus memuat 3 soal pemahaman + 1 soal pemrograman dengan subsoal mudah/sulit."
+      ],
+      "practiceModel": [
+        "Partial scoring",
+        "baseline -> optimized solution",
+        "contest 3 jam",
+        "postmortem."
+      ],
+      "citations": ["R3"],
+      "contestFormat": {
+        "kind": "case-study",
+        "minItems": 5,
+        "maxItems": 8,
+        "durationMinutes": 180,
+        "comprehensionPerCase": 3,
+        "programmingPerCase": 1
+      }
+    },
+    {
+      "id": "osn-nasional",
+      "name": "OSN Nasional",
+      "dominantCompetencies": [
+        "Integrasi materi",
+        "implementasi presisi",
+        "daya tahan contest",
+        "strategi poin."
+      ],
+      "practiceModel": [
+        "Mixed-topic contest",
+        "arsip nasional",
+        "stress testing",
+        "editorial review terbatas."
+      ],
+      "citations": [],
+      "contestFormat": null
+    },
+    {
+      "id": "toki-ioi-extension",
+      "name": "TOKI/IOI extension",
+      "dominantCompetencies": ["Breadth/depth sesuai silabus IOI terbaru."],
+      "practiceModel": ["Hanya setelah core lokal stabil dan syllabus check dilakukan."],
+      "citations": [],
+      "contestFormat": null
+    }
+  ]
+}

@@ -1,0 +1,60 @@
+{
+  "syllabusVersion": "2.0",
+  "syllabusDate": "2026-09-04",
+  "sourceSection": "§3",
+  "dependencyRule": "Tidak memperkenalkan struktur data/algoritma lanjutan hanya karena populer. Materi baru diberikan bila prasyarat konsep, complexity, dan kemampuan implementasinya sudah cukup stabil.",
+  "categories": [
+    {
+      "id": "core",
+      "name": "CORE",
+      "contents": [
+        "Seluruh rumpun resmi OSN 2026",
+        "complexity/constraint analysis",
+        "C++ implementation discipline",
+        "contest strategy."
+      ],
+      "rule": "Wajib dikuasai sebelum memperluas materi."
+    },
+    {
+      "id": "support",
+      "name": "SUPPORT",
+      "contents": [
+        "Prefix sum",
+        "difference array",
+        "two pointers",
+        "sliding window",
+        "set/map",
+        "debugging workflow",
+        "stress testing",
+        "proof sketch."
+      ],
+      "rule": "Digunakan sebagai alat pemecahan masalah dan implementation engineering."
+    },
+    {
+      "id": "extension",
+      "name": "EXTENSION",
+      "contents": [
+        "Topological sort",
+        "SCC",
+        "balanced BST concept",
+        "interval DP",
+        "bitmask DP",
+        "string algorithms",
+        "convex hull algorithm",
+        "advanced graph/DP."
+      ],
+      "rule": "Masuk setelah core stabil; cek silabus terbaru dan kebutuhan siswa."
+    },
+    {
+      "id": "de-prioritized",
+      "name": "DE-PRIORITIZED",
+      "contents": [
+        "Implementasi AVL spesifik",
+        "linear algebra sebagai blok besar",
+        "hafalan Matrix Chain Multiplication",
+        "KMP/Z sebagai materi wajib."
+      ],
+      "rule": "Tidak dialokasikan waktu core kecuali ada tujuan kompetisi lanjutan yang jelas."
+    }
+  ]
+}
