@@ -14,6 +14,7 @@
     "test:coverage": "bun test --coverage",
     "build": "bun build ./src/index.ts --outdir dist --target bun",
     "validate": "echo \"validate: not yet implemented (see issue #19)\"",
+    "check:requirements": "bun run scripts/check-requirements.ts",
     "changeset": "changeset",
     "version": "changeset version"
   },
