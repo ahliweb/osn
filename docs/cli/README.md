@@ -315,6 +315,104 @@ Note week 1's date range is extended by one day (05-12, not 05-11) and its
 second session date shifts from 08 to 09, since 2026-01-07 was excluded --
 see "Week-shifting rule" and "Session-date rule" above.
 
+## `osn render`
+
+Turns the validated curriculum corpus into mentor-facing Markdown
+artefacts (issue #21): a weekly session plan, a checkpoint sheet, or a
+one-page mentor SOP card.
+
+```sh
+osn render weekly --week <1-28> [--out <path>] [--force]
+osn render checkpoint --number <1-7> [--out <path>] [--force]
+osn render sop [--out <path>] [--force]
+```
+
+The actual rendering logic (`renderWeeklyPlan`, `renderCheckpointSheet`,
+`renderSopCard`) lives in `src/render/weekly.ts`, `src/render/
+checkpoint.ts` and `src/render/sop.ts` as **pure functions from validated
+data to a Markdown string** -- no file I/O, no `process` access, no dates,
+no randomness. `osn render` itself (`src/cli/commands/render.ts`) is only
+subcommand/flag parsing plus the thin `--out`/`--force` file-writing layer
+(`src/cli/output-writer.ts`), exactly the same split `osn plan` uses
+around `buildCohortPlan`.
+
+Every renderer fails loudly on an out-of-range request: it throws a named
+`RenderRequestError` (`src/render/errors.ts`) naming the valid range,
+before emitting anything, rather than ever producing a partially-filled
+document. `osn render` catches that one error class and reports it as a
+clean usage error (exit `2`).
+
+### `osn render weekly`
+
+Renders a mentor-ready plan for one week of the §4 28-week syllabus: the
+week number and focus, its content list, its learning outcome, the
+practice/evaluation target together with the curated problem-load range
+(or an explicit "no fixed count" note where a week's `problemLoad` is
+`null` -- simulation/contest weeks), both §5.1 120-minute session
+templates with their five segment timings and activities, the §5.1
+exit-ticket instruction, the §5.2 seven-step SOP reminder, the §5.3 hint
+policy ladder, and -- only on a gate week -- the §4.1 gate evidence
+required to proceed past it.
+
+| Flag | Meaning |
+| --- | --- |
+| `--week <n>` | The week number, `1`-`28`. **Required.** |
+
+### `osn render checkpoint`
+
+Renders a checkpoint sheet for one of the seven §4.1 phase gates: the
+gate evidence required to proceed, the §6.1 rubric weights table (with
+each component's evidence column), an A/B/C/D recording grid (§6.2, with
+each status's prescribed follow-up action), and the §6.3 KPI snapshot
+fields (from `listKpiDefinitions()`).
+
+| Flag | Meaning |
+| --- | --- |
+| `--number <n>` | The checkpoint number, `1`-`7`. **Required.** |
+
+### `osn render sop`
+
+Renders a one-page mentor SOP card: the §5.2 seven-step SOP, its minimum
+test checklist, its four post-Accepted questions, and the §5.3 hint
+policy ladder together with the mandatory re-solve obligation it carries
+from level 4 onward. Takes no subcommand-specific flags.
+
+### `--out` / `--force` (all three `osn render` subcommands)
+
+| Flag | Meaning |
+| --- | --- |
+| `--out <path>` | Write the rendered Markdown to this path instead of printing it to stdout. Resolved against the process's current working directory. |
+| `--force` | Required to overwrite a file that already exists at `--out`. Without it, an existing file is left byte-for-byte untouched (the write itself never opens the file for truncation) and the command exits `2` -- a mentor should never silently lose an edited worksheet to a repeated `osn render ... --out` invocation. |
+
+Without `--out`, the rendered Markdown is printed to stdout and nothing is
+written to disk.
+
+### Exit codes
+
+| Code | Meaning |
+| --- | --- |
+| `0` | Success. |
+| `2` | Usage error: a missing or unknown subcommand, a missing required flag (`--week`/`--number`), a `--week`/`--number` value outside its valid range (or not an integer), or `--out` already exists without `--force`. |
+
+### Example
+
+```text
+$ osn render checkpoint --number 1
+# Checkpoint 1 (after week 4: Search/sort dasar & recursion)
+
+## Gate evidence required (§4.1)
+- Dapat coding dasar tanpa template berlebihan
+- memahami Big-O dasar
+- binary search/recursion sederhana
+- tracing C++.
+
+## Rubric weights (§6.1)
+| Component | Weight | Evidence |
+| --- | --- | --- |
+| Computational thinking & konsep | 20% | Tracing; modeling; quiz logika/complexity. |
+...
+```
+
 ## Planned commands (not yet implemented)
 
 The following subcommands are named in `docs/architecture/README.md` and
@@ -323,7 +421,6 @@ them today is simply an unknown command (exit `2`):
 
 | Command | Issue | Purpose |
 | --- | --- | --- |
-| `osn render` | [#21](https://github.com/ahliweb/osn/issues/21) | Turns domain data into mentor-facing Markdown artefacts (weekly session plans, checkpoint sheets, SOP cards) via `src/render/`. |
 | `osn report` | [#22](https://github.com/ahliweb/osn/issues/22) | Computes the §6.3 mentor KPIs (`src/domain/kpi.ts`) from already-produced learning-record data. |
 | `osn checklist` | [#25](https://github.com/ahliweb/osn/issues/25) | Generates an operational checklist artefact. |
 
