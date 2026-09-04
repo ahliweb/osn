@@ -1,0 +1,72 @@
+name: Curriculum change
+description: Propose or record a change to curriculum data (syllabus content, problem taxonomy, calendar, rubrics, etc.).
+labels:
+  - "type:docs"
+  - "epic:corpus"
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Per §14.2 rule 8 of the operational syllabus: "Setiap versi silabus harus
+        memiliki tanggal, changelog, dan syllabus check" — every syllabus version
+        must carry a date, a changelog, and a syllabus check against an official
+        source. This template captures that check. Do not skip the fields below
+        for any change that touches curriculum data.
+
+  - type: dropdown
+    id: official_source
+    attributes:
+      label: Official source checked
+      description: Which official source was consulted to verify this change?
+      options:
+        - Silabus OSN Informatika 2026 (osn.toki.id/silabus)
+        - OSN-K Informatika 2026 (osn.toki.id/silabus/kota)
+        - OSN-P Informatika 2026 (osn.toki.id/silabus/provinsi)
+        - IOI Syllabus (ioinformatics.org/page/syllabus)
+        - other
+    validations:
+      required: true
+
+  - type: input
+    id: source_detail
+    attributes:
+      label: Source detail (URL / document / version)
+      description: If "other" was selected above, or to give the exact URL, document, or version consulted.
+      placeholder: "https://osn.toki.id/silabus (accessed 2026-09-05)"
+    validations:
+      required: false
+
+  - type: input
+    id: date_checked
+    attributes:
+      label: Date checked
+      description: The date (YYYY-MM-DD) the official source was checked.
+      placeholder: "2026-09-05"
+    validations:
+      required: true
+
+  - type: textarea
+    id: what_changed
+    attributes:
+      label: What changed
+      description: Describe precisely what changed in the official source, and what curriculum data in this repo it affects.
+    validations:
+      required: true
+
+  - type: textarea
+    id: changelog_impact
+    attributes:
+      label: Expected changelog / version impact
+      description: What entry should this produce in the curriculum changelog, and does it warrant a version bump (and at what level)?
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: confirmations
+    attributes:
+      label: Confirmations
+      options:
+        - label: I checked an official source (not a secondary summary) for this change.
+          required: true
+        - label: This change includes a date and changelog entry, per §14.2 rule 8.
+          required: true

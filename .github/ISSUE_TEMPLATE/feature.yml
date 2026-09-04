@@ -1,0 +1,65 @@
+name: Feature request
+description: Propose a new capability or enhancement for the project.
+labels:
+  - "type:feature"
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem / motivation
+      description: What gap or need does this feature address? Link to the relevant syllabus section or milestone if applicable.
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed solution
+      description: Describe the change you'd like to see. Include scope boundaries — what is explicitly out of scope.
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+      description: Any alternative approaches you considered and why they were not chosen.
+    validations:
+      required: false
+
+  - type: dropdown
+    id: epic
+    attributes:
+      label: Epic
+      description: Which epic does this feature belong to?
+      options:
+        - epic:foundation
+        - epic:corpus
+        - epic:data-model
+        - epic:pedagogy
+        - epic:cli
+        - epic:governance
+    validations:
+      required: true
+
+  - type: dropdown
+    id: priority
+    attributes:
+      label: Priority
+      options:
+        - priority:P0
+        - priority:P1
+        - priority:P2
+    validations:
+      required: true
+
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Acceptance criteria
+      description: A checklist of conditions that must be true for this feature to be considered done.
+      placeholder: |
+        - [ ] ...
+        - [ ] ...
+    validations:
+      required: true
