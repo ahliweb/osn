@@ -57,8 +57,9 @@ trace.
 5. Otherwise calls the command's `run(args, ctx)`, with the subcommand
    token and `--json` already stripped from `args`.
 
-Adding a new subcommand (`plan` #20, `render` #21, `report` #22,
-`checklist` #25) means writing a new `src/cli/commands/<name>.ts`
+Adding a new subcommand (`plan` #20, done -- see below; `render` #21,
+`report` #22, `checklist` #25, still planned) means writing a new
+`src/cli/commands/<name>.ts`
 exporting a `Command` (`src/cli/command.ts`'s interface: `name`,
 `summary`, `help()`, `run(args, ctx)`) and adding it to the `COMMANDS`
 array in `src/cli/commands/index.ts` -- nothing in `run-cli.ts` itself
@@ -183,6 +184,137 @@ why this module could not simply reuse
 `assertNoDanglingCitations`/`findDanglingCitations` from
 `src/domain/registers.ts`).
 
+## `osn plan`
+
+Generates the dated 28-week cohort calendar against the §4 operational
+syllabus: for each week, its date range, focus, two session dates,
+mini-contest/checkpoint markers, and (on a gate week) the evidence required
+to proceed past that gate. Implements TR-07 (deterministic, UTC-only date
+arithmetic), FR-23 and OR-03.
+
+```sh
+osn plan --start <YYYY-MM-DD> [options]
+```
+
+The actual planning logic (`buildCohortPlan`) lives in
+`src/domain/cohort-plan.ts` as a pure function with no I/O -- `osn plan`
+itself (`src/cli/commands/plan.ts`) is only flag parsing plus the two
+renderers in `src/cli/format-plan.ts` (`formatPlanMarkdown`,
+`formatPlanJson`), exactly the same split `osn validate` uses around
+`auditCorpus`.
+
+### Options
+
+| Flag | Meaning |
+| --- | --- |
+| `--start <date>` | The cohort's start date, ISO `YYYY-MM-DD`. **Required.** |
+| `--exclude <d1,d2,...>` | A comma-separated list of ISO `YYYY-MM-DD` dates to exclude (school holidays, exam days, ...). Optional; defaults to none. Order and duplicates don't matter -- the output normalises this list (deduplicated, ascending). |
+| `--target-stage <id>` | Report against a target competition stage's intensive-preparation week: one of `osn-k`, `osn-p`, `osn-nasional`, `toki-ioi-extension` (`src/domain/structure.ts`'s `STAGE_IDS`). Optional. See "Target-stage informational entry and schedule-slip warning" below. |
+| `--format <md\|json>` | Output format. Default `md`. `--json` (the global flag) is equivalent to `--format json`; an explicit `--format` wins if both are given. |
+| `-h`, `--help` | Show `osn plan`'s own help. |
+
+### Week-shifting rule
+
+A week is **7 usable calendar days** -- calendar days that are not in
+`--exclude`. Weeks are laid out back-to-back with no gaps and no overlap:
+week 1 starts on `--start`; every later week starts the calendar day
+immediately after the previous week's last day. Within a week, days are
+consumed one at a time from that week's start: an excluded date is
+consumed (so it lies inside exactly one week's date range and is never
+silently dropped, and can never reappear in a later week) but does **not**
+count toward that week's 7 usable days -- the walk simply continues one
+more calendar day to make up the shortfall. A week's end date is therefore
+its 7th usable day, whatever calendar date that turns out to be: it is 6
+days after that week's start when no excluded date falls inside it, and
+grows by exactly one calendar day for every excluded date that does. Since
+every following week starts the day after the previous one ends, one
+excluded date pushes every subsequent week's whole date range one day
+later, and this accumulates: two excluded dates anywhere in weeks 1-10
+push week 11 onward two days later in total, regardless of which of those
+ten weeks each one fell in.
+
+### Session-date rule
+
+Each week's two session dates (§1.3's "2 sesi mentor/minggu" baseline) are
+that week's **1st and 4th usable day** (i.e. the 1st and 4th non-excluded
+calendar day counting from the week's start). This is fully deterministic
+and does not assume any particular weekday alignment -- `--exclude` already
+carries whatever school-specific calendar structure matters. An excluded
+day can never be picked as a session date, since it is never one of a
+week's usable days in the first place.
+
+### Target-stage informational entry and schedule-slip warning
+
+§4 places OSN-K intensive preparation at week 25, OSN-P at week 26,
+national mixed at week 27, and final readiness at week 28 (`toki-ioi-extension`
+has no dedicated intensive week in §4, so it is mapped to week 28,
+final readiness, as the closest applicable milestone -- a derived reading,
+noted as such in the output). Issue #20 asks for a warning "when the
+corresponding intensive week falls after a supplied target date", but `osn
+plan` has no target-*date* input, only `--target-stage`. Given `--target-stage`,
+two things are reported instead:
+
+1. **An informational entry** naming which week that stage's intensive
+   preparation lands on and that week's *actual*, post-shift date range in
+   this specific plan -- so a mentor can see exactly which calendar dates
+   the relevant intensive week now covers once `--exclude` is accounted
+   for.
+2. **A schedule-slip warning**, only if `projectedEndDate` is pushed more
+   than 14 days later than `baselineEndDate` (what the same 28 weeks would
+   look like with zero excluded dates) -- a slip that large is exactly the
+   kind of drift that could push an intensive week past the real-world
+   selection dates §14.1 requires the calendar to be aligned against.
+
+Both are gated on `--target-stage` being given, by design: `baselineEndDate`
+itself is always reported regardless (it costs nothing and is useful
+context on its own), but the warning only fires once a stage has actually
+been named -- an `--exclude`-heavy plan with no stated target is not
+assumed to be "wrong" just because it runs long, since without a named
+target there is no operational deadline it could have slipped against.
+
+### Determinism (TR-07)
+
+All date arithmetic is UTC-only: dates are represented as the epoch-
+millisecond instant of UTC midnight on that calendar day, arithmetic is
+plain millisecond addition, and every value is read back out via
+`Date#getUTC*` accessors only (never `Date#setDate`/`Date#getDate`, which
+are sensitive to the host's local timezone) -- see
+`src/domain/cohort-plan.ts`'s docblock. No date library is used. `osn plan`
+is a pure function of its flags: identical `--start`/`--exclude`/
+`--target-stage`/`--format` produce byte-identical stdout, on any machine,
+regardless of host timezone.
+
+### Exit codes
+
+| Code | Meaning |
+| --- | --- |
+| `0` | Success. |
+| `2` | Usage error: `--start` missing, `--start`/an `--exclude` entry is not a real ISO `YYYY-MM-DD` calendar date, an unknown `--target-stage`, or an unknown `--format`. |
+
+### Example
+
+```text
+$ osn plan --start 2026-01-05 --exclude 2026-01-07 --target-stage osn-k
+# osn plan: cohort calendar
+
+Start date: 2026-01-05
+Excluded dates (1): 2026-01-07
+Target stage: osn-k
+Projected end date: 2026-07-20 (un-excluded baseline: 2026-07-19)
+
+Target stage "osn-k" (OSN-K): intensive preparation lands on week 25, 2026-06-23 to 2026-06-29. §4 places OSN-K intensive preparation at week 25.
+
+| Week | Start | End | Focus | Sessions | Mini-contest | Checkpoint | Gate evidence |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| 1 | 2026-01-05 | 2026-01-12 | Orientasi CP & C++ dasar | 2026-01-05, 2026-01-09 | no | - | - |
+| 2 | 2026-01-13 | 2026-01-19 | Control flow, fungsi, array/string | 2026-01-13, 2026-01-16 | no | - | - |
+...
+```
+
+Note week 1's date range is extended by one day (05-12, not 05-11) and its
+second session date shifts from 08 to 09, since 2026-01-07 was excluded --
+see "Week-shifting rule" and "Session-date rule" above.
+
 ## Planned commands (not yet implemented)
 
 The following subcommands are named in `docs/architecture/README.md` and
@@ -191,7 +323,6 @@ them today is simply an unknown command (exit `2`):
 
 | Command | Issue | Purpose |
 | --- | --- | --- |
-| `osn plan` | [#20](https://github.com/ahliweb/osn/issues/20) | Generates the 28-week programme calendar as data/Markdown, deterministically (byte-identical output across repeated runs, per TR-07). |
 | `osn render` | [#21](https://github.com/ahliweb/osn/issues/21) | Turns domain data into mentor-facing Markdown artefacts (weekly session plans, checkpoint sheets, SOP cards) via `src/render/`. |
 | `osn report` | [#22](https://github.com/ahliweb/osn/issues/22) | Computes the §6.3 mentor KPIs (`src/domain/kpi.ts`) from already-produced learning-record data. |
 | `osn checklist` | [#25](https://github.com/ahliweb/osn/issues/25) | Generates an operational checklist artefact. |

@@ -6,10 +6,11 @@
  */
 
 import type { Command } from "../command";
+import { planCommand } from "./plan";
 import { validateCommand } from "./validate";
 
 /** Every registered `osn` subcommand, in the order they should be listed in `osn --help`. */
-export const COMMANDS: readonly Command[] = [validateCommand];
+export const COMMANDS: readonly Command[] = [validateCommand, planCommand];
 
 /** {@link COMMANDS}, indexed by name for O(1) dispatch lookup. */
 export const COMMAND_REGISTRY: ReadonlyMap<string, Command> = new Map(
