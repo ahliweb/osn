@@ -1,0 +1,104 @@
+{
+  "syllabusVersion": "2.0",
+  "syllabusDate": "2026-09-04",
+  "sourceSection": "§7",
+  "playbooks": [
+    {
+      "id": "constraint-to-complexity",
+      "title": "Constraint menjadi kompleksitas",
+      "sourceSection": "§7.1",
+      "summary": "N <= 200.000. Siswa wajib menolak O(N^2) sebagai baseline produksi untuk operasi per elemen, menguji kandidat O(N log N) atau O(N), lalu memeriksa time limit, konstanta, dan memori. Output latihan: satu tabel constraint -> kandidat complexity -> alasan.",
+      "rules": [
+        "N <= 200.000.",
+        "Siswa wajib menolak O(N^2) sebagai baseline produksi untuk operasi per elemen",
+        "menguji kandidat O(N log N) atau O(N)",
+        "lalu memeriksa time limit, konstanta, dan memori",
+        "Output latihan: satu tabel constraint -> kandidat complexity -> alasan."
+      ],
+      "citations": []
+    },
+    {
+      "id": "shortest-path-selection",
+      "title": "Memilih shortest path",
+      "sourceSection": "§7.2",
+      "summary": "Unweighted/sama bobot -> BFS; bobot non-negatif -> Dijkstra; edge negatif -> Bellman-Ford; all-pairs dan N kecil -> Floyd-Warshall. Siswa harus menjelaskan syarat berlaku sebelum coding.",
+      "rules": [
+        "Unweighted/sama bobot -> BFS",
+        "bobot non-negatif -> Dijkstra",
+        "edge negatif -> Bellman-Ford",
+        "all-pairs dan N kecil -> Floyd-Warshall",
+        "Siswa harus menjelaskan syarat berlaku sebelum coding."
+      ],
+      "citations": []
+    },
+    {
+      "id": "range-query-selection",
+      "title": "Range query",
+      "sourceSection": "§7.3",
+      "summary": "N,Q <= 200.000 dengan point update + range sum. Prefix sum memiliki update mahal; Fenwick memberi O(log N) update/query; Segment Tree lebih fleksibel untuk agregasi. Siswa membuat matriks operasi sebelum memilih struktur.",
+      "rules": [
+        "N,Q <= 200.000 dengan point update + range sum.",
+        "Prefix sum memiliki update mahal",
+        "Fenwick memberi O(log N) update/query",
+        "Segment Tree lebih fleksibel untuk agregasi",
+        "Siswa membuat matriks operasi sebelum memilih struktur."
+      ],
+      "citations": []
+    },
+    {
+      "id": "dp-design",
+      "title": "Mendesain DP",
+      "sourceSection": "§7.4",
+      "summary": "Sebelum coding: definisikan state minimum, transition, base case, dependency/order, jumlah state x transition, reconstruction, dan kemungkinan compression. Knapsack/LCS/LIS diperlakukan sebagai contoh state design.",
+      "rules": [
+        "state minimum",
+        "transition",
+        "base case",
+        "dependency/order",
+        "jumlah state x transition",
+        "reconstruction",
+        "kemungkinan compression",
+        "Knapsack/LCS/LIS diperlakukan sebagai contoh state design."
+      ],
+      "citations": []
+    },
+    {
+      "id": "subtask-strategy",
+      "title": "Strategi subtask OSN-P",
+      "sourceSection": "§7.5",
+      "summary": "N <= 20 -> brute force/bitmask; N <= 2.000 -> kemungkinan O(N^2); N <= 200.000 -> cari O(N log N)/O(N). Tujuan: amankan solusi benar untuk subtask kecil, lalu upgrade tanpa merusak correctness.",
+      "rules": [
+        "N <= 20 -> brute force/bitmask",
+        "N <= 2.000 -> kemungkinan O(N^2)",
+        "N <= 200.000 -> cari O(N log N)/O(N)",
+        "Tujuan: amankan solusi benar untuk subtask kecil, lalu upgrade tanpa merusak correctness."
+      ],
+      "citations": ["R3"]
+    },
+    {
+      "id": "stress-testing",
+      "title": "Stress testing",
+      "sourceSection": "§7.6",
+      "summary": "Buat brute-force oracle untuk N kecil, random generator, lalu bandingkan solusi cepat vs oracle. Simpan counterexample minimal ketika berbeda. Terapkan khususnya pada DP, greedy, graph, dan data structure yang rawan edge case.",
+      "rules": [
+        "Buat brute-force oracle untuk N kecil",
+        "random generator",
+        "lalu bandingkan solusi cepat vs oracle",
+        "Simpan counterexample minimal ketika berbeda.",
+        "Terapkan khususnya pada DP, greedy, graph, dan data structure yang rawan edge case."
+      ],
+      "citations": []
+    },
+    {
+      "id": "osn-k-tracing",
+      "title": "OSN-K tracing",
+      "sourceSection": "§7.7",
+      "summary": "Gunakan potongan C++ 10-20 baris dengan loop, array, function, recursion atau bitwise. Tugas siswa: output, state per iterasi, invariant sederhana, dan complexity tanpa menjalankan program.",
+      "rules": [
+        "Gunakan potongan C++ 10-20 baris dengan loop, array, function, recursion atau bitwise.",
+        "Tugas siswa: output, state per iterasi, invariant sederhana, dan complexity tanpa menjalankan program."
+      ],
+      "citations": ["R2"]
+    }
+  ]
+}
