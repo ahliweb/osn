@@ -1,0 +1,48 @@
+{
+  "syllabusVersion": "2.0",
+  "syllabusDate": "2026-09-04",
+  "sourceSection": "§6.1",
+  "components": [
+    {
+      "id": "computational-thinking",
+      "name": "Computational thinking & konsep",
+      "weight": 20,
+      "evidence": ["Tracing", "modeling", "quiz logika/complexity."]
+    },
+    {
+      "id": "problem-solving",
+      "name": "Problem solving & algorithm selection",
+      "weight": 25,
+      "evidence": [
+        "Constraint analysis",
+        "alasan pemilihan algoritma",
+        "subtask plan",
+        "proof sketch."
+      ]
+    },
+    {
+      "id": "implementation-correctness",
+      "name": "Implementation correctness",
+      "weight": 25,
+      "evidence": ["Accepted rate", "edge-case coverage", "error taxonomy", "code clarity."]
+    },
+    {
+      "id": "contest-performance",
+      "name": "Contest performance",
+      "weight": 20,
+      "evidence": [
+        "Score",
+        "time-to-first-correct",
+        "partial score",
+        "time allocation",
+        "stability."
+      ]
+    },
+    {
+      "id": "upsolve-learning-process",
+      "name": "Upsolve & learning process",
+      "weight": 10,
+      "evidence": ["Re-solve", "error log", "ability to explain solution without editorial."]
+    }
+  ]
+}
