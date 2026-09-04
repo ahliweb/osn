@@ -57,8 +57,8 @@ trace.
 5. Otherwise calls the command's `run(args, ctx)`, with the subcommand
    token and `--json` already stripped from `args`.
 
-Adding a new subcommand (`plan` #20, done -- see below; `render` #21,
-`report` #22, `checklist` #25, still planned) means writing a new
+Adding a new subcommand (`plan` #20, `render` #21, `report` #22, done --
+see below; `checklist` #25, still planned) means writing a new
 `src/cli/commands/<name>.ts`
 exporting a `Command` (`src/cli/command.ts`'s interface: `name`,
 `summary`, `help()`, `run(args, ctx)`) and adding it to the `COMMANDS`
@@ -413,6 +413,187 @@ $ osn render checkpoint --number 1
 ...
 ```
 
+## `osn report`
+
+Computes the seven §6.3 mentor KPI metrics (`src/domain/kpi.ts`), a §13.1
+step-4 postmortem error-taxonomy breakdown, and a §13.1 step-5
+scheduled-re-solves listing (`src/domain/assessment.ts`'s
+`resolveSchedule`) from a file of already-produced §15 learning records.
+Implements FR-25, OR-09, OR-10.
+
+```sh
+osn report --records <path> [options]
+```
+
+The actual reporting logic (`buildKpiReport`) lives in
+`src/domain/report.ts` as a pure function with no I/O -- `osn report`
+itself (`src/cli/commands/report.ts`) is only input-format detection, the
+**privacy gate** (below), schema validation, and the two renderers in
+`src/cli/format-report.ts` (`formatReportMarkdown`, `formatReportJson`),
+exactly the same split `osn validate`/`osn plan` use around their own
+domain functions.
+
+### Options
+
+| Flag | Meaning |
+| --- | --- |
+| `--records <path>` | A `.jsonl` (one JSON record per line, blank lines skipped) or `.json` (a JSON array of records) file. **Required.** See "Input format detection" below. |
+| `--by <topic\|week\|none>` | Group the KPI metrics by topic family or by §4 week number, in addition to the always-present overall (ungrouped) section. Default `none`. See "Grouping: a documented current limitation" below. |
+| `--format <md\|json>` | Output format. Default `md`. |
+| `--out <path>` | Write the rendered report to this path instead of stdout. |
+| `--force` | Required to overwrite a file that already exists at `--out`. Without it, an existing file is left byte-for-byte untouched and the command exits `2` -- same safety property as `osn render`'s `--out`/`--force` (`src/cli/output-writer.ts`). |
+| `-h`, `--help` | Show `osn report`'s own help. |
+
+### Input format detection
+
+`--records` accepts two shapes, chosen by this rule:
+
+1. A `.jsonl` extension (case-insensitive) -> parsed as one JSON value per
+   line; blank (whitespace-only) lines are skipped entirely and consume no
+   record index.
+2. A `.json` extension -> parsed as a single JSON array of records.
+3. Any other extension -> **content-sniffed**: the whole trimmed file is
+   parsed as JSON; if that succeeds and the result is an array, it is
+   treated as `.json`-mode, otherwise as `.jsonl`-mode.
+
+A record index reported in any error message below is: for `.jsonl` input,
+the record's 0-indexed position among *non-blank* lines (so a blank line
+never shifts later indices); for `.json` input, its 0-indexed position in
+the array.
+
+### The privacy gate
+
+**Before anything is computed** -- before schema validation, before any
+KPI is touched -- every successfully-parsed record in the input is scanned
+with `findDirectIdentifiers` (`src/schema/learning-record.ts`'s recursive
+walk against `DIRECT_IDENTIFIER_DENYLIST`, at any nesting depth). If
+**any** record anywhere in the file carries a denylisted-identifier-shaped
+key (`name`, `email`, `nisn`, `school`, ...; see ADR-0004), the whole file
+is refused outright: no report is computed, no partial output is printed,
+and the command exits non-zero.
+
+The refusal message names every offending field's **path** and the
+**record index** it was found in -- **never the value found there**, so a
+real identifier accidentally present in an export is never echoed back
+into a terminal, a CI log, or a redirected `--out` file. For example:
+
+```text
+$ osn report --records ./export-with-a-mistake.jsonl
+osn report: privacy refusal: 1 field(s) shaped like a direct or indirect personal identifier were
+found (see ADR-0004). Refusing to process "./export-with-a-mistake.jsonl". Values are never logged
+-- only field paths and record indices are shown below. Remove or rename these fields in the
+source data and re-run:
+  - [index 3] (root): key "email"
+```
+
+This gate runs strictly before schema validation, so the message a mentor
+sees is unambiguously "you have personal data in this file, remove it" --
+never a generic "unrecognized key" schema error that could be mistaken for
+an ordinary typo (a denylisted key like `email` would also fail
+`learningRecordSchema`'s `.strict()` mode, since it is not a recognised
+field, but that is not the error this command reports for it).
+
+### Invalid records
+
+If the privacy gate passes but one or more records fail
+`learningRecordSchema` (or, for `.jsonl` input, one or more lines are not
+valid JSON at all), the command refuses to process the file and reports
+**every** failing record index at once (not just the first) -- the same
+"report every invalid index" discipline `parseLearningRecords`
+(`src/domain/learning-record.ts`) already uses for #15's batch parsing.
+
+### Grouping: a documented current limitation
+
+`buildKpiReport` (`src/domain/report.ts`) supports grouping the report by
+topic or by §4 week number, but only when given a `resolveTopic`/
+`resolveWeek` function -- a `LearningRecord` carries a `problemId` and a
+`recordedAt` timestamp, but no topic-family id and no week number of its
+own (see that module's docblock for the full reasoning). **This repository
+ships no `problemId` -> topic-family registry and no timestamp -> §4-week
+registry** -- there is no `data/*.json` file mapping specific problem ids
+to topic families, and mapping a timestamp to a week number needs a
+cohort's own start date and excluded-days list (`src/domain/cohort-plan.ts`),
+which `osn report` has no flag to supply.
+
+Consequently, **`--by topic` and `--by week` currently always fail** with
+an actionable usage error (exit `2`) explaining exactly this, and `--by
+none` (the default) is the only grouping that works via the CLI today.
+`buildKpiReport` itself is fully generic over any caller-supplied resolver
+-- a future CLI enhancement (or a programmatic caller in the same process)
+that does have a real topic/week mapping can pass `resolveTopic`/
+`resolveWeek` and get real per-group sections without any change to
+`src/domain/report.ts`.
+
+### Report contents
+
+Regardless of `--by`, every report contains:
+
+- **The seven §6.3 KPI metrics** (`src/domain/kpi.ts`), computed over the
+  whole input (the `overall` section) and, when grouping succeeds, again
+  per group. Each metric is reported as either its computed value or an
+  explicit `"insufficient data: <reason>"` -- never coerced to a bare `0`
+  (see `src/domain/kpi.ts`'s "no NaN/Infinity, ever" contract).
+- **A postmortem section** (§13.1 step 4): counts and shares of the five
+  error-taxonomy classes (`conceptual`, `modeling`, `complexity`,
+  `implementation`, `debugging`) across every record that carries a
+  non-null `errorTaxonomy`. All five classes are always listed, even one
+  nobody hit in that batch (`count: 0`).
+- **A scheduled re-solves section** (§13.1 step 5): every record whose
+  `status` is `B` or `C`, paired with the §6.2 3-7 day re-solve window
+  `resolveSchedule` (`src/domain/assessment.ts`) computes from that
+  record's own `recordedAt` -- sorted by that window's earliest date. This
+  reports each entry's due *window* only, never an "is it overdue right
+  now" boolean computed against the current wall-clock time (that would
+  make the report non-deterministic; a record's own `resolveStatus` field
+  is already the authoritative source for whether a re-solve is still
+  outstanding).
+
+### Exit codes
+
+| Code | Meaning |
+| --- | --- |
+| `0` | Success. |
+| `1` | Invalid input: one or more records failed schema validation (every failing index listed), or a privacy refusal (see above). Both cases exit `1`; a privacy refusal is distinguished by its message (always starting `"osn report: privacy refusal:"`), never by a different exit code -- see `src/cli/commands/report.ts`'s docblock for why this repository did not add a fourth exit code just for this one case. |
+| `2` | Usage error: `--records` missing, the given path cannot be read, an unknown `--by`, an unknown `--format`, `--by topic`/`--by week` (see "Grouping" above), or `--out` already exists without `--force`. |
+
+### Example
+
+```text
+$ osn report --records data/samples/learning-records.sample.jsonl
+# osn report: mentor KPI dashboard
+
+Generated from 58 learning record(s), grouped by "none".
+§6.3 caveat: every metric below must be read alongside "Jumlah soal bukan satu-satunya KPI; mastery dan transfer lebih penting."
+
+## overall (58 record(s))
+
+#### A/B/C/D per topic
+
+_Mengukur independensi dan dependency pada bantuan._
+
+Total records: 58
+
+| Topic | Total | A | B | C | D |
+| --- | --- | --- | --- | --- | --- |
+| unresolved | 58 | 30 (51.7%) | 12 (20.7%) | 10 (17.2%) | 6 (10.3%) |
+...
+```
+
+(The `A/B/C/D per topic` metric shows one `unresolved` bucket here because
+no `--by topic`-style `resolveTopic` was supplied for this run -- see
+"Grouping" above; every record still counts, per `statusDistributionByTopic`'s
+own "never silently drop a record" contract in `src/domain/kpi.ts`.)
+
+### Sample data
+
+`data/samples/learning-records.sample.jsonl` (see
+`data/samples/README.md`) is a committed, clearly-synthetic sample dataset
+-- fake pseudonymous learners (`lr_demo0001`-`lr_demo0010`), fake problem
+ids (`demo-problem-001`-`demo-problem-015`), no real learner data of any
+kind (ADR-0004). It exists so this command (and its tests) have real input
+to run against without this repository ever holding real learner data;
+**it must never be replaced with real cohort data.**
+
 ## Planned commands (not yet implemented)
 
 The following subcommands are named in `docs/architecture/README.md` and
@@ -421,7 +602,6 @@ them today is simply an unknown command (exit `2`):
 
 | Command | Issue | Purpose |
 | --- | --- | --- |
-| `osn report` | [#22](https://github.com/ahliweb/osn/issues/22) | Computes the §6.3 mentor KPIs (`src/domain/kpi.ts`) from already-produced learning-record data. |
 | `osn checklist` | [#25](https://github.com/ahliweb/osn/issues/25) | Generates an operational checklist artefact. |
 
 Each will be added as a new `src/cli/commands/<name>.ts` module registered
