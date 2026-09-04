@@ -1,0 +1,112 @@
+{
+  "syllabusVersion": "2.0",
+  "syllabusDate": "2026-09-04",
+  "sourceSection": "§13",
+  "derivationNote": "§13's Problem Taxonomy row names seven tag dimensions (official-topic, prerequisite, difficulty, stage, complexity, common traps, expected solution) but gives no table of values for difficulty, common traps or expected solution -- unlike most data/*.json files in this corpus, the three vocabularies below are DERIVED, not transcribed verbatim. difficultyScale is a 1-5 integer scale anchored to the §2.2 competition-stage progression (OSN-K -> OSN-P -> OSN Nasional -> TOKI/IOI extension). commonTraps is derived from §2.2's OSN-K 'kompleksitas'/'tracing' competencies, §2.1's geometri-dasar family, and the §13.1 postmortem error classes. expectedSolutionClasses is derived directly from §2.1's strategi-problem-solving coverage (brute force via OSN-P's 'baseline -> optimized solution' practice model, complete search + pruning, greedy, divide-and-conquer, dynamic programming) plus graph-tree, struktur-data and geometri-dasar. See src/schema/problem-taxonomy.ts for the full per-vocabulary justification.",
+  "difficultyScale": [
+    {
+      "level": 1,
+      "id": "pengantar",
+      "label": "Pengantar",
+      "description": "Latihan pengantar: satu teknik dari satu topic family, tanpa kasus tepi yang rumit. Setara level awal persiapan OSN-K."
+    },
+    {
+      "level": 2,
+      "id": "dasar",
+      "label": "Dasar",
+      "description": "Penerapan standar satu teknik, dengan beberapa kasus tepi yang wajar. Setara persiapan OSN-K reguler."
+    },
+    {
+      "level": 3,
+      "id": "menengah",
+      "label": "Menengah",
+      "description": "Menggabungkan dua teknik atau membutuhkan langkah modeling yang tidak langsung terlihat. Rentang khas OSN-K lanjut/OSN-P."
+    },
+    {
+      "level": 4,
+      "id": "lanjut",
+      "label": "Lanjut",
+      "description": "Membutuhkan optimasi kompleksitas yang cermat atau argumen kebenaran yang tidak trivial. Rentang khas OSN-P/OSN Nasional."
+    },
+    {
+      "level": 5,
+      "id": "elite",
+      "label": "Elite",
+      "description": "Kesulitan penuh setara kontes: menggabungkan beberapa teknik dengan batasan yang ketat. Rentang OSN Nasional/TOKI-IOI extension."
+    }
+  ],
+  "commonTraps": [
+    {
+      "id": "off-by-one",
+      "label": "Off-by-one",
+      "description": "Kesalahan batas indeks/rentang (mis. <= vs <, indeks mulai dari 0 vs 1)."
+    },
+    {
+      "id": "integer-overflow",
+      "label": "Integer overflow",
+      "description": "Hasil perhitungan melebihi jangkauan tipe integer yang dipakai, tidak memakai tipe/modular arithmetic yang tepat."
+    },
+    {
+      "id": "excessive-complexity",
+      "label": "Kompleksitas berlebih",
+      "description": "Solusi lolos secara logika tapi kompleksitasnya melebihi batas waktu (TLE); lih. §2.2 kompetensi 'kompleksitas' OSN-K."
+    },
+    {
+      "id": "empty-or-degenerate-input",
+      "label": "Input kosong/degenerate",
+      "description": "Kasus tepi seperti input kosong, satu elemen, atau graf tanpa edge tidak ditangani."
+    },
+    {
+      "id": "floating-point-precision",
+      "label": "Presisi floating-point",
+      "description": "Kesalahan pembulatan/perbandingan pada perhitungan geometri atau desimal; lih. §2.1 geometri-dasar."
+    },
+    {
+      "id": "incorrect-modeling",
+      "label": "Modeling keliru",
+      "description": "Representasi soal (state, graf, invariant) salah sejak awal, bukan sekadar bug implementasi; padanan taktis dari kelas error 'modeling' §13.1."
+    }
+  ],
+  "expectedSolutionClasses": [
+    {
+      "id": "brute-force",
+      "label": "Brute force",
+      "description": "Solusi coba-semua tanpa optimasi, dipakai sebagai baseline sebelum dioptimasi; lih. §2.2 OSN-P 'baseline -> optimized solution'."
+    },
+    {
+      "id": "complete-search-pruning",
+      "label": "Complete search + pruning",
+      "description": "Penelusuran lengkap dengan pemangkasan cabang; item pertama cakupan §2.1 strategi-problem-solving."
+    },
+    {
+      "id": "greedy",
+      "label": "Greedy",
+      "description": "Strategi greedy; item kedua cakupan §2.1 strategi-problem-solving."
+    },
+    {
+      "id": "divide-and-conquer",
+      "label": "Divide and conquer",
+      "description": "Divide-and-conquer; juga muncul di cakupan §2.1 rekursi dan strategi-problem-solving."
+    },
+    {
+      "id": "dynamic-programming",
+      "label": "Dynamic programming",
+      "description": "Dynamic programming; item terakhir cakupan §2.1 strategi-problem-solving."
+    },
+    {
+      "id": "graph",
+      "label": "Graph",
+      "description": "Algoritma graf/tree (BFS/DFS, shortest path, MST, LCA); lih. §2.1 graph-tree."
+    },
+    {
+      "id": "data-structure",
+      "label": "Data structure",
+      "description": "Struktur data non-trivial (stack/queue, heap, DSU, Fenwick/Segment Tree); lih. §2.1 struktur-data."
+    },
+    {
+      "id": "geometry",
+      "label": "Geometry",
+      "description": "Geometri komputasional dasar (koordinat, jarak, convex hull); lih. §2.1 geometri-dasar."
+    }
+  ]
+}
