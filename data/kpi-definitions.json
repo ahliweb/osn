@@ -1,0 +1,71 @@
+{
+  "syllabusVersion": "2.0",
+  "syllabusDate": "2026-09-04",
+  "sourceSection": "§6.3",
+  "caveat": "Jumlah soal bukan satu-satunya KPI; mastery dan transfer lebih penting.",
+  "metrics": [
+    {
+      "id": "status-distribution",
+      "name": "A/B/C/D per topic",
+      "purpose": "Mengukur independensi dan dependency pada bantuan.",
+      "unit": "distribution",
+      "direction": "neutral",
+      "inputs": ["problemId", "status"],
+      "interpretation": "A per-topic breakdown of A/B/C/D counts and shares. A high A-share within a topic signals independent mastery; a high C/D-share signals dependency on hints/editorial or unresolved gaps in that topic. Read per topic, not as a single aggregate number, and always alongside the §14.2 rule 7 caveat that problem count alone is not the KPI."
+    },
+    {
+      "id": "time-to-first-correct",
+      "name": "Time-to-first-correct",
+      "purpose": "Mengukur kecepatan modeling dan implementasi.",
+      "unit": "seconds",
+      "direction": "lower-better",
+      "inputs": ["learnerRef", "problemId", "verdict", "attemptNo", "durationSeconds"],
+      "interpretation": "Median and mean seconds to a learner's first accepted (AC) attempt at a problem. Lower is generally faster modeling/implementation, but must be read against problem difficulty and the learner's constraint-analysis time, not treated as a speed contest on its own."
+    },
+    {
+      "id": "verdict-frequency",
+      "name": "WA/TLE/RE frequency",
+      "purpose": "Mengidentifikasi failure mode teknis.",
+      "unit": "distribution",
+      "direction": "lower-better",
+      "inputs": ["verdict"],
+      "interpretation": "Counts and shares (of total attempts) for the WA, TLE and RE verdicts specifically. A high WA share suggests logic/edge-case gaps; a high TLE share suggests complexity misjudgement; a high RE share suggests implementation/runtime hygiene gaps. Use to target postmortem focus, not to rank learners against each other."
+    },
+    {
+      "id": "upsolve-completion",
+      "name": "Upsolve completion",
+      "purpose": "Mengukur pembelajaran setelah contest.",
+      "unit": "percent",
+      "direction": "higher-better",
+      "inputs": ["resolveStatus"],
+      "interpretation": "Share of records requiring a re-solve (resolveStatus scheduled/completed/overdue) that reached completed. A low rate signals the mandatory §14.2 rule 6 postmortem/upsolve obligation is not being followed through, independent of how many problems were attempted."
+    },
+    {
+      "id": "repeat-solve-retention",
+      "name": "Repeat-solve retention",
+      "purpose": "Memastikan solusi tidak hanya dihafal dari editorial.",
+      "unit": "percent",
+      "direction": "higher-better",
+      "inputs": ["resolveStatus", "hintLevelUsed", "usedEditorial", "verdict"],
+      "interpretation": "Of completed re-solves, the share solved cleanly (no hint, no editorial, verdict AC) on that later attempt. A low rate suggests the original solution was memorised from the editorial rather than internalised -- this is a DERIVED operational definition (§6.3 states only the intent, not a formula); see the docblock in src/domain/kpi.ts for the precise reading."
+    },
+    {
+      "id": "complexity-selection-accuracy",
+      "name": "Complexity-selection accuracy",
+      "purpose": "Mengukur kemampuan membaca constraint.",
+      "unit": "percent",
+      "direction": "higher-better",
+      "inputs": ["verdict"],
+      "interpretation": "PROXY, not a direct measurement: LearningRecord carries no explicit predicted-complexity field, so this uses the share of attempts that did NOT time out (verdict != TLE) as an observable stand-in for correct complexity selection. A platform that captures an explicit predicted-complexity field should override this metric with a direct comparison against required complexity rather than relying on the TLE proxy."
+    },
+    {
+      "id": "contest-time-allocation",
+      "name": "Contest time allocation",
+      "purpose": "Menilai strategi pemilihan soal dan keputusan berhenti/pindah.",
+      "unit": "distribution",
+      "direction": "neutral",
+      "inputs": ["durationSeconds", "status"],
+      "interpretation": "The distribution (total, mean, median, max) of time spent per attempt, plus the share of total time spent on attempts that ended unsolved (status D). A high unsolved-time share suggests poor stop/switch decisions during contests; read alongside status-distribution rather than in isolation."
+    }
+  ]
+}

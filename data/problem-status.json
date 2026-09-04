@@ -1,0 +1,27 @@
+{
+  "syllabusVersion": "2.0",
+  "syllabusDate": "2026-09-04",
+  "sourceSection": "§6.2",
+  "statuses": [
+    {
+      "code": "A",
+      "meaning": "Solved independently",
+      "followUp": "Review singkat; tandai pola transfer."
+    },
+    {
+      "code": "B",
+      "meaning": "Solved after hint",
+      "followUp": "Re-solve 3-7 hari tanpa hint."
+    },
+    {
+      "code": "C",
+      "meaning": "Solved after editorial/solution",
+      "followUp": "Wajib reimplement + jelaskan invariant/state + re-solve terjadwal."
+    },
+    {
+      "code": "D",
+      "meaning": "Unsolved/blocked",
+      "followUp": "Diagnosis gap: konsep, modeling, complexity, implementation, debugging."
+    }
+  ]
+}

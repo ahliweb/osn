@@ -1,0 +1,39 @@
+{
+  "syllabusVersion": "2.0",
+  "syllabusDate": "2026-09-04",
+  "sourceSection": "§5.3",
+  "calloutText": "Progressive hinting - Gunakan urutan: pertanyaan pemodelan -> arah complexity -> observasi kunci -> pseudocode parsial -> editorial. Solusi penuh adalah opsi terakhir. Semua soal yang membutuhkan editorial wajib dire-solve tanpa bantuan pada interval berikutnya.",
+  "resolvePolicy": "Any problem that reached the terminal editorial hint level must be re-solved without help at the next interval, per the §5.3 mandatory re-solve rule. This records the obligation only; re-solve scheduling is out of scope for this module (see issue #14).",
+  "levels": [
+    {
+      "level": 1,
+      "id": "pertanyaan-pemodelan",
+      "description": "pertanyaan pemodelan",
+      "requiresResolve": false
+    },
+    {
+      "level": 2,
+      "id": "arah-complexity",
+      "description": "arah complexity",
+      "requiresResolve": false
+    },
+    {
+      "level": 3,
+      "id": "observasi-kunci",
+      "description": "observasi kunci",
+      "requiresResolve": false
+    },
+    {
+      "level": 4,
+      "id": "pseudocode-parsial",
+      "description": "pseudocode parsial",
+      "requiresResolve": true
+    },
+    {
+      "level": 5,
+      "id": "editorial",
+      "description": "editorial",
+      "requiresResolve": true
+    }
+  ]
+}
