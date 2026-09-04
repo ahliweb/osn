@@ -8,6 +8,7 @@
 
 import type { Command } from "../command";
 import { planCommand } from "./plan";
+import { privacyCheckCommand } from "./privacy-check";
 import { renderCommand } from "./render";
 import { reportCommand } from "./report";
 import { validateCommand } from "./validate";
@@ -18,6 +19,7 @@ export const COMMANDS: readonly Command[] = [
   planCommand,
   renderCommand,
   reportCommand,
+  privacyCheckCommand,
 ];
 
 /** {@link COMMANDS}, indexed by name for O(1) dispatch lookup. */

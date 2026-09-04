@@ -594,6 +594,106 @@ kind (ADR-0004). It exists so this command (and its tests) have real input
 to run against without this repository ever holding real learner data;
 **it must never be replaced with real cohort data.**
 
+## `osn privacy-check`
+
+A CI-checkable governance control (issue #23, GR-04): recursively scans
+every `.json`/`.jsonl` file under `data/` — including nested directories
+such as `data/samples/` — for object keys shaped like a direct or
+indirect personal identifier, at any nesting depth. This promotes the ad
+hoc scan `tests/unit/learning-record.test.ts` already ran (top-level
+`data/*.json` only) to a first-class subcommand, per ADR-0004's "Decision
+detail: enforcement mechanism".
+
+```sh
+osn privacy-check [options]
+```
+
+The actual scanning logic (`scanEntriesForDirectIdentifiers`) lives in
+`src/domain/privacy-scan.ts` as a pure function over an injected entry
+list — `osn privacy-check` itself (`src/cli/commands/privacy-check.ts`)
+is only the recursive directory read (`src/cli/privacy-scan-loader.ts`)
+plus the two renderers in `src/cli/format-privacy-check.ts`, exactly the
+same split `osn validate` uses around `auditCorpus`.
+
+### What it checks
+
+Every object key found anywhere in the parsed contents of every
+`.json`/`.jsonl` file under the scanned directory is compared against
+`DIRECT_IDENTIFIER_DENYLIST` (`src/schema/learning-record.ts`): `name`,
+`nama`, `email`, `phone`, `telepon`, `nik`, `nisn`, `school`, `sekolah`,
+`address`, `alamat`, `birthdate`, `tanggallahir`, `dob`, `photo`, `foto`,
+`ip`, `ipaddress` — case-insensitively, matching camelCase/snake_case/
+kebab-case word boundaries, never a substring (see `isDenylistedKey`'s
+docblock).
+
+**Tolerance rule:** the key `name` is permitted everywhere under `data/`,
+because this repository's pre-existing curriculum corpus (topic
+families, competition stages, curriculum categories, ...) legitimately
+carries a `name` field for a *curriculum entity's* printed name (e.g.
+`{ "id": "osn-k", "name": "OSN-K" }` in `data/competition-stages.json`),
+never a person's name. Every other denylisted term is zero-tolerance: a
+single occurrence anywhere under `data/` is reported. See
+`docs/governance/privacy.md`'s "Must-not-collect list" section for the
+full rationale, and `TOLERATED_KEY` in `src/domain/privacy-scan.ts` for
+the enforcement.
+
+A file that is not valid JSON (or a `.jsonl` line that is not valid JSON)
+is skipped and reported separately as a `parseIssues` entry — this is
+`osn validate`'s concern (schema/JSON conformance), not this control's;
+one malformed file never prevents every other file from being scanned,
+and a parse issue never affects this command's exit code.
+
+### Options
+
+| Flag | Meaning |
+| --- | --- |
+| `--json` | Emit `{ ok, findings, parseIssues, summary }` instead of grouped text. |
+| `--data-dir <path>` | Scan a different directory instead of the repository's real `data/` (primarily for testing against a fixture directory). |
+| `-h`, `--help` | Show `osn privacy-check`'s own help. |
+
+### Finding shape: never the value
+
+Every finding carries exactly three fields: `file` (or, for a `.jsonl`
+file, `"<file>:<line>"`), `path` (the dot-separated in-file path to the
+offending key's parent, or `"(root)"`), and `key` (the offending key
+itself) — **never the value found there**, matching `osn report`'s
+privacy-gate refusal pattern (`src/cli/commands/report.ts`'s docblock): a
+real identifier accidentally committed must never be echoed back into a
+terminal, a CI log, or a `--json` payload.
+
+### Exit codes
+
+| Code | Meaning |
+| --- | --- |
+| `0` | Clean — no direct-identifier-shaped key found (beyond the `name` tolerance). |
+| `1` | One or more direct-identifier-shaped keys found. |
+| `2` | Usage error: an unrecognised flag/argument, `--data-dir` given with no path, or the given directory cannot be read. |
+
+### Example: clean corpus
+
+```text
+$ osn privacy-check
+osn privacy-check: scanning /path/to/repo/data
+OK -- 19 file(s) scanned, 0 direct-identifier-shaped key(s) found.
+```
+
+### Example: a planted identifier (illustrative)
+
+```text
+$ osn privacy-check --data-dir ./fixture-with-a-mistake
+osn privacy-check: scanning ./fixture-with-a-mistake
+FAILED -- 1 direct-identifier-shaped key(s) found in 3 file(s) scanned. Values are never shown -- only file, path, and key:
+
+samples/learning-records.sample.jsonl:12:
+  - (root): key "email"
+```
+
+### CI
+
+`osn privacy-check` runs in CI (`.github/workflows/ci.yml`, the "Privacy
+check" step) immediately after `osn validate`, on every push and pull
+request, via `bun run privacy-check`.
+
 ## Planned commands (not yet implemented)
 
 The following subcommands are named in `docs/architecture/README.md` and

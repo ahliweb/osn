@@ -46,3 +46,6 @@ jobs:
 
       - name: Validate curriculum data
         run: bun run validate
+
+      - name: Privacy check
+        run: bun run privacy-check
