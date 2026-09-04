@@ -1,0 +1,40 @@
+# Dependency update automation.
+#
+# Closes the gap recorded as RISK-05 (dependency supply-chain compromise) in
+# docs/governance/security.md, which noted that no automated dependency
+# surveillance existed. See also ISO/IEC 27002:2022 supplier-relationship and
+# vulnerability-management controls (reference R24 in data/references.json).
+#
+# Scope note: this project's runtime dependency surface is deliberately small
+# (zod only), so the expected volume here is low. Grouping is enabled anyway so
+# that a burst of dev-tooling patches arrives as one reviewable pull request
+# rather than several, which keeps the atomic-issue workflow readable.
+version: 2
+updates:
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+    open-pull-requests-limit: 5
+    commit-message:
+      prefix: build
+      include: scope
+    labels:
+      - "type:infra"
+    groups:
+      dev-dependencies:
+        dependency-type: development
+        update-types:
+          - minor
+          - patch
+
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+    open-pull-requests-limit: 5
+    commit-message:
+      prefix: ci
+      include: scope
+    labels:
+      - "type:infra"
