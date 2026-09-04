@@ -1,0 +1,470 @@
+{
+  "syllabusVersion": "2.0",
+  "syllabusDate": "2026-09-04",
+  "sourceSection": "§4",
+  "weeks": [
+    {
+      "week": 1,
+      "focus": "Orientasi CP & C++ dasar",
+      "content": [
+        "Algoritma/pseudocode",
+        "I/O",
+        "variabel",
+        "tipe data",
+        "operator",
+        "integer overflow",
+        "format solusi."
+      ],
+      "outcome": "Menulis program dasar, dry-run, membedakan int/long long.",
+      "practice": "6-10 soal dasar + diagnosis OSN-K.",
+      "topicFamilies": ["dasar-pemrograman"],
+      "problemLoad": { "min": 6, "max": 10 },
+      "hasMiniContest": false,
+      "checkpoint": null
+    },
+    {
+      "week": 2,
+      "focus": "Control flow, fungsi, array/string",
+      "content": [
+        "if/else",
+        "for/while",
+        "function",
+        "parameter",
+        "scope",
+        "array",
+        "string",
+        "STL dasar",
+        "debugging."
+      ],
+      "outcome": "Menerjemahkan prosedur menjadi kode terstruktur.",
+      "practice": "8-12 soal + 2 tracing.",
+      "topicFamilies": ["dasar-pemrograman", "struktur-data"],
+      "problemLoad": { "min": 8, "max": 12 },
+      "hasMiniContest": false,
+      "checkpoint": null
+    },
+    {
+      "week": 3,
+      "focus": "Logika, bitwise & complexity",
+      "content": [
+        "Boolean",
+        "truth table",
+        "bitwise",
+        "Big-O",
+        "waktu vs memori",
+        "constraint-driven selection."
+      ],
+      "outcome": "Menolak solusi yang tidak feasible sebelum coding.",
+      "practice": "8-12 soal + worksheet complexity.",
+      "topicFamilies": ["logika-bitwise", "strategi-problem-solving"],
+      "problemLoad": { "min": 8, "max": 12 },
+      "hasMiniContest": false,
+      "checkpoint": null
+    },
+    {
+      "week": 4,
+      "focus": "Search/sort dasar & recursion",
+      "content": [
+        "Linear/binary search",
+        "bubble/insertion",
+        "recursion",
+        "call stack",
+        "prefix sum support."
+      ],
+      "outcome": "Memahami invariant sederhana, rekursi dasar, dan binary search.",
+      "practice": "8-12 soal + Checkpoint 1.",
+      "topicFamilies": ["search-sort", "rekursi"],
+      "problemLoad": { "min": 8, "max": 12 },
+      "hasMiniContest": false,
+      "checkpoint": 1
+    },
+    {
+      "week": 5,
+      "focus": "Sorting lanjut & divide-and-conquer",
+      "content": [
+        "Merge sort",
+        "quicksort",
+        "heapsort concept",
+        "divide-and-conquer",
+        "correctness intuition."
+      ],
+      "outcome": "Membandingkan kompleksitas dan trade-off algoritma sorting.",
+      "practice": "8-10 soal + implementasi 3 sort.",
+      "topicFamilies": ["search-sort", "rekursi"],
+      "problemLoad": { "min": 8, "max": 10 },
+      "hasMiniContest": false,
+      "checkpoint": null
+    },
+    {
+      "week": 6,
+      "focus": "Complete search & pruning",
+      "content": [
+        "Brute force sistematis",
+        "enumeration",
+        "recursion tree",
+        "pruning",
+        "backtracking."
+      ],
+      "outcome": "Mendesain search space dan mengurangi cabang tidak perlu.",
+      "practice": "8-12 soal, termasuk N kecil.",
+      "topicFamilies": ["strategi-problem-solving", "rekursi"],
+      "problemLoad": { "min": 8, "max": 12 },
+      "hasMiniContest": false,
+      "checkpoint": null
+    },
+    {
+      "week": 7,
+      "focus": "Greedy fundamentals",
+      "content": [
+        "Greedy choice",
+        "ordering",
+        "interval/scheduling",
+        "counterexample",
+        "exchange argument sederhana."
+      ],
+      "outcome": "Membedakan kapan greedy valid/tidak.",
+      "practice": "8-12 soal + 2 proof sketches.",
+      "topicFamilies": ["strategi-problem-solving"],
+      "problemLoad": { "min": 8, "max": 12 },
+      "hasMiniContest": false,
+      "checkpoint": null
+    },
+    {
+      "week": 8,
+      "focus": "Problem solving integration I",
+      "content": [
+        "Simulation",
+        "prefix sum",
+        "difference array",
+        "two pointers/sliding window sebagai support",
+        "mixed problems."
+      ],
+      "outcome": "Menggabungkan teknik dasar tanpa pattern matching sempit.",
+      "practice": "Mini-contest + Checkpoint 2.",
+      "topicFamilies": ["struktur-data", "strategi-problem-solving"],
+      "problemLoad": null,
+      "hasMiniContest": true,
+      "checkpoint": 2
+    },
+    {
+      "week": 9,
+      "focus": "Number theory I",
+      "content": [
+        "GCD/LCM",
+        "divisibility",
+        "prime",
+        "Sieve",
+        "factorization",
+        "modular arithmetic."
+      ],
+      "outcome": "Menerapkan teori bilangan dasar pada constraint nyata.",
+      "practice": "8-12 soal.",
+      "topicFamilies": ["aritmetika"],
+      "problemLoad": { "min": 8, "max": 12 },
+      "hasMiniContest": false,
+      "checkpoint": null
+    },
+    {
+      "week": 10,
+      "focus": "Number theory II & bit patterns",
+      "content": [
+        "Fast exponentiation",
+        "modular power",
+        "set concepts",
+        "parity",
+        "bit masks dasar."
+      ],
+      "outcome": "Menggunakan bit representation dan modular operations dengan aman.",
+      "practice": "8-12 soal.",
+      "topicFamilies": ["aritmetika", "logika-bitwise"],
+      "problemLoad": { "min": 8, "max": 12 },
+      "hasMiniContest": false,
+      "checkpoint": null
+    },
+    {
+      "week": 11,
+      "focus": "Combinatorics & probability",
+      "content": [
+        "Rule of sum/product",
+        "permutation/combination",
+        "probability",
+        "Pascal/binomial."
+      ],
+      "outcome": "Menghitung ruang solusi dan probabilitas sederhana.",
+      "practice": "8-10 soal analitis + coding ringan.",
+      "topicFamilies": ["aturan-berhitung"],
+      "problemLoad": { "min": 8, "max": 10 },
+      "hasMiniContest": false,
+      "checkpoint": null
+    },
+    {
+      "week": 12,
+      "focus": "Pigeonhole & inclusion-exclusion",
+      "content": [
+        "Pigeonhole principle",
+        "inclusion-exclusion",
+        "sequences",
+        "Fibonacci",
+        "induction intuition."
+      ],
+      "outcome": "Memilih prinsip hitung yang tepat pada soal reasoning.",
+      "practice": "OSN-K style set + Checkpoint 3.",
+      "topicFamilies": ["aturan-berhitung"],
+      "problemLoad": null,
+      "hasMiniContest": false,
+      "checkpoint": 3
+    },
+    {
+      "week": 13,
+      "focus": "Dynamic Programming I",
+      "content": ["State", "transition", "base case", "memoization", "tabulation", "complexity."],
+      "outcome": "Mendesain DP 1D/2D sederhana tanpa hafalan.",
+      "practice": "8-10 soal.",
+      "topicFamilies": ["strategi-problem-solving"],
+      "problemLoad": { "min": 8, "max": 10 },
+      "hasMiniContest": false,
+      "checkpoint": null
+    },
+    {
+      "week": 14,
+      "focus": "Dynamic Programming II",
+      "content": [
+        "Knapsack patterns",
+        "grid DP",
+        "coin change",
+        "reconstruction",
+        "space optimization."
+      ],
+      "outcome": "Menghubungkan state design dengan constraint dan memori.",
+      "practice": "8-10 soal + state worksheet.",
+      "topicFamilies": ["strategi-problem-solving"],
+      "problemLoad": { "min": 8, "max": 10 },
+      "hasMiniContest": false,
+      "checkpoint": null
+    },
+    {
+      "week": 15,
+      "focus": "DP sequence & optimization thinking",
+      "content": [
+        "LIS/LCS sebagai contoh",
+        "alternative O(N^2) vs O(N log N) untuk LIS",
+        "DP correctness."
+      ],
+      "outcome": "Membandingkan beberapa formulation dan trade-off.",
+      "practice": "8-10 soal.",
+      "topicFamilies": ["strategi-problem-solving"],
+      "problemLoad": { "min": 8, "max": 10 },
+      "hasMiniContest": false,
+      "checkpoint": null
+    },
+    {
+      "week": 16,
+      "focus": "DP integration",
+      "content": ["Mixed DP", "interval/bitmask intro bila siap", "debugging DP", "edge cases."],
+      "outcome": "Mampu menjelaskan state-transition-complexity sebelum coding.",
+      "practice": "Mini-contest + Checkpoint 4.",
+      "topicFamilies": ["strategi-problem-solving", "logika-bitwise"],
+      "problemLoad": null,
+      "hasMiniContest": true,
+      "checkpoint": 4
+    },
+    {
+      "week": 17,
+      "focus": "Graph fundamentals",
+      "content": [
+        "Directed/undirected",
+        "weighted/unweighted",
+        "adjacency list/matrix/edge list",
+        "BFS/DFS",
+        "connectivity."
+      ],
+      "outcome": "Membangun model graph dari cerita dan memilih representasi.",
+      "practice": "8-12 soal.",
+      "topicFamilies": ["graph-tree"],
+      "problemLoad": { "min": 8, "max": 12 },
+      "hasMiniContest": false,
+      "checkpoint": null
+    },
+    {
+      "week": 18,
+      "focus": "Shortest path",
+      "content": [
+        "BFS shortest path",
+        "Dijkstra",
+        "Bellman-Ford",
+        "Floyd-Warshall",
+        "negative edge/cycle."
+      ],
+      "outcome": "Memilih algoritma shortest path sesuai tipe bobot dan N.",
+      "practice": "8-10 soal + selection matrix.",
+      "topicFamilies": ["graph-tree"],
+      "problemLoad": { "min": 8, "max": 10 },
+      "hasMiniContest": false,
+      "checkpoint": null
+    },
+    {
+      "week": 19,
+      "focus": "Tree & LCA",
+      "content": [
+        "Rooted tree",
+        "parent/depth",
+        "traversal",
+        "subtree thinking",
+        "LCA concept/implementation sesuai level."
+      ],
+      "outcome": "Menguasai tree traversal dan query ancestor dasar.",
+      "practice": "8-10 soal.",
+      "topicFamilies": ["graph-tree"],
+      "problemLoad": { "min": 8, "max": 10 },
+      "hasMiniContest": false,
+      "checkpoint": null
+    },
+    {
+      "week": 20,
+      "focus": "MST & graph integration",
+      "content": ["Prim", "Kruskal", "DSU connection", "connectivity", "graph mixed."],
+      "outcome": "Mendesain solusi MST dan menjelaskan correctness intuitif.",
+      "practice": "Mini-contest + Checkpoint 5.",
+      "topicFamilies": ["graph-tree", "struktur-data"],
+      "problemLoad": null,
+      "hasMiniContest": true,
+      "checkpoint": 5
+    },
+    {
+      "week": 21,
+      "focus": "Core data structures I",
+      "content": [
+        "Stack",
+        "queue",
+        "deque support",
+        "binary heap/priority_queue",
+        "set/map support."
+      ],
+      "outcome": "Memilih struktur data berdasarkan operasi dan complexity.",
+      "practice": "8-12 soal.",
+      "topicFamilies": ["struktur-data"],
+      "problemLoad": { "min": 8, "max": 12 },
+      "hasMiniContest": false,
+      "checkpoint": null
+    },
+    {
+      "week": 22,
+      "focus": "DSU & offline connectivity",
+      "content": [
+        "Find/union",
+        "path compression",
+        "union by rank/size",
+        "Kruskal",
+        "connectivity."
+      ],
+      "outcome": "Mengimplementasikan DSU dengan kompleksitas amortized yang sesuai.",
+      "practice": "8-10 soal.",
+      "topicFamilies": ["struktur-data", "graph-tree"],
+      "problemLoad": { "min": 8, "max": 10 },
+      "hasMiniContest": false,
+      "checkpoint": null
+    },
+    {
+      "week": 23,
+      "focus": "Fenwick Tree & Segment Tree",
+      "content": [
+        "Point update/range query",
+        "prefix query",
+        "segment tree aggregation",
+        "trade-offs."
+      ],
+      "outcome": "Memilih Fenwick vs Segment Tree dari matriks operasi.",
+      "practice": "8-10 soal + implementation drill.",
+      "topicFamilies": ["struktur-data"],
+      "problemLoad": { "min": 8, "max": 10 },
+      "hasMiniContest": false,
+      "checkpoint": null
+    },
+    {
+      "week": 24,
+      "focus": "Geometry dasar & integration",
+      "content": [
+        "Coordinates",
+        "distance",
+        "Pythagoras",
+        "line/segment/sudut",
+        "cross-product intuition",
+        "convex hull definition."
+      ],
+      "outcome": "Menyelesaikan geometri dasar tanpa kehilangan precision.",
+      "practice": "OSN-style mixed + Checkpoint 6.",
+      "topicFamilies": ["geometri-dasar"],
+      "problemLoad": null,
+      "hasMiniContest": false,
+      "checkpoint": 6
+    },
+    {
+      "week": 25,
+      "focus": "OSN-K intensive",
+      "content": [
+        "Abstraksi CT",
+        "logical deduction",
+        "tracing C++",
+        "modeling",
+        "complexity",
+        "timed paper set."
+      ],
+      "outcome": "Meningkatkan akurasi dan kecepatan analitis.",
+      "practice": "2 simulasi OSN-K + review.",
+      "topicFamilies": ["dasar-pemrograman", "logika-bitwise"],
+      "problemLoad": null,
+      "hasMiniContest": false,
+      "checkpoint": null
+    },
+    {
+      "week": 26,
+      "focus": "OSN-P intensive",
+      "content": [
+        "Studi kasus",
+        "subtask mudah/sulit",
+        "baseline",
+        "partial score",
+        "coding 3 jam."
+      ],
+      "outcome": "Mengamankan poin, lalu meng-upgrade solusi.",
+      "practice": "2 simulasi OSN-P + upsolve.",
+      "topicFamilies": ["dasar-pemrograman", "strategi-problem-solving"],
+      "problemLoad": null,
+      "hasMiniContest": false,
+      "checkpoint": null
+    },
+    {
+      "week": 27,
+      "focus": "Nasional mixed contest",
+      "content": [
+        "Mixed algorithm/data structure",
+        "implementation precision",
+        "stress testing",
+        "time allocation."
+      ],
+      "outcome": "Menjaga performa pada contest panjang dan topik campuran.",
+      "practice": "1-2 full contests + postmortem.",
+      "topicFamilies": ["strategi-problem-solving", "struktur-data", "graph-tree"],
+      "problemLoad": null,
+      "hasMiniContest": false,
+      "checkpoint": null
+    },
+    {
+      "week": 28,
+      "focus": "Final readiness & individualized repair",
+      "content": [
+        "Weak-topic repair",
+        "re-solve C/B problems",
+        "template hygiene",
+        "contest strategy",
+        "readiness review."
+      ],
+      "outcome": "Profil mastery akhir dan rencana lanjutan individual.",
+      "practice": "Final simulation + Checkpoint 7.",
+      "topicFamilies": ["strategi-problem-solving"],
+      "problemLoad": null,
+      "hasMiniContest": false,
+      "checkpoint": 7
+    }
+  ]
+}

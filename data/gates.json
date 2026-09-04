@@ -1,0 +1,60 @@
+{
+  "syllabusVersion": "2.0",
+  "syllabusDate": "2026-09-04",
+  "sourceSection": "§4.1",
+  "gates": [
+    {
+      "afterWeek": 4,
+      "evidence": [
+        "Dapat coding dasar tanpa template berlebihan",
+        "memahami Big-O dasar",
+        "binary search/recursion sederhana",
+        "tracing C++."
+      ],
+      "blocksProgression": true
+    },
+    {
+      "afterWeek": 8,
+      "evidence": [
+        "Dapat complete search/backtracking/greedy dasar dan menjelaskan mengapa solusi feasible."
+      ],
+      "blocksProgression": true
+    },
+    {
+      "afterWeek": 12,
+      "evidence": [
+        "Dapat menggunakan number theory/combinatorics dasar dan menyelesaikan set OSN-K terukur."
+      ],
+      "blocksProgression": true
+    },
+    {
+      "afterWeek": 16,
+      "evidence": [
+        "Dapat merumuskan state-transition-base case-complexity DP sebelum implementasi."
+      ],
+      "blocksProgression": true
+    },
+    {
+      "afterWeek": 20,
+      "evidence": [
+        "Dapat memodelkan graph, memilih shortest path/MST, dan memakai tree traversal/LCA dasar."
+      ],
+      "blocksProgression": true
+    },
+    {
+      "afterWeek": 24,
+      "evidence": [
+        "Dapat memilih heap/DSU/Fenwick/Segment Tree berdasarkan operasi",
+        "geometri dasar stabil."
+      ],
+      "blocksProgression": true
+    },
+    {
+      "afterWeek": 28,
+      "evidence": [
+        "Menyelesaikan simulasi sesuai tahap target, melakukan postmortem dan upsolve mandiri."
+      ],
+      "blocksProgression": true
+    }
+  ]
+}
