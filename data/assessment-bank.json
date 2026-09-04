@@ -1,0 +1,61 @@
+{
+  "syllabusVersion": "2.0",
+  "syllabusDate": "2026-09-04",
+  "sourceSection": "§13",
+  "banks": [
+    {
+      "id": "diagnostic",
+      "name": "Diagnostic bank",
+      "purpose": "Builds each student's baseline competency profile before the 28-week programme starts, per §13.1 step 1 (\"Diagnostic baseline -> profil kompetensi per siswa\"), by testing exactly the five §14.1 diagnostic areas: C++, logika, matematika, complexity, dan problem solving. Kept separate from weekly/checkpoint/stage-facing banks per §13's Assessment Bank row. scoringModel is \"rubric\" (DERIVED): a \"profil kompetensi\" is a graded profile across five areas, not a single pass/fail signal, so each area is scored against named mastery criteria rather than accept/reject.",
+      "servesStage": null,
+      "scoringModel": "rubric",
+      "timingMinutes": null,
+      "sourceSections": ["§13", "§13.1", "§14.1"]
+    },
+    {
+      "id": "weekly",
+      "name": "Weekly bank",
+      "purpose": "Supplies the curated per-week practice problems §13.1 step 2 draws on (\"Weekly plan -> latihan berdasarkan gap dan target tahap seleksi\"), sized against §1.3's \"Soal terkurasi\" baseline (umumnya 8-12/minggu) and required by §14.1 to exist for every week with at least one alternative per topic. Kept separate from diagnostic/checkpoint/stage-facing banks per §13's Assessment Bank row. scoringModel is \"binary\" (DERIVED): ordinary curated practice problems are graded by a plain judge accept/reject verdict, the base signal the §6.2 A/B/C/D problem-completion codes are themselves built on.",
+      "servesStage": null,
+      "scoringModel": "binary",
+      "timingMinutes": null,
+      "sourceSections": ["§13", "§13.1", "§1.3", "§14.1"]
+    },
+    {
+      "id": "checkpoint",
+      "name": "Checkpoint bank",
+      "purpose": "Supplies the mastery evaluation given at the end of every 4-week block, per §1.3's Checkpoint row (\"Akhir setiap 4 minggu\") and the §4.1 phase-gate evidence a learner must show before proceeding. Kept separate from diagnostic/weekly/stage-facing banks per §13's Assessment Bank row. scoringModel is \"rubric\", directly stated by §1.3's own Checkpoint note: \"Gunakan rubrik mastery, bukan ranking saja\" (use a mastery rubric, not just ranking).",
+      "servesStage": null,
+      "scoringModel": "rubric",
+      "timingMinutes": null,
+      "sourceSections": ["§13", "§1.3", "§4.1"]
+    },
+    {
+      "id": "osn-k-style",
+      "name": "OSN-K style bank",
+      "purpose": "Rehearses the OSN-K contest format and dominant competencies from §2.2 (computational thinking, modeling, logika, membaca algoritma C++, tracing, kompleksitas) via §2.2's OSN-K practice model (worksheet analitis, dry-run, Bebras-style, short coding, quiz kompleksitas). Kept separate from the other five bank kinds per §13's Assessment Bank row. scoringModel is \"binary\" (DERIVED): §2.2's OSN-K practice-model items are objective, single-correct-answer items (worksheet, dry-run, quiz), unlike OSN-P, whose row states \"Partial scoring\" outright and OSN-K's does not.",
+      "servesStage": "osn-k",
+      "scoringModel": "binary",
+      "timingMinutes": null,
+      "sourceSections": ["§13", "§2.2"]
+    },
+    {
+      "id": "osn-p-style",
+      "name": "OSN-P style bank",
+      "purpose": "Rehearses the OSN-P case-study contest format from §2.2 (5-8 studi kasus/3 jam, each with 3 soal pemahaman + 1 soal pemrograman with easy/hard subtasks) via §2.2's OSN-P practice model, which states \"Partial scoring, baseline -> optimized solution, contest 3 jam, postmortem\" outright. Kept separate from the other five bank kinds per §13's Assessment Bank row. scoringModel is \"partial\", directly stated by §2.2's OSN-P practice-model cell -- not derived, the one bank kind whose scoring model the source names outright.",
+      "servesStage": "osn-p",
+      "scoringModel": "partial",
+      "timingMinutes": null,
+      "sourceSections": ["§13", "§2.2"]
+    },
+    {
+      "id": "national-mixed",
+      "name": "National mixed bank",
+      "purpose": "Rehearses OSN Nasional's mixed-topic, full-integration format from §2.2 (\"Integrasi materi, implementasi presisi, daya tahan contest, strategi poin\", practice model \"Mixed-topic contest, arsip nasional, stress testing, editorial review terbatas\"), combining OSN-K-style analytical items with OSN-P-style partial-credit programming cases. Kept separate from the other five bank kinds per §13's Assessment Bank row. scoringModel is \"partial\" (DERIVED): §2.2 names \"strategi poin\" (a points strategy) among OSN Nasional's dominant competencies, implying partial-credit point accumulation rather than a binary pass/fail, and the format mixes in OSN-P-style programming cases that are themselves partially scored.",
+      "servesStage": "osn-nasional",
+      "scoringModel": "partial",
+      "timingMinutes": null,
+      "sourceSections": ["§13", "§2.2"]
+    }
+  ]
+}
