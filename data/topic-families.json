@@ -1,0 +1,144 @@
+{
+  "syllabusVersion": "2.0",
+  "syllabusDate": "2026-09-04",
+  "sourceSection": "§2.1",
+  "topicFamilies": [
+    {
+      "id": "dasar-pemrograman",
+      "name": "Dasar pemrograman",
+      "coverage": [
+        "C++ syntax/semantics",
+        "variabel",
+        "tipe data",
+        "ekspresi",
+        "I/O",
+        "percabangan",
+        "perulangan",
+        "fungsi/parameter"
+      ],
+      "citations": ["R1"],
+      "sourceSection": "§2.1"
+    },
+    {
+      "id": "logika-bitwise",
+      "name": "Logika & bitwise",
+      "coverage": [
+        "Boolean",
+        "truth table",
+        "implikasi/biimplikasi/XOR",
+        "modus ponens/tollens",
+        "operasi bit"
+      ],
+      "citations": ["R1"],
+      "sourceSection": "§2.1"
+    },
+    {
+      "id": "aritmetika",
+      "name": "Aritmetika",
+      "coverage": [
+        "Integer",
+        "paritas",
+        "divisibility",
+        "modular arithmetic",
+        "modular exponentiation",
+        "prime",
+        "fractions",
+        "number theory",
+        "sets"
+      ],
+      "citations": ["R1"],
+      "sourceSection": "§2.1"
+    },
+    {
+      "id": "aturan-berhitung",
+      "name": "Aturan berhitung",
+      "coverage": [
+        "Rule of sum/product",
+        "barisan",
+        "Fibonacci",
+        "permutasi/kombinasi",
+        "probabilitas",
+        "pigeonhole",
+        "inclusion-exclusion",
+        "Pascal/binomial"
+      ],
+      "citations": ["R1"],
+      "sourceSection": "§2.1"
+    },
+    {
+      "id": "rekursi",
+      "name": "Rekursi",
+      "coverage": [
+        "Konsep rekursi",
+        "fungsi/prosedur rekursif",
+        "divide-and-conquer",
+        "backtracking"
+      ],
+      "citations": ["R1"],
+      "sourceSection": "§2.1"
+    },
+    {
+      "id": "search-sort",
+      "name": "Search & sort",
+      "coverage": ["Linear/binary search", "bubble/insertion", "quick/merge/heap sort"],
+      "citations": ["R1"],
+      "sourceSection": "§2.1"
+    },
+    {
+      "id": "strategi-problem-solving",
+      "name": "Strategi problem solving",
+      "coverage": [
+        "Complete search + pruning",
+        "greedy",
+        "divide-and-conquer",
+        "dynamic programming"
+      ],
+      "citations": ["R1"],
+      "sourceSection": "§2.1"
+    },
+    {
+      "id": "struktur-data",
+      "name": "Struktur data",
+      "coverage": [
+        "Primitive types",
+        "array/multidimensi",
+        "string",
+        "stack/queue",
+        "binary heap",
+        "DSU",
+        "Fenwick/Segment Tree"
+      ],
+      "citations": ["R1"],
+      "sourceSection": "§2.1"
+    },
+    {
+      "id": "graph-tree",
+      "name": "Graph & tree",
+      "coverage": [
+        "Representasi",
+        "BFS/DFS",
+        "connectivity",
+        "shortest path",
+        "MST",
+        "rooted tree",
+        "LCA"
+      ],
+      "citations": ["R1"],
+      "sourceSection": "§2.1"
+    },
+    {
+      "id": "geometri-dasar",
+      "name": "Geometri dasar",
+      "coverage": [
+        "Titik/koordinat",
+        "garis/segmen/sudut",
+        "bangun dasar",
+        "Euclidean distance",
+        "Pythagoras",
+        "definisi convex hull"
+      ],
+      "citations": ["R1"],
+      "sourceSection": "§2.1"
+    }
+  ]
+}

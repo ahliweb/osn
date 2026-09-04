@@ -1,0 +1,52 @@
+{
+  "syllabusVersion": "2.0",
+  "syllabusDate": "2026-09-04",
+  "sourceSection": "§1.3",
+  "components": [
+    {
+      "component": "Sesi mentor",
+      "baseline": "2 x 120 menit/minggu",
+      "note": "Dapat menjadi 3 sesi pada fase intensif.",
+      "quantity": {
+        "kind": "mentor-sessions",
+        "sessionsPerWeek": 2,
+        "minutesPerSession": 120
+      }
+    },
+    {
+      "component": "Latihan mandiri",
+      "baseline": "4-8 jam/minggu",
+      "note": "Disesuaikan sekolah, level, dan fase.",
+      "quantity": {
+        "kind": "hour-range",
+        "minHoursPerWeek": 4,
+        "maxHoursPerWeek": 8
+      }
+    },
+    {
+      "component": "Soal terkurasi",
+      "baseline": "Umumnya 8-12/minggu",
+      "note": "Topik berat boleh lebih sedikit; dasar boleh lebih banyak.",
+      "quantity": {
+        "kind": "count-range",
+        "minPerWeek": 8,
+        "maxPerWeek": 12
+      }
+    },
+    {
+      "component": "Contest",
+      "baseline": "1 mini-contest/2 minggu; meningkat menjadi mingguan",
+      "note": "Wajib postmortem dan upsolve.",
+      "quantity": null
+    },
+    {
+      "component": "Checkpoint",
+      "baseline": "Akhir setiap 4 minggu",
+      "note": "Gunakan rubrik mastery, bukan ranking saja.",
+      "quantity": {
+        "kind": "cadence-weeks",
+        "everyWeeks": 4
+      }
+    }
+  ]
+}
