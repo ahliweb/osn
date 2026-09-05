@@ -43,7 +43,6 @@ export type ReferenceKind = z.infer<typeof referenceKindSchema>;
  * network requests in tests").
  */
 export const httpsUrlSchema = z
-  .string()
   .url()
   .refine(
     (value) => {
