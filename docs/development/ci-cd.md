@@ -10,7 +10,7 @@ without it passing.
 The workflow is defined in `.github/workflows/ci.yml`. It has a single job,
 `quality`, that runs the following steps in sequence on `ubuntu-latest`:
 
-1. **Checkout** — `actions/checkout@v4`.
+1. **Checkout** — `actions/checkout@v7`.
 2. **Set up Bun** — `oven-sh/setup-bun@v2`, pinned to an exact Bun version
    (see "Action and tool pinning policy" below).
 3. **Install dependencies** — `bun install --frozen-lockfile`. The frozen
