@@ -57,8 +57,8 @@ trace.
 5. Otherwise calls the command's `run(args, ctx)`, with the subcommand
    token and `--json` already stripped from `args`.
 
-Adding a new subcommand (`plan` #20, `render` #21, `report` #22, done --
-see below; `checklist` #25, still planned) means writing a new
+Adding a new subcommand (`plan` #20, `render` #21, `report` #22,
+`checklist` #25, all done -- see below) means writing a new
 `src/cli/commands/<name>.ts`
 exporting a `Command` (`src/cli/command.ts`'s interface: `name`,
 `summary`, `help()`, `run(args, ctx)`) and adding it to the `COMMANDS`
@@ -95,7 +95,9 @@ osn validate [options]
    exactly 100; both weekly session templates summing to exactly 120
    minutes; 5 hint-escalation levels; 4 problem-completion status codes; 7
    KPI metrics; 7 decision playbooks; 6 assessment-bank kinds; 4
-   competition stages; 4 curriculum categories.
+   competition stages; 4 curriculum categories; 8 §14.1 readiness-checklist
+   items; 8 §14.2 operational rules; 10 §14.2 mentor quick-pointer stages;
+   a non-empty §14.2 rule 8 syllabus-check log.
 
 3. **Referential integrity**, spanning two files where the fact cannot be
    expressed by either file's own schema:
@@ -130,7 +132,7 @@ osn validate [options]
 ```text
 $ osn validate
 osn validate: corpus at /path/to/repo/data
-OK -- 19 data file(s) validated, 0 problem(s) found.
+OK -- 22 data file(s) validated, 0 problem(s) found.
 ```
 
 ```sh
@@ -139,7 +141,7 @@ $ osn validate --json
   "ok": true,
   "findings": [],
   "summary": {
-    "filesValidated": 19,
+    "filesValidated": 22,
     "filesMissing": 0,
     "filesUnregistered": 0,
     "findingCount": 0,
@@ -674,7 +676,7 @@ terminal, a CI log, or a `--json` payload.
 ```text
 $ osn privacy-check
 osn privacy-check: scanning /path/to/repo/data
-OK -- 19 file(s) scanned, 0 direct-identifier-shaped key(s) found.
+OK -- 23 file(s) scanned, 0 direct-identifier-shaped key(s) found.
 ```
 
 ### Example: a planted identifier (illustrative)
@@ -694,16 +696,107 @@ samples/learning-records.sample.jsonl:12:
 check" step) immediately after `osn validate`, on every push and pull
 request, via `bun run privacy-check`.
 
-## Planned commands (not yet implemented)
+## `osn checklist`
 
-The following subcommands are named in `docs/architecture/README.md` and
-scoped by their own issues, but do not exist yet -- `osn <name>` for any of
-them today is simply an unknown command (exit `2`):
+Renders the §14.1 eight-item cohort-readiness checklist, the §14.2 eight
+operational rules and mentor quick-pointer callout, and the latest §14.2
+rule 8 syllabus-check status (issue #25), together with this operational
+corpus's own `syllabusVersion`/`syllabusDate`.
 
-| Command | Issue | Purpose |
-| --- | --- | --- |
-| `osn checklist` | [#25](https://github.com/ahliweb/osn/issues/25) | Generates an operational checklist artefact. |
+```sh
+osn checklist [options]
+```
 
-Each will be added as a new `src/cli/commands/<name>.ts` module registered
-in `src/cli/commands/index.ts`, per "Command dispatch and how new commands
-are added" above -- no change to the dispatcher itself.
+The actual data lives in `data/readiness-checklist.json` (the eight §14.1
+items, each with a `verificationMethod` and `evidenceRequired`, both
+DERIVED -- see `src/schema/readiness-checklist.ts`'s docblock) and
+`data/operational-rules.json` (the eight §14.2 rules and the mentor
+quick-pointer callout, verbatim). The typed loaders
+(`listReadinessItems`, `getReadinessItem`, `listOperationalRules`,
+`quickPointer`, `listSyllabusChecks`, `latestSyllabusCheck`,
+`daysSinceLastSyllabusCheck`) live in `src/domain/operations.ts`. The
+Markdown renderer (`renderChecklist`) lives in `src/render/checklist.ts`
+as a function of an explicit `asOf: Date` -- exactly as
+`src/domain/cohort-plan.ts`'s `buildCohortPlan` takes its dates as
+explicit input rather than calling `new Date()` itself, since "days since
+last syllabus check" is necessarily relative to *some* current date. `osn
+checklist` itself (`src/cli/commands/checklist.ts`) is the one place that
+reads the wall clock, then passes that single `asOf` to both the Markdown
+renderer and the `--format json` builder (`src/cli/format-checklist.ts`),
+exactly the same split `osn plan`/`osn render` use around their own pure
+functions.
+
+### Options
+
+| Flag | Meaning |
+| --- | --- |
+| `--format <md\|json>` | Output format. Default `md`. `--json` (the global flag) is equivalent to `--format json`; an explicit `--format` wins if both are given. |
+| `--out <path>` | Write the rendered checklist to this path instead of stdout. |
+| `--force` | Required to overwrite a file that already exists at `--out`. Without it, an existing file is left byte-for-byte untouched and the command exits `2` -- same safety property as `osn render`'s/`osn report`'s `--out`/`--force` (`src/cli/output-writer.ts`). |
+| `-h`, `--help` | Show `osn checklist`'s own help. |
+
+### Contents
+
+Regardless of `--format`, `osn checklist` reports:
+
+- **The corpus version** -- `syllabusVersion`/`syllabusDate` from
+  `data/readiness-checklist.json` (`operationsCorpusVersion()` in
+  `src/domain/operations.ts`).
+- **The latest syllabus-check status** (§14.2 rule 8) -- the most recent
+  entry in `data/syllabus-check-log.json` by `checkedOn`, its `outcome`,
+  the official sources it checked, and the number of whole days between
+  that date and `asOf` (`daysSinceLastSyllabusCheck`, UTC-only date
+  arithmetic, no `Date` mutation -- see that function's docblock).
+- **The eight §14.1 readiness-checklist items**, each with its
+  verification method and the evidence a mentor records.
+- **The eight §14.2 operational rules**, in order.
+- **The §14.2 mentor quick-pointer callout**: its ten ordered stages
+  (Problem Solving -> C++ -> Complexity -> Math/Logic -> Complete Search
+  -> Greedy -> DP -> Graph/Tree -> Data Structures -> Contest Engineering)
+  and its closing condition that extension only follows once core is
+  stable.
+
+### Exit codes
+
+| Code | Meaning |
+| --- | --- |
+| `0` | Success. |
+| `2` | Usage error: an unknown `--format`, or `--out` already exists without `--force`. |
+
+### Example
+
+```text
+$ osn checklist
+# osn checklist: cohort readiness & operational rules
+
+Corpus version: 2.0 (2026-09-04)
+
+## Syllabus-check status (§14.2 rule 8)
+
+Latest check: 2026-09-05 -- outcome: no-change.
+Sources checked: R1, R2, R3, R7, R8.
+Days since last check (as of 2026-09-05): 0.
+
+## Cohort readiness checklist (§14.1)
+
+1. **Verifikasi silabus resmi OSN dan halaman OSN-K/OSN-P terbaru.** (`verify-official-syllabus`)
+   - Verification: ...
+   - Evidence required: ...
+...
+
+## Operational rules (§14.2)
+
+1. Core OSN harus lebih dahulu daripada extension.
+...
+
+## Mentor quick pointer (§14.2 callout)
+
+Problem Solving -> C++ -> Complexity -> Math/Logic -> Complete Search -> Greedy -> DP -> Graph/Tree -> Data Structures -> Contest Engineering
+
+Extension hanya setelah core stabil.
+```
+
+See `docs/operations/runbook.md` for how `osn checklist` fits into the
+cohort-start procedure, and `docs/operations/syllabus-check.md` for the
+full §14.2 rule 8 syllabus-check procedure this command's status line
+summarises.
