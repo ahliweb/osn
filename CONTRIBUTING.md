@@ -39,7 +39,8 @@ Every PR uses the existing template
 - Scope is atomic — one issue, no unrelated changes bundled in.
 - Tests added/updated.
 - All local checks pass: `bun run format:check`, `bun run lint`, `bun run
-  typecheck`, `bun run test:coverage`, `bun run build`, `bun run validate`.
+  typecheck`, `bun run test:coverage`, `bun run build`, `bun run validate`,
+  `bun run privacy-check`.
 - Docs updated (`docs/`) if behavior, setup, or process changed.
 - Changeset added if the change is user-visible (see
   `docs/development/releasing.md`).
@@ -85,6 +86,7 @@ bun run typecheck
 bun run test:coverage
 bun run build
 bun run validate
+bun run privacy-check
 ```
 
 These are the exact steps CI runs, in the same order (see

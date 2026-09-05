@@ -1,6 +1,6 @@
 {
   "name": "osn-informatika-2026",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "private": true,
   "type": "module",
   "description": "Curriculum-as-code for the OSN Informatika 2026 operational syllabus: schema, domain model, and rendering pipeline.",
@@ -17,7 +17,9 @@
     "test:coverage": "bun test --coverage",
     "build": "bun build ./src/index.ts --outdir dist --target bun",
     "validate": "bun run src/cli/index.ts validate",
+    "privacy-check": "bun run src/cli/index.ts privacy-check",
     "check:requirements": "bun run scripts/check-requirements.ts",
+    "check:checklist-fidelity": "bun run scripts/check-checklist-fidelity.ts",
     "changeset": "changeset",
     "version": "changeset version"
   },

@@ -1,0 +1,54 @@
+{
+  "syllabusVersion": "2.0",
+  "syllabusDate": "2026-09-04",
+  "sourceSection": "§14.2",
+  "rules": [
+    {
+      "order": 1,
+      "rule": "Core OSN harus lebih dahulu daripada extension."
+    },
+    {
+      "order": 2,
+      "rule": "C++ fundamentals, computational thinking, complexity, dan constraint analysis diberikan sejak awal."
+    },
+    {
+      "order": 3,
+      "rule": "Latihan dan tracing dimulai Minggu 1; Minggu 25-28 adalah integrasi intensif."
+    },
+    {
+      "order": 4,
+      "rule": "DP diajarkan melalui state-transition-base case-complexity."
+    },
+    {
+      "order": 5,
+      "rule": "Graph/data structure selalu dimulai dari operasi/constraint dan model masalah."
+    },
+    {
+      "order": 6,
+      "rule": "Setiap contest wajib postmortem dan upsolve."
+    },
+    {
+      "order": 7,
+      "rule": "Jumlah soal bukan satu-satunya KPI; mastery dan transfer lebih penting."
+    },
+    {
+      "order": 8,
+      "rule": "Setiap versi silabus harus memiliki tanggal, changelog, dan syllabus check."
+    }
+  ],
+  "quickPointer": {
+    "stages": [
+      "Problem Solving",
+      "C++",
+      "Complexity",
+      "Math/Logic",
+      "Complete Search",
+      "Greedy",
+      "DP",
+      "Graph/Tree",
+      "Data Structures",
+      "Contest Engineering"
+    ],
+    "extensionCondition": "Extension hanya setelah core stabil."
+  }
+}

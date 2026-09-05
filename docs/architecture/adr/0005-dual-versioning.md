@@ -37,7 +37,7 @@ document for policy detail rather than restating it.
    `publish` script).
 3. **Two independent version numbers**: `package.json` `version` (SemVer)
    for the software, and a separate `syllabusVersion`/`syllabusDate` field
-   carried by the curriculum corpus data itself (planned, issue #10),
+   carried by the curriculum corpus data itself (issue #10),
    tracking the source syllabus document's own versioning.
 
 ## Decision
@@ -95,7 +95,7 @@ direction.
 - **Harder:** the two numbers must be actively cross-checked rather than
   trusted to stay in sync automatically — `docs/development/releasing.md`
   assigns this to the PR template's "Syllabus check" item and to `osn
-  validate` (planned, #19) asserting `syllabusVersion`/`syllabusDate` are
+  validate` (issue #19) asserting `syllabusVersion`/`syllabusDate` are
   present and well-formed, so the cross-check is a reviewer/CI
   responsibility rather than something the version scheme enforces by
   construction.

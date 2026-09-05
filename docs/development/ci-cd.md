@@ -25,17 +25,21 @@ The workflow is defined in `.github/workflows/ci.yml`. It has a single job,
    `docs/development/testing.md`.
 8. **Build** — `bun run build` (`bun build ./src/index.ts --outdir dist
    --target bun`).
-9. **Validate curriculum data** — `bun run validate` (`osn validate`,
-   issue #19). Parses every `data/*.json` file against its schema, checks
+9. **Validate curriculum data** — `bun run validate` (`osn validate`).
+   Parses every `data/*.json` file against its schema, checks
    the fixed structural invariants (28 weeks, 7 gates, 10 topic families,
    41 references, and so on), and checks referential integrity across the
    corpus (week → topic family, week checkpoint numbering ↔ gate weeks,
    assessment-bank kind → competition stage, every `Rnn` citation → the
    reference register) — see `docs/cli/README.md` for the full command
-   reference. Exits `0` on a clean corpus, `1` if any finding exists. No
-   workflow change was needed to land the real implementation: this step
-   already called `bun run validate` while that script was still a
-   placeholder.
+   reference. Exits `0` on a clean corpus, `1` if any finding exists.
+10. **Privacy check** — `bun run privacy-check` (`osn privacy-check`,
+    GR-04). Recursively scans every `.json`/`.jsonl` file under `data/`
+    (including `data/samples/`) for a direct-identifier-shaped key, and
+    fails the build if any is found (beyond the documented `"name"`
+    tolerance — see `docs/cli/README.md`'s "osn privacy-check" section).
+    Runs immediately after `osn validate`, since both are corpus-wide
+    checks over `data/`. Exits `0` clean, `1` if any finding exists.
 
 Steps run in this order deliberately: cheaper, faster checks (formatting,
 lint, typecheck) fail fast before the more expensive test and build steps
@@ -111,7 +115,8 @@ bun run lint && \
 bun run typecheck && \
 bun run test:coverage && \
 bun run build && \
-bun run validate
+bun run validate && \
+bun run privacy-check
 ```
 
 Any step that fails locally will fail identically in CI, since CI runs

@@ -25,9 +25,12 @@ tests/
 - **`tests/integration/`** — tests that cross module boundaries: for
   example, parsing real curriculum data through the schema layer and into
   the domain model, or running a CLI command end-to-end and asserting on its
-  output/exit code. This directory is currently empty (kept alive with
-  `.gitkeep`) because there is no cross-module behaviour to integrate yet;
-  it will gain tests as the schema, domain, CLI, and render layers land.
+  output/exit code. This includes `requirements.test.ts` (verifies the
+  requirements register and traceability matrices), the full-corpus
+  `cli-validate.test.ts`/`cli-validate-fixtures.test.ts`, and one
+  end-to-end test per CLI command (`cli-plan.test.ts`,
+  `cli-render.test.ts`, `cli-report.test.ts`, `cli-privacy-check.test.ts`,
+  `cli-checklist.test.ts`).
 
 Both directories mirror the shape of `src/` closely enough that a reader can
 find the test for a given module without guessing — exact mirroring is not
@@ -90,14 +93,15 @@ coverageThreshold = { lines = 0.85, functions = 0.85 }
   fails if line coverage or function coverage drops below 85%.** This is
   the actual, currently-enforced floor.
 
-  The repository measures 100% today, because `src/` holds a single trivial
-  entrypoint. The gate is nonetheless set at 85% deliberately: a 100% gate
-  combined with the ratchet policy below would deadlock as soon as the CLI
-  lands, because CLI error paths, `process.exit` calls, and defensive
-  branches that should never be reached are exactly the code that cannot be
-  driven to 100% without writing tests that assert nothing. 85% is a floor
-  that catches a genuinely untested module while leaving the ratchet room
-  to move honestly.
+  The repository measures well above this floor today (run `bun run
+  test:coverage` for the current percentages) even with the full schema,
+  domain, CLI, and render layers in place. The gate is nonetheless set at
+  85%, not 100%, deliberately: a 100% gate combined with the ratchet policy
+  below would deadlock, because CLI error paths, `process.exit` calls, and
+  defensive branches that should never be reached are exactly the code that
+  cannot be driven to 100% without writing tests that assert nothing. 85%
+  is a floor that catches a genuinely untested module while leaving the
+  ratchet room to move honestly.
 
   Note the key names: Bun's threshold table uses the plural `lines` /
   `functions` (not `line` / `function`) — the singular keys are silently

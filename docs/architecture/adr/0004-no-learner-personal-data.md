@@ -43,7 +43,7 @@ themselves").
 ## Decision
 
 Option 1: this repository defines the **schemas** for learning records
-and problem taxonomy (planned, issue #15 — `src/schema/learning-record.ts`,
+and problem taxonomy (issue #15 — `src/schema/learning-record.ts`,
 `src/schema/problem-taxonomy.ts`) but stores **no real learner personal
 data**, anywhere, ever. Every learner identifier in the data model is an
 opaque pseudonymous `learnerRef`. Any fixture or sample data used in tests
@@ -93,14 +93,14 @@ Quality Review principle this repository applies to itself (ADR-0001),
 the rule is enforced mechanically at two points:
 
 1. **Schema-level rejection of direct identifiers.** The learning-record
-   schema (planned, #15) includes a guard that rejects any record
+   schema (issue #15) includes a guard that rejects any record
    containing fields that look like direct personal identifiers (name,
    email, phone, NIK, school, birthdate) — GR-02 in
    `docs/requirements/register.md`, with a corresponding rejecting-fixture
    test. The identifier field itself is typed as an opaque `learnerRef`
    (GR-03), never a name or other direct identifier.
-2. **A CI-checkable scan over `data/`.** Planned issue #23 (privacy
-   policy) adds an automated assertion that scans every file under
+2. **A CI-checkable scan over `data/`.** Issue #23 (privacy
+   policy) adds `osn privacy-check`, an automated assertion that scans every file under
    `data/` for fields named like direct identifiers and fails the build if
    any are found (GR-04) — a second, corpus-wide check independent of any
    single schema, so a future data file cannot bypass the schema-level
@@ -109,9 +109,9 @@ the rule is enforced mechanically at two points:
 The full role-based-access, retention-schedule, and consent-process detail
 required by §10 is a **policy for a downstream platform**, not a control
 this repository enforces at runtime (it has no runtime with users) — that
-policy is written in `docs/governance/privacy.md`, planned issue #23, and
-cross-referenced from `docs/architecture/data-classification.md`, planned
-issue #15 (see `docs/architecture/repository-map.md`).
+policy is written in `docs/governance/privacy.md` (issue #23), and
+cross-referenced from `docs/architecture/data-classification.md`
+(issue #15; see `docs/architecture/repository-map.md`).
 
 ## Consequences
 

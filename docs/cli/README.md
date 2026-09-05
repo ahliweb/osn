@@ -57,8 +57,8 @@ trace.
 5. Otherwise calls the command's `run(args, ctx)`, with the subcommand
    token and `--json` already stripped from `args`.
 
-Adding a new subcommand (`plan` #20, `render` #21, `report` #22, done --
-see below; `checklist` #25, still planned) means writing a new
+Adding a new subcommand (`plan` #20, `render` #21, `report` #22,
+`checklist` #25, all done -- see below) means writing a new
 `src/cli/commands/<name>.ts`
 exporting a `Command` (`src/cli/command.ts`'s interface: `name`,
 `summary`, `help()`, `run(args, ctx)`) and adding it to the `COMMANDS`
@@ -95,7 +95,9 @@ osn validate [options]
    exactly 100; both weekly session templates summing to exactly 120
    minutes; 5 hint-escalation levels; 4 problem-completion status codes; 7
    KPI metrics; 7 decision playbooks; 6 assessment-bank kinds; 4
-   competition stages; 4 curriculum categories.
+   competition stages; 4 curriculum categories; 8 §14.1 readiness-checklist
+   items; 8 §14.2 operational rules; 10 §14.2 mentor quick-pointer stages;
+   a non-empty §14.2 rule 8 syllabus-check log.
 
 3. **Referential integrity**, spanning two files where the fact cannot be
    expressed by either file's own schema:
@@ -130,7 +132,7 @@ osn validate [options]
 ```text
 $ osn validate
 osn validate: corpus at /path/to/repo/data
-OK -- 19 data file(s) validated, 0 problem(s) found.
+OK -- 22 data file(s) validated, 0 problem(s) found.
 ```
 
 ```sh
@@ -139,7 +141,7 @@ $ osn validate --json
   "ok": true,
   "findings": [],
   "summary": {
-    "filesValidated": 19,
+    "filesValidated": 22,
     "filesMissing": 0,
     "filesUnregistered": 0,
     "findingCount": 0,
@@ -594,16 +596,207 @@ kind (ADR-0004). It exists so this command (and its tests) have real input
 to run against without this repository ever holding real learner data;
 **it must never be replaced with real cohort data.**
 
-## Planned commands (not yet implemented)
+## `osn privacy-check`
 
-The following subcommands are named in `docs/architecture/README.md` and
-scoped by their own issues, but do not exist yet -- `osn <name>` for any of
-them today is simply an unknown command (exit `2`):
+A CI-checkable governance control (issue #23, GR-04): recursively scans
+every `.json`/`.jsonl` file under `data/` — including nested directories
+such as `data/samples/` — for object keys shaped like a direct or
+indirect personal identifier, at any nesting depth. This promotes the ad
+hoc scan `tests/unit/learning-record.test.ts` already ran (top-level
+`data/*.json` only) to a first-class subcommand, per ADR-0004's "Decision
+detail: enforcement mechanism".
 
-| Command | Issue | Purpose |
-| --- | --- | --- |
-| `osn checklist` | [#25](https://github.com/ahliweb/osn/issues/25) | Generates an operational checklist artefact. |
+```sh
+osn privacy-check [options]
+```
 
-Each will be added as a new `src/cli/commands/<name>.ts` module registered
-in `src/cli/commands/index.ts`, per "Command dispatch and how new commands
-are added" above -- no change to the dispatcher itself.
+The actual scanning logic (`scanEntriesForDirectIdentifiers`) lives in
+`src/domain/privacy-scan.ts` as a pure function over an injected entry
+list — `osn privacy-check` itself (`src/cli/commands/privacy-check.ts`)
+is only the recursive directory read (`src/cli/privacy-scan-loader.ts`)
+plus the two renderers in `src/cli/format-privacy-check.ts`, exactly the
+same split `osn validate` uses around `auditCorpus`.
+
+### What it checks
+
+Every object key found anywhere in the parsed contents of every
+`.json`/`.jsonl` file under the scanned directory is compared against
+`DIRECT_IDENTIFIER_DENYLIST` (`src/schema/learning-record.ts`): `name`,
+`nama`, `email`, `phone`, `telepon`, `nik`, `nisn`, `school`, `sekolah`,
+`address`, `alamat`, `birthdate`, `tanggallahir`, `dob`, `photo`, `foto`,
+`ip`, `ipaddress` — case-insensitively, matching camelCase/snake_case/
+kebab-case word boundaries, never a substring (see `isDenylistedKey`'s
+docblock).
+
+**Tolerance rule:** the key `name` is permitted everywhere under `data/`,
+because this repository's pre-existing curriculum corpus (topic
+families, competition stages, curriculum categories, ...) legitimately
+carries a `name` field for a *curriculum entity's* printed name (e.g.
+`{ "id": "osn-k", "name": "OSN-K" }` in `data/competition-stages.json`),
+never a person's name. Every other denylisted term is zero-tolerance: a
+single occurrence anywhere under `data/` is reported. See
+`docs/governance/privacy.md`'s "Must-not-collect list" section for the
+full rationale, and `TOLERATED_KEY` in `src/domain/privacy-scan.ts` for
+the enforcement.
+
+A file that is not valid JSON (or a `.jsonl` line that is not valid JSON)
+is skipped and reported separately as a `parseIssues` entry — this is
+`osn validate`'s concern (schema/JSON conformance), not this control's;
+one malformed file never prevents every other file from being scanned,
+and a parse issue never affects this command's exit code.
+
+### Options
+
+| Flag | Meaning |
+| --- | --- |
+| `--json` | Emit `{ ok, findings, parseIssues, summary }` instead of grouped text. |
+| `--data-dir <path>` | Scan a different directory instead of the repository's real `data/` (primarily for testing against a fixture directory). |
+| `-h`, `--help` | Show `osn privacy-check`'s own help. |
+
+### Finding shape: never the value
+
+Every finding carries exactly three fields: `file` (or, for a `.jsonl`
+file, `"<file>:<line>"`), `path` (the dot-separated in-file path to the
+offending key's parent, or `"(root)"`), and `key` (the offending key
+itself) — **never the value found there**, matching `osn report`'s
+privacy-gate refusal pattern (`src/cli/commands/report.ts`'s docblock): a
+real identifier accidentally committed must never be echoed back into a
+terminal, a CI log, or a `--json` payload.
+
+### Exit codes
+
+| Code | Meaning |
+| --- | --- |
+| `0` | Clean — no direct-identifier-shaped key found (beyond the `name` tolerance). |
+| `1` | One or more direct-identifier-shaped keys found. |
+| `2` | Usage error: an unrecognised flag/argument, `--data-dir` given with no path, or the given directory cannot be read. |
+
+### Example: clean corpus
+
+```text
+$ osn privacy-check
+osn privacy-check: scanning /path/to/repo/data
+OK -- 23 file(s) scanned, 0 direct-identifier-shaped key(s) found.
+```
+
+### Example: a planted identifier (illustrative)
+
+```text
+$ osn privacy-check --data-dir ./fixture-with-a-mistake
+osn privacy-check: scanning ./fixture-with-a-mistake
+FAILED -- 1 direct-identifier-shaped key(s) found in 3 file(s) scanned. Values are never shown -- only file, path, and key:
+
+samples/learning-records.sample.jsonl:12:
+  - (root): key "email"
+```
+
+### CI
+
+`osn privacy-check` runs in CI (`.github/workflows/ci.yml`, the "Privacy
+check" step) immediately after `osn validate`, on every push and pull
+request, via `bun run privacy-check`.
+
+## `osn checklist`
+
+Renders the §14.1 eight-item cohort-readiness checklist, the §14.2 eight
+operational rules and mentor quick-pointer callout, and the latest §14.2
+rule 8 syllabus-check status (issue #25), together with this operational
+corpus's own `syllabusVersion`/`syllabusDate`.
+
+```sh
+osn checklist [options]
+```
+
+The actual data lives in `data/readiness-checklist.json` (the eight §14.1
+items, each with a `verificationMethod` and `evidenceRequired`, both
+DERIVED -- see `src/schema/readiness-checklist.ts`'s docblock) and
+`data/operational-rules.json` (the eight §14.2 rules and the mentor
+quick-pointer callout, verbatim). The typed loaders
+(`listReadinessItems`, `getReadinessItem`, `listOperationalRules`,
+`quickPointer`, `listSyllabusChecks`, `latestSyllabusCheck`,
+`daysSinceLastSyllabusCheck`) live in `src/domain/operations.ts`. The
+Markdown renderer (`renderChecklist`) lives in `src/render/checklist.ts`
+as a function of an explicit `asOf: Date` -- exactly as
+`src/domain/cohort-plan.ts`'s `buildCohortPlan` takes its dates as
+explicit input rather than calling `new Date()` itself, since "days since
+last syllabus check" is necessarily relative to *some* current date. `osn
+checklist` itself (`src/cli/commands/checklist.ts`) is the one place that
+reads the wall clock, then passes that single `asOf` to both the Markdown
+renderer and the `--format json` builder (`src/cli/format-checklist.ts`),
+exactly the same split `osn plan`/`osn render` use around their own pure
+functions.
+
+### Options
+
+| Flag | Meaning |
+| --- | --- |
+| `--format <md\|json>` | Output format. Default `md`. `--json` (the global flag) is equivalent to `--format json`; an explicit `--format` wins if both are given. |
+| `--out <path>` | Write the rendered checklist to this path instead of stdout. |
+| `--force` | Required to overwrite a file that already exists at `--out`. Without it, an existing file is left byte-for-byte untouched and the command exits `2` -- same safety property as `osn render`'s/`osn report`'s `--out`/`--force` (`src/cli/output-writer.ts`). |
+| `-h`, `--help` | Show `osn checklist`'s own help. |
+
+### Contents
+
+Regardless of `--format`, `osn checklist` reports:
+
+- **The corpus version** -- `syllabusVersion`/`syllabusDate` from
+  `data/readiness-checklist.json` (`operationsCorpusVersion()` in
+  `src/domain/operations.ts`).
+- **The latest syllabus-check status** (§14.2 rule 8) -- the most recent
+  entry in `data/syllabus-check-log.json` by `checkedOn`, its `outcome`,
+  the official sources it checked, and the number of whole days between
+  that date and `asOf` (`daysSinceLastSyllabusCheck`, UTC-only date
+  arithmetic, no `Date` mutation -- see that function's docblock).
+- **The eight §14.1 readiness-checklist items**, each with its
+  verification method and the evidence a mentor records.
+- **The eight §14.2 operational rules**, in order.
+- **The §14.2 mentor quick-pointer callout**: its ten ordered stages
+  (Problem Solving -> C++ -> Complexity -> Math/Logic -> Complete Search
+  -> Greedy -> DP -> Graph/Tree -> Data Structures -> Contest Engineering)
+  and its closing condition that extension only follows once core is
+  stable.
+
+### Exit codes
+
+| Code | Meaning |
+| --- | --- |
+| `0` | Success. |
+| `2` | Usage error: an unknown `--format`, or `--out` already exists without `--force`. |
+
+### Example
+
+```text
+$ osn checklist
+# osn checklist: cohort readiness & operational rules
+
+Corpus version: 2.0 (2026-09-04)
+
+## Syllabus-check status (§14.2 rule 8)
+
+Latest check: 2026-09-05 -- outcome: no-change.
+Sources checked: R1, R2, R3, R7, R8.
+Days since last check (as of 2026-09-05): 0.
+
+## Cohort readiness checklist (§14.1)
+
+1. **Verifikasi silabus resmi OSN dan halaman OSN-K/OSN-P terbaru.** (`verify-official-syllabus`)
+   - Verification: ...
+   - Evidence required: ...
+...
+
+## Operational rules (§14.2)
+
+1. Core OSN harus lebih dahulu daripada extension.
+...
+
+## Mentor quick pointer (§14.2 callout)
+
+Problem Solving -> C++ -> Complexity -> Math/Logic -> Complete Search -> Greedy -> DP -> Graph/Tree -> Data Structures -> Contest Engineering
+
+Extension hanya setelah core stabil.
+```
+
+See `docs/operations/runbook.md` for how `osn checklist` fits into the
+cohort-start procedure, and `docs/operations/syllabus-check.md` for the
+full §14.2 rule 8 syllabus-check procedure this command's status line
+summarises.

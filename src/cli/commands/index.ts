@@ -1,13 +1,14 @@
 /**
  * The command registry: every `osn` subcommand, in one array. This is the
- * seam that let `plan` (#20) and `render` (#21) get added as one-line
- * additions here, and will do the same for `report` (#22) and `checklist`
- * (#25) -- nothing in `src/cli/run-cli.ts` (the dispatcher) needs to
- * change.
+ * seam that let `plan` (#20), `render` (#21), `report` (#22) and
+ * `checklist` (#25) get added as one-line additions here -- nothing in
+ * `src/cli/run-cli.ts` (the dispatcher) needs to change.
  */
 
 import type { Command } from "../command";
+import { checklistCommand } from "./checklist";
 import { planCommand } from "./plan";
+import { privacyCheckCommand } from "./privacy-check";
 import { renderCommand } from "./render";
 import { reportCommand } from "./report";
 import { validateCommand } from "./validate";
@@ -18,6 +19,8 @@ export const COMMANDS: readonly Command[] = [
   planCommand,
   renderCommand,
   reportCommand,
+  privacyCheckCommand,
+  checklistCommand,
 ];
 
 /** {@link COMMANDS}, indexed by name for O(1) dispatch lookup. */

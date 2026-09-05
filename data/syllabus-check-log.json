@@ -1,0 +1,14 @@
+{
+  "syllabusVersion": "2.0",
+  "syllabusDate": "2026-09-04",
+  "sourceSection": "§14.2",
+  "checks": [
+    {
+      "checkedOn": "2026-09-05",
+      "sources": ["R1", "R2", "R3", "R7", "R8"],
+      "outcome": "no-change",
+      "notes": "Initial seeding entry for this release, not a live syllabus check. What was done: the curriculum corpus in this repository (including data/readiness-checklist.json and data/operational-rules.json added in this release) was transcribed from the operational syllabus source document version 2.0, dated 2026-09-04 (see syllabusVersion/syllabusDate above), and the five official sources listed in `sources` (R1 Silabus OSN Informatika 2026, R2 Silabus OSN-K Informatika 2026, R3 Silabus OSN-P Informatika 2026, R7 IOI official syllabus page, R8 IOI Syllabus 2025 PDF) are exactly the official OSN/IOI sources that source document itself cites. What was NOT done: no live check of these external websites was performed for this entry -- the tooling that produced this corpus has no network access, so this entry records transcription provenance only, not a verified-live confirmation that the upstream pages are unchanged since 2026-09-04. The next syllabus check, required before the next cohort cycle per §14.2 rule 8 and the Catatan Penutup, must perform the actual live check against these sources and record a fresh entry here, per docs/operations/syllabus-check.md.",
+      "resultingIssues": []
+    }
+  ]
+}

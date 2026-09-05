@@ -5,13 +5,11 @@ what the four layers are, how a curriculum fact moves through them, the
 rules that keep the dependency graph one-way, and what this repository
 deliberately does not attempt to be.
 
-It is written against the repository as it exists on branch
-`feat/m2-curriculum-corpus` today (M1 and issues #6, #7 merged/complete;
-`src/schema/`, `src/domain/`, `src/cli/`, `src/render/`, and `data/` are
-scaffolded but empty except for `.gitkeep`). Where it describes something
-that does not exist yet, it says so explicitly and names the GitHub issue
-that will build it — see `repository-map.md` for the exhaustive
-directory-by-directory version of that same rule.
+It is written against the repository as it exists at release v1.0.0
+(issues #1-#25 complete; issue #26, the release itself, in progress):
+`src/schema/`, `src/domain/`, `src/cli/`, `src/render/`, and `data/` all
+carry their full, real content. See `repository-map.md` for the
+exhaustive directory-by-directory version of the same description.
 
 ## System overview: four layers, one direction
 
@@ -24,36 +22,28 @@ data/*.json  --->  src/schema/  --->  src/domain/  --->  src/render/
 ```
 
 1. **`data/*.json`** — the curriculum corpus itself: inert JSON files with
-   no executable logic. Today this is an empty scaffold (`data/.gitkeep`);
-   the first real data files land in issue #9 (`data/topic-families.json`).
+   no executable logic. 22 files today (topic families, weeks, gates,
+   references, assessment model, KPI definitions, playbooks, and more).
 2. **`src/schema/`** — Zod schemas that are the single source of truth for
    both runtime validation and the static TypeScript types inferred from
    them (see ADR-0003). A schema describes the shape a data file must have
    and rejects anything that doesn't match it, with a readable error.
-   Empty scaffold today (`src/schema/.gitkeep`); the first schemas land in
-   issue #9 (`src/schema/common.ts`, `src/schema/topic-family.ts`).
 3. **`src/domain/`** — typed queries and business rules that operate on
    data that has already been parsed through a schema. Domain code never
    re-validates its input; it assumes validity because loading always goes
-   through the schema layer first (see "Layering rules" below). Empty
-   scaffold today; the first domain module lands in issue #9
-   (`src/domain/topic-families.ts`, with `getTopicFamily()` /
-   `listTopicFamilies()`).
+   through the schema layer first (see "Layering rules" below).
 4. **`src/render/`** and **`src/cli/`** — the two output-facing modules
    that consume the domain layer:
    - `src/render/` turns domain data into mentor-facing artefacts
-     (Markdown session plans, checkpoint sheets, SOP cards — planned in
-     issue #21).
+     (Markdown session plans, checkpoint sheets, SOP cards, the cohort
+     readiness checklist).
    - `src/cli/` is the `osn` command-line entrypoint that wires
-     subcommands (`validate`, `plan`, `render`, `report`, `checklist`) to
-     the domain and render layers, dispatching without an external CLI
-     framework — planned starting with issue #19.
-   Both are empty scaffolds today (`src/render/.gitkeep`,
-   `src/cli/.gitkeep`).
+     subcommands (`validate`, `plan`, `render`, `report`, `privacy-check`,
+     `checklist`) to the domain and render layers, dispatching without an
+     external CLI framework (TR-11).
 
-`src/index.ts` currently exports only a placeholder (`CURRICULUM_SOURCE`,
-`packageInfo`) — it is not yet a real aggregation point for the four
-layers; that composition happens as the CLI and render layers land.
+`src/index.ts` is the package entrypoint, built by `bun run build` into
+`dist/`.
 
 ## Component diagram
 
@@ -63,7 +53,7 @@ flowchart LR
         PDF["Silabus PDF\n(docs/*.pdf)"]
     end
 
-    subgraph Corpus["docs/silabus/ (Markdown corpus, #6 — done)"]
+    subgraph Corpus["docs/silabus/ (Markdown corpus)"]
         MD["Structured Markdown\n01-*.md .. 14-*.md, 99-referensi.md"]
     end
 
@@ -80,12 +70,12 @@ flowchart LR
     end
 
     subgraph Output["src/render/ + src/cli/"]
-        REND["Render:\nweekly / checkpoint / SOP\nMarkdown artefacts"]
-        CLI["CLI:\nosn validate / plan / render / report / checklist"]
+        REND["Render:\nweekly / checkpoint / SOP / checklist\nMarkdown artefacts"]
+        CLI["CLI:\nosn validate / plan / render / report /\nprivacy-check / checklist"]
     end
 
-    PDF -- "manual transcription (#6)" --> MD
-    MD -- "manual transcription (#9-#18)" --> JSON
+    PDF -- "manual transcription" --> MD
+    MD -- "manual transcription" --> JSON
     JSON -- "parsed at load, once" --> ZOD
     ZOD -- "validated, typed data" --> DOM
     DOM --> REND
@@ -102,36 +92,36 @@ A single curriculum fact — for example, the phase gate after week 12 in
    (`docs/Silabus_Operasional_OSN_Informatika_2026_Siap_Pakai_AhliKoding_AhliWeb.pdf`)
    is the authoritative document. It is never parsed programmatically at
    runtime; it is read by a human.
-2. **`docs/silabus/04-silabus-28-minggu.md`** (issue #6, done) is the
+2. **`docs/silabus/04-silabus-28-minggu.md`** is the
    faithful Markdown transcription of that section, preserving the
    original structure, tables, and citation markers (`Rnn`) — see TR-10 in
    `docs/requirements/register.md`.
-3. **`data/phase-gates.json`** (planned, issue #10) is the machine-readable
+3. **`data/gates.json`** is the machine-readable
    encoding of the same fact: which week the gate follows, its minimum
    evidence text, and its `blocksProgression` flag. This file is
    hand-authored against the Markdown in step 2, not generated from it —
    there is no PDF-to-JSON or Markdown-to-JSON automation in this
    repository.
-4. **`src/schema/phase-gate.ts`** (planned, issue #10) defines the Zod
+4. **`src/schema/gate.ts`** defines the Zod
    shape that file must satisfy. Loading the file always means parsing it
    through this schema; a gate record missing its evidence text or with a
    duplicate week number is rejected at load time with a readable error,
    not discovered later as a rendering bug.
-5. **`src/domain/phase-gates.ts`** (planned, issue #10) exposes the
-   validated gate records as typed queries — for example, "the gate that
-   blocks progression past week 12" — without re-checking anything the
-   schema already guaranteed.
-6. **`src/render/checkpoint.ts`** (planned, issue #21) turns that domain
+5. **`src/domain/curriculum.ts`** exposes the validated gate records as
+   typed queries (`listGates()`, `gateAfter(week)`) — for example, "the
+   gate that blocks progression past week 12" — without re-checking
+   anything the schema already guaranteed.
+6. **`src/render/checkpoint.ts`** turns that domain
    query into a rendered mentor artefact: a Markdown checkpoint sheet
    listing the week-12 gate's evidence requirement, invoked via `osn
-   render checkpoint` (`src/cli/`, issue #21).
+   render checkpoint` (`src/cli/`).
 
 The same shape of pipeline applies to every other curriculum fact (topic
 families, weekly sessions, assessment weights, KPI definitions, decision
 playbooks, and so on) — only the specific schema, domain module, and
 render target differ. See `docs/requirements/register.md` and
 `docs/requirements/traceability.md` for the full section-by-section list
-of which issue builds which piece of this pipeline.
+of which issue built which piece of this pipeline.
 
 ## Layering rules
 
@@ -169,27 +159,27 @@ notice and "What this repository is not" section in `README.md`, and per
 ADR-0001:
 
 - **No judge/grader.** Nothing here compiles, runs, or scores submitted
-  source code. `osn report` (planned, #22) computes KPIs from
+  source code. `osn report` computes KPIs from
   already-produced learning-record data; it does not produce that data by
   executing anyone's submission.
 - **No LMS.** Nothing here delivers lessons, enrols learners, manages
-  cohorts, or provides a learner-facing UI. `osn plan` (planned, #20)
+  cohorts, or provides a learner-facing UI. `osn plan`
   generates a calendar as data/Markdown; it is not a scheduling system
   with users and notifications.
 - **No authentication or authorization.** There are no accounts, no
   sessions, no roles enforced at runtime. Role-based access is a policy
-  this repository will *describe* (`docs/governance/privacy.md`, planned
-  issue #23) for a downstream platform to *implement*.
+  this repository *describes* (`docs/governance/privacy.md`) for a
+  downstream platform to *implement*.
 - **No database.** The corpus lives in version-controlled JSON files,
   read from disk. There is no persistence layer, no migrations, no query
   engine beyond in-memory domain functions over parsed JSON.
 - **No network I/O at runtime.** Schema validation, domain queries,
   rendering, and CLI commands all run against local files. Nothing in
   `src/` makes an HTTP request, and `osn validate`'s referential-integrity
-  check (planned, #19; TR-08) is explicitly a "network-free integration
+  check (TR-08) is explicitly a "network-free integration
   test" per FR-13.
 - **No student personal data.** This repository defines schemas for
-  learning records and problem taxonomy (planned, #15) but never stores
+  learning records and problem taxonomy but never stores
   real learner data — see ADR-0004.
 
 **What a consumer must build themselves:** the actual LMS/dashboard UI,
@@ -209,8 +199,8 @@ below).
 
 - **Deterministic output.** Given the same corpus and the same inputs,
   generators produce byte-identical output. This is stated as an explicit
-  requirement for the calendar generator (TR-07, `osn plan`, planned
-  #20: "byte-identical output across repeated runs ... computed with UTC
+  requirement for the calendar generator (TR-07, `osn plan`:
+  "byte-identical output across repeated runs ... computed with UTC
   date arithmetic only") and is the general expectation for every render
   target in `src/render/`, since they are pure functions from validated
   data to a string (FR-24).
@@ -218,7 +208,7 @@ below).
   inside `data/` — a week's topic-family reference, a citation's `Rnn`
   reference, a stage's assessment-bank reference — resolves to a record
   that actually exists, enforced mechanically rather than by convention
-  (FR-05, FR-13, TR-08; enforced by `osn validate`, planned #19).
+  (FR-05, FR-13, TR-08; enforced by `osn validate`).
 - **Every curriculum fact is traceable to a syllabus section.** Every
   requirement in `docs/requirements/register.md` cites the exact
   `docs/silabus/*.md` section (and, transitively, the source PDF) it

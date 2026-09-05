@@ -83,8 +83,8 @@ designed. The retention *schedule* (how long a real platform may keep
 each field, and its deletion procedure) is policy for that platform to
 set, not a control this repository can enforce at runtime -- it has no
 runtime with users. That full policy, including the least-privilege
-role matrix (GR-05), belongs in `docs/governance/privacy.md` (planned,
-issue #23), cross-referenced from ADR-0004.
+role matrix (GR-05), belongs in `docs/governance/privacy.md` (issue #23),
+cross-referenced from ADR-0004.
 
 ## Summary
 
@@ -97,7 +97,7 @@ issue #23), cross-referenced from ADR-0004.
   (`findDirectIdentifiers`/`assertNoDirectIdentifiers`).
 - The full role-based-access, retention-schedule and consent-process
   policy this data model implies for a downstream platform is written in
-  `docs/governance/privacy.md` (planned, issue #23), not here.
+  `docs/governance/privacy.md` (issue #23), not here.
 
 See also: ADR-0004 (`docs/architecture/adr/0004-no-learner-personal-data.md`),
 `docs/silabus/13-tata-kelola.md` (§13), `docs/silabus/10-regulasi-indonesia.md`

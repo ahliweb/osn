@@ -1,0 +1,55 @@
+{
+  "syllabusVersion": "2.0",
+  "syllabusDate": "2026-09-04",
+  "sourceSection": "§14.1",
+  "items": [
+    {
+      "id": "verify-official-syllabus",
+      "item": "Verifikasi silabus resmi OSN dan halaman OSN-K/OSN-P terbaru.",
+      "verificationMethod": "Mentor lead performs a syllabus check against the official sources named in data/references.json (R1 Silabus OSN Informatika, R2 OSN-K, R3 OSN-P) per docs/operations/syllabus-check.md, and records the outcome in data/syllabus-check-log.json before the cohort starts.",
+      "evidenceRequired": "A dated data/syllabus-check-log.json entry naming the sources checked and its outcome (no-change or change-detected), filed before Week 1."
+    },
+    {
+      "id": "set-28-week-calendar",
+      "item": "Tetapkan kalender 28 minggu terhadap jadwal sekolah dan seleksi.",
+      "verificationMethod": "Mentor lead runs `osn plan --start <cohort-start-date>` (with the school calendar's holidays/exam days as --exclude, and the relevant --target-stage) and reviews the generated 28-week calendar for conflicts against the school and selection schedule.",
+      "evidenceRequired": "The generated `osn plan` calendar (excluded dates, target-stage informational entry, and any schedule-slip warning) reviewed and signed off by the mentor lead."
+    },
+    {
+      "id": "run-diagnostic",
+      "item": "Lakukan diagnostic C++, logika, matematika, complexity, dan problem solving.",
+      "verificationMethod": "Every incoming student completes the diagnostic assessment-bank kind (data/assessment-bank.json's \"diagnostic\" entry), covering all five §14.1 diagnostic areas, before Week 1.",
+      "evidenceRequired": "A per-student diagnostic result covering all five diagnostic areas (C++, logika, matematika, complexity, problem solving), recorded before cohort start."
+    },
+    {
+      "id": "group-students-by-gap",
+      "item": "Kelompokkan siswa berdasarkan gap, bukan hanya kelas/usia.",
+      "verificationMethod": "Mentor lead reviews each student's diagnostic profile (from the item above) and assigns cohort groupings by identified competency gap, explicitly not by school class or age alone.",
+      "evidenceRequired": "A documented grouping rationale per student or group, citing the diagnostic profile that justified the grouping."
+    },
+    {
+      "id": "prepare-problem-bank",
+      "item": "Siapkan problem bank terkurasi untuk semua minggu dan minimal satu alternatif per topik.",
+      "verificationMethod": "Mentor lead confirms, for every week 1-28, a curated problem bank exists with at least one alternative problem per topic family in scope -- the same §14.1 alternatives-per-topic minimum `buildBlueprint` (src/domain/blueprint.ts) encodes as `alternativesPerTopic >= 1`.",
+      "evidenceRequired": "A per-week problem-bank listing showing at least one alternative problem per topic family, reviewed before that week runs."
+    },
+    {
+      "id": "prepare-judge-and-dashboard",
+      "item": "Siapkan judge/account, template C++ minimal, dashboard mentor, dan error taxonomy.",
+      "verificationMethod": "Mentor lead confirms judge/contest accounts are provisioned, the minimal C++ template is distributed to every student, the mentor dashboard is reachable, and the error-taxonomy classification is available to every mentor.",
+      "evidenceRequired": "A signed-off readiness confirmation listing judge/account access, the distributed C++ template, dashboard access, and the error-taxonomy reference, completed before Week 1."
+    },
+    {
+      "id": "set-rubric-and-policies",
+      "item": "Tetapkan rubrik A/B/C/D, hint policy, upsolve policy, dan checkpoint.",
+      "verificationMethod": "Mentor lead confirms every mentor has received the §6.2 A/B/C/D rubric, the §5.3 hint policy, the upsolve policy, and the §4.1 checkpoint schedule, per §13's Mentor Calibration requirement that all mentors use the same rubric and hint policy.",
+      "evidenceRequired": "A mentor sign-off per mentor confirming receipt and understanding of the rubric, hint policy, upsolve policy, and checkpoint schedule."
+    },
+    {
+      "id": "set-data-protection",
+      "item": "Tetapkan perlindungan data, akses mentor, retensi, backup, dan incident contact.",
+      "verificationMethod": "Mentor lead confirms the data-protection controls in docs/governance/privacy.md and docs/governance/security.md are in place: mentor access roles, a retention policy, a backup procedure, and an incident contact, before any learner data is collected.",
+      "evidenceRequired": "A signed-off privacy/security readiness confirmation naming the retention policy, backup procedure, and incident contact in effect for this cohort."
+    }
+  ]
+}

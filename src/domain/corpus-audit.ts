@@ -72,6 +72,12 @@ import { type HintPolicyFile, HINT_LEVEL_COUNT, hintPolicyFileSchema } from "../
 import { type KpiDefinitionsFile, KPI_METRIC_IDS, kpiDefinitionsFileSchema } from "../schema/kpi";
 import { learningLoadFileSchema } from "../schema/learning-load";
 import { mentorSopFileSchema } from "../schema/mentor-sop";
+import {
+  type OperationalRulesFile,
+  OPERATIONAL_RULE_COUNT,
+  operationalRulesFileSchema,
+  QUICK_POINTER_STAGE_COUNT,
+} from "../schema/operational-rules";
 import { type PlaybooksFile, PLAYBOOK_IDS, playbooksFileSchema } from "../schema/playbook";
 import {
   type ProblemStatusFile,
@@ -79,6 +85,11 @@ import {
   problemStatusFileSchema,
 } from "../schema/problem-status";
 import { OFFICIAL_TOPIC_IDS, problemTaxonomyVocabFileSchema } from "../schema/problem-taxonomy";
+import {
+  type ReadinessChecklistFile,
+  READINESS_ITEM_COUNT,
+  readinessChecklistFileSchema,
+} from "../schema/readiness-checklist";
 import { type ReferencesFile, referencesFileSchema } from "../schema/reference";
 import { regulationsFileSchema } from "../schema/regulation";
 import {
@@ -89,6 +100,8 @@ import {
 import { sourcePriorityFileSchema } from "../schema/source-priority";
 import { type StagesFile, STAGE_IDS, stagesFileSchema } from "../schema/stage";
 import { standardsFileSchema } from "../schema/standard";
+import type { SyllabusCheckLogFile } from "../schema/syllabus-check";
+import { syllabusCheckLogFileSchema } from "../schema/syllabus-check";
 import { type TopicFamiliesFile, topicFamiliesSchema } from "../schema/topic-family";
 import { MAX_WEEK, MIN_WEEK, type WeeksFile, weeksSchema } from "../schema/week";
 
@@ -224,6 +237,21 @@ export const DATA_FILE_REGISTRY: readonly DataFileRegistryEntry[] = [
     file: "problem-taxonomy-vocab.json",
     description: "The controlled vocabulary for the open §13 Problem Taxonomy dimensions.",
     schema: problemTaxonomyVocabFileSchema,
+  },
+  {
+    file: "readiness-checklist.json",
+    description: "The eight §14.1 cohort-readiness checklist items.",
+    schema: readinessChecklistFileSchema,
+  },
+  {
+    file: "operational-rules.json",
+    description: "The eight §14.2 operational rules and the mentor quick-pointer callout.",
+    schema: operationalRulesFileSchema,
+  },
+  {
+    file: "syllabus-check-log.json",
+    description: "The §14.2 rule 8 / Catatan Penutup syllabus-check log.",
+    schema: syllabusCheckLogFileSchema,
   },
   {
     file: "references.json",
@@ -573,6 +601,59 @@ function structuralInvariantFindings(parsed: ReadonlyMap<string, unknown>): Corp
         "assessment bank kind ids",
         bankFile.banks.map((bank) => bank.id),
         BANK_KIND_IDS,
+      ),
+    );
+  }
+
+  const readinessChecklistFile = parsed.get("readiness-checklist.json") as
+    | ReadinessChecklistFile
+    | undefined;
+  if (
+    readinessChecklistFile !== undefined &&
+    readinessChecklistFile.items.length !== READINESS_ITEM_COUNT
+  ) {
+    findings.push(
+      error(
+        "readiness-checklist.json",
+        "items",
+        `must define exactly ${READINESS_ITEM_COUNT} readiness-checklist items; got ${readinessChecklistFile.items.length}`,
+      ),
+    );
+  }
+
+  const operationalRulesFile = parsed.get("operational-rules.json") as
+    | OperationalRulesFile
+    | undefined;
+  if (operationalRulesFile !== undefined) {
+    if (operationalRulesFile.rules.length !== OPERATIONAL_RULE_COUNT) {
+      findings.push(
+        error(
+          "operational-rules.json",
+          "rules",
+          `must define exactly ${OPERATIONAL_RULE_COUNT} operational rules; got ${operationalRulesFile.rules.length}`,
+        ),
+      );
+    }
+    if (operationalRulesFile.quickPointer.stages.length !== QUICK_POINTER_STAGE_COUNT) {
+      findings.push(
+        error(
+          "operational-rules.json",
+          "quickPointer.stages",
+          `must define exactly ${QUICK_POINTER_STAGE_COUNT} quick-pointer stages; got ${operationalRulesFile.quickPointer.stages.length}`,
+        ),
+      );
+    }
+  }
+
+  const syllabusCheckLogFile = parsed.get("syllabus-check-log.json") as
+    | SyllabusCheckLogFile
+    | undefined;
+  if (syllabusCheckLogFile !== undefined && syllabusCheckLogFile.checks.length === 0) {
+    findings.push(
+      error(
+        "syllabus-check-log.json",
+        "checks",
+        "the syllabus-check log must contain at least one entry; got an empty log",
       ),
     );
   }
