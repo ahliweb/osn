@@ -15,26 +15,28 @@ mechanically; do not hand-edit one matrix without updating the other and `regist
 
 | Syllabus section | Requirements | Issues | Status |
 | --- | --- | --- | --- |
-| §1 — [Identitas Program, Sasaran, dan Hasil Belajar](../silabus/01-identitas-program.md) | FR-08, ER-15 | #10, #11, #17, #18 | planned |
-| §2 — [Arsitektur Kompetensi dan Tahapan Kompetisi](../silabus/02-arsitektur-kompetensi.md) | FR-01, FR-02, FR-07, FR-21 | #9, #11, #18 | planned |
-| §3 — [Struktur Kurikulum: Core, Support, dan Extension](../silabus/03-struktur-kurikulum.md) | FR-06, ER-10, ER-11 | #11 | planned |
-| §4 — [Silabus Operasional 28 Minggu](../silabus/04-silabus-28-minggu.md) | FR-03, FR-04, FR-05, ER-09 | #10, #21 | planned |
-| §5 — [Format Pembelajaran Mingguan dan SOP Mentor](../silabus/05-format-pembelajaran-dan-sop.md) | FR-14, FR-24, ER-02, ER-03, ER-04, ER-05 | #13, #21 | planned |
-| §6 — [Sistem Evaluasi, Rubrik, dan KPI](../silabus/06-evaluasi-rubrik-kpi.md) | FR-17, FR-25, ER-06, ER-07, ER-08, ER-12, OR-09 | #14, #16, #22 | planned |
-| §7 — [Contoh Implementasi Praktis](../silabus/07-contoh-implementasi.md) | FR-18, FR-19, ER-13, ER-14 | #17 | planned |
-| §8 — [Perbandingan Lima Model/Kasus Pembinaan](../silabus/08-perbandingan-model.md) | OR-10, OR-11 | #10, #15, #18, #22, #25 | planned |
-| §9 — [Sejarah dan Pelajaran dari Pendahulu](../silabus/09-sejarah-dan-pelajaran.md) | OR-07 | #25 | planned |
-| §10 — [Regulasi Indonesia yang Relevan](../silabus/10-regulasi-indonesia.md) | FR-10, GR-01, GR-02, GR-03, GR-04, GR-05 | #12, #15, #23 | planned |
-| §11 — [Pemetaan Standar ISO/IEC](../silabus/11-pemetaan-iso.md) | FR-11, GR-07, GR-08 | #12, #24 | planned |
-| §12 — [Sumber Belajar dan Pustaka](../silabus/12-sumber-belajar.md) | FR-12 | #12 | planned |
+| §1 — [Identitas Program, Sasaran, dan Hasil Belajar](../silabus/01-identitas-program.md) | FR-08, ER-15 | #10, #11, #17, #18 | implemented |
+| §2 — [Arsitektur Kompetensi dan Tahapan Kompetisi](../silabus/02-arsitektur-kompetensi.md) | FR-01, FR-02, FR-07, FR-21 | #9, #11, #18 | implemented |
+| §3 — [Struktur Kurikulum: Core, Support, dan Extension](../silabus/03-struktur-kurikulum.md) | FR-06, ER-10, ER-11 | #11 | implemented |
+| §4 — [Silabus Operasional 28 Minggu](../silabus/04-silabus-28-minggu.md) | FR-03, FR-04, FR-05, ER-09 | #10, #21 | implemented |
+| §5 — [Format Pembelajaran Mingguan dan SOP Mentor](../silabus/05-format-pembelajaran-dan-sop.md) | FR-14, FR-24, ER-02, ER-03, ER-04, ER-05 | #13, #21 | implemented |
+| §6 — [Sistem Evaluasi, Rubrik, dan KPI](../silabus/06-evaluasi-rubrik-kpi.md) | FR-17, FR-25, ER-06, ER-07, ER-08, ER-12, OR-09 | #14, #16, #22 | implemented |
+| §7 — [Contoh Implementasi Praktis](../silabus/07-contoh-implementasi.md) | FR-18, FR-19, ER-13, ER-14 | #17 | implemented |
+| §8 — [Perbandingan Lima Model/Kasus Pembinaan](../silabus/08-perbandingan-model.md) | OR-10, OR-11 | #10, #15, #18, #22, #25 | implemented |
+| §9 — [Sejarah dan Pelajaran dari Pendahulu](../silabus/09-sejarah-dan-pelajaran.md) | OR-07 | #25 | implemented |
+| §10 — [Regulasi Indonesia yang Relevan](../silabus/10-regulasi-indonesia.md) | FR-10, GR-01, GR-02, GR-03, GR-04, GR-05 | #12, #15, #23 | implemented |
+| §11 — [Pemetaan Standar ISO/IEC](../silabus/11-pemetaan-iso.md) | FR-11, GR-07, GR-08 | #12, #24 | implemented |
+| §12 — [Sumber Belajar dan Pustaka](../silabus/12-sumber-belajar.md) | FR-12 | #12 | implemented |
 | §13 — [Tata Kelola Implementasi AhliKoding.com](../silabus/13-tata-kelola.md) | TR-01, TR-02, TR-03, TR-04, TR-05, TR-06, TR-08, TR-09, TR-11, FR-15, FR-16, FR-20, FR-22, OR-04, OR-05, OR-12, GR-06, GR-09, GR-10 | #1, #2, #3, #4, #5, #7, #8, #9, #15, #18, #19, #24, #25, #26 | mixed |
-| §14 — [Checklist Kesiapan dan Aturan Operasional](../silabus/14-checklist-dan-aturan-operasional.md) | FR-23, FR-26, TR-07, OR-01, OR-02, OR-03, OR-08, ER-16 | #18, #20, #25 | planned |
-| §99 — [Daftar Referensi](../silabus/99-referensi.md) | FR-09, FR-13, OR-06, GR-12 | #12, #25, #26 | planned |
+| §14 — [Checklist Kesiapan dan Aturan Operasional](../silabus/14-checklist-dan-aturan-operasional.md) | FR-23, FR-26, TR-07, OR-01, OR-02, OR-03, OR-08, ER-16 | #18, #20, #25 | implemented |
+| §99 — [Daftar Referensi](../silabus/99-referensi.md) | FR-09, FR-13, OR-06, GR-12 | #12, #25, #26 | mixed |
 
 `Status` is `implemented` when every requirement in the row is `implemented`, `planned` when
-none is, and `mixed` otherwise (§13 currently carries six `implemented` toolchain/governance
-requirements from the merged M1 milestone and issue #6, alongside thirteen requirements still
-awaiting their M3-M6 issues).
+none is, and `mixed` otherwise. Issues #1-#25 are all closed; only issue #26 (this release) is
+still in progress, so only the two rows that cite #26 (§13, via OR-12; §99, via GR-12) are
+`mixed` — every other row is fully `implemented`. See `register.md`'s OR-12 and GR-12 rows: both
+require issue #26 itself to be done, which by definition is not yet true while this release is
+in progress.
 
 ## Matrix 2 — Issue → requirements covered
 

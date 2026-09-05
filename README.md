@@ -24,10 +24,10 @@ documentation that syllabus mandates.
 - **Not a student data store.** It holds no learner personal data. Sample
   data used anywhere in this repository is synthetic.
 
-What it *is*: a schema, domain model, and (eventually) CLI and rendering
-pipeline that turn the syllabus's structure — the 28-week programme, the
-ten official topic families, phase gates, assessment weights, mentor SOPs
-— into version-controlled, testable artefacts.
+What it *is*: a schema, domain model, CLI, and rendering pipeline that
+turn the syllabus's structure — the 28-week programme, the ten official
+topic families, phase gates, assessment weights, mentor SOPs — into
+version-controlled, testable artefacts.
 
 ## Quick start
 
@@ -46,23 +46,28 @@ bun test
 
 | Path | Contents |
 | --- | --- |
-| `src/schema/` | Zod schemas for curriculum data (empty scaffold today). |
-| `src/domain/` | Domain model / business rules over parsed curriculum data (empty scaffold today). |
-| `src/cli/` | CLI command handlers (empty scaffold today). |
-| `src/render/` | Output generators — mentor artefacts, reports (empty scaffold today). |
-| `src/index.ts` | Package entrypoint; currently a minimal placeholder. |
-| `data/` | Curriculum data files (empty scaffold today). |
+| `src/schema/` | Zod schemas for curriculum data — the single source of truth for both runtime validation and inferred static types (ADR-0003). |
+| `src/domain/` | Domain model / business rules over parsed curriculum data: KPI engine, decision playbooks, cohort planning, learning records, and more. |
+| `src/cli/` | The `osn` CLI's command handlers (`validate`, `plan`, `render`, `report`, `privacy-check`, `checklist`) and dispatcher. |
+| `src/render/` | Pure functions that turn domain data into mentor-facing Markdown artefacts (weekly plan, checkpoint sheet, SOP card, checklist). |
+| `src/index.ts` | Package entrypoint, built by `bun run build` into `dist/`. |
+| `data/` | The curriculum corpus: 22 schema-validated JSON files (topic families, weeks, gates, references, assessment model, KPI definitions, playbooks, and more). |
 | `tests/unit/` | Fast, isolated tests, one module at a time. |
-| `tests/integration/` | Cross-module tests (currently empty; see `docs/development/testing.md`). |
+| `tests/integration/` | Cross-module tests (requirements-register verification, full-corpus and CLI end-to-end tests). |
 | `docs/development/` | Engineering process docs: testing, CI/CD, releasing. |
+| `docs/architecture/` | System architecture overview, repository map, and Architecture Decision Records (`adr/`). |
+| `docs/requirements/` | The requirements register and its traceability matrices. |
+| `docs/cli/` | The `osn` CLI command reference. |
+| `docs/governance/` | Privacy policy, security policy, and incident-response procedure. |
+| `docs/operations/` | The operational runbook and syllabus-check procedure. |
+| `docs/silabus/` | The faithful Markdown transcription of the source syllabus PDF. |
 | `docs/*.pdf` | The source syllabus document itself. |
 | `.github/workflows/` | CI pipeline (`ci.yml`). |
 | `.github/ISSUE_TEMPLATE/` | Bug, feature, and curriculum-change issue forms. |
 | `.changeset/` | Pending changesets (see `docs/development/releasing.md`). |
 
-Several `src/` subdirectories and `data/` currently hold only a
-`.gitkeep` placeholder — they are scaffolded ahead of the issues that
-populate them (see Roadmap below).
+See `docs/architecture/repository-map.md` for the exhaustive,
+directory-by-directory description.
 
 ## Command reference
 
@@ -81,6 +86,9 @@ test`). This table matches `package.json` exactly.
 | `bun run test:coverage` | `bun test --coverage` | Enforces the coverage gate in `bunfig.toml` (see `docs/development/testing.md`). |
 | `bun run build` | `bun build ./src/index.ts --outdir dist --target bun` | — |
 | `bun run validate` | `osn validate` | Validates every `data/*.json` file (schema, structural invariants, referential integrity). Exits 0 clean / 1 on any finding. See `docs/cli/README.md`. |
+| `bun run privacy-check` | `osn privacy-check` | Recursively scans `data/` for direct-identifier-shaped keys (GR-04). Exits 0 clean / 1 on any finding. See `docs/cli/README.md`. |
+| `bun run check:requirements` | `bun run scripts/check-requirements.ts` | Verifies `docs/requirements/register.md` and `traceability.md` are internally consistent and exhaustive. |
+| `bun run check:checklist-fidelity` | `bun run scripts/check-checklist-fidelity.ts` | Verifies the §14.1/§14.2 data in `data/` matches the source syllabus verbatim. |
 | `bun run changeset` | `changeset` | Interactive changeset creation. See `docs/development/releasing.md`. |
 | `bun run version` | `changeset version` | Consumes changesets into `CHANGELOG.md` and bumps `package.json` version. |
 
@@ -90,12 +98,12 @@ Milestones as tracked in the GitHub repository (`ahliweb/osn`):
 
 | Milestone | Scope | Status |
 | --- | --- | --- |
-| **M1: Engineering Foundation** | Repo scaffolding, toolchain, CI/CD, release engineering, agent docs | In progress — scaffolding, test harness, CI/CD, and release engineering are done; this documentation issue ([#5](https://github.com/ahliweb/osn/issues/5)) is in progress. |
-| **M2: Curriculum Corpus** | PDF to Markdown, requirements register, architecture docs | Not started |
-| **M3: Curriculum Data Model** | Typed, validated machine-readable curriculum datasets | Not started |
-| **M4: Pedagogy & Assessment** | Session template, SOP, hint policy, rubric, KPI, playbooks | Not started |
-| **M5: CLI & Generators** | `osn` CLI: validate, plan, render, report, checklist | Not started |
-| **M6: Governance & Release** | Privacy, security, ISO mapping, runbook, v1.0.0 | Not started |
+| **M1: Engineering Foundation** | Repo scaffolding, toolchain, CI/CD, release engineering, agent docs | Complete |
+| **M2: Curriculum Corpus** | PDF to Markdown, requirements register, architecture docs | Complete |
+| **M3: Curriculum Data Model** | Typed, validated machine-readable curriculum datasets | Complete |
+| **M4: Pedagogy & Assessment** | Session template, SOP, hint policy, rubric, KPI, playbooks | Complete |
+| **M5: CLI & Generators** | `osn` CLI: validate, plan, render, report, checklist | Complete |
+| **M6: Governance & Release** | Privacy, security, ISO mapping, runbook, v1.0.0 | Complete except the release itself — [#26](https://github.com/ahliweb/osn/issues/26) (this documentation-audit step included) is in progress. |
 
 See `gh issue list --repo ahliweb/osn --state all` (or the
 [Issues](https://github.com/ahliweb/osn/issues) tab) for the individual

@@ -383,11 +383,11 @@ and multi-factor authentication at minimum for the mentor, curriculum
 board, and administrator roles, since those roles' compromise exposes
 `internal`/`personal` data belonging to more than one learner at once).
 The full technical control detail (secure authentication design, backup,
-incident procedure) belongs to the security policy planned under issue
+incident procedure) belongs to the security policy, issue
 [#24](https://github.com/ahliweb/osn/issues/24)
-(`docs/governance/security.md`, not yet created) — this section states
+(`docs/governance/security.md`) — this section states
 the requirement so this document's coverage of the §10 callout is
-complete, without duplicating that forthcoming document's detail.
+complete, without duplicating that document's detail.
 
 ## The automated check: `osn privacy-check`
 

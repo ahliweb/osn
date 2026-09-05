@@ -28,7 +28,7 @@ Run once, before Week 1 of a new cohort, in this order:
    confirms the corpus itself (every `data/*.json` file, including
    `data/readiness-checklist.json`, `data/operational-rules.json`, and
    `data/syllabus-check-log.json`) is schema-valid and structurally sound
-   (§19's whole-corpus audit); `osn privacy-check` confirms no
+   (issue #19's whole-corpus audit); `osn privacy-check` confirms no
    direct-identifier-shaped key has crept into `data/` (ADR-0004, GR-04).
 
 2. **Run the syllabus check** (§14.2 rule 8), if it has not already been

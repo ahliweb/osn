@@ -109,7 +109,7 @@ code review with no additional tooling.
   being committed without a corresponding schema, or from being edited
   without going back through validation. This is mitigated by the
   "Ordering rule for curriculum work" in `AGENTS.md` (schema first, never
-  data without a schema) and, once it lands, by `osn validate`'s
+  data without a schema) and by `osn validate`'s
   requirement to parse **every** `data/*.json` file against its schema in
-  one pass (FR-22, TR-08, planned issue #19) — a corpus file with no
+  one pass (FR-22, TR-08, issue #19) — a corpus file with no
   schema, or that fails its schema, fails CI (`docs/development/ci-cd.md`).

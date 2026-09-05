@@ -17,21 +17,27 @@ Tables, not prose — drift should be visible at a glance.
 | --- | --- |
 | `src/schema/` | Zod schemas that validate curriculum data shapes. |
 | `src/domain/` | Business rules operating on parsed (schema-valid) curriculum data. |
-| `src/cli/` | CLI command handlers (`osn <command>`). |
+| `src/cli/` | CLI command handlers (`osn <command>`): `validate`, `plan`, `render`, `report`, `privacy-check`, `checklist`. |
 | `src/render/` | Generators that turn domain data into mentor-facing output. |
 | `src/index.ts` | Package entrypoint. |
 | `data/` | Curriculum data files (schema-validated content, not code). |
 | `tests/unit/` | One module tested in isolation. Mirrors `src/` loosely. |
 | `tests/integration/` | Cross-module tests (schema → domain → CLI/render). |
-| `docs/cli/` | `osn` CLI command reference (issue #19). |
+| `docs/architecture/` | System architecture overview, repository map, and ADRs. |
+| `docs/requirements/` | Requirements register and traceability matrices. |
+| `docs/cli/` | `osn` CLI command reference. |
 | `docs/development/` | Engineering process docs (testing, CI/CD, releasing). |
+| `docs/governance/` | Privacy policy, security policy, incident-response procedure. |
+| `docs/operations/` | Operational runbook and syllabus-check procedure. |
+| `docs/silabus/` | Faithful Markdown transcription of the source syllabus PDF. |
 | `docs/*.pdf` | The source syllabus document. |
 | `.changeset/` | Pending changesets — one Markdown file per user-visible change. |
 | `.github/workflows/` | CI pipeline. |
 | `.github/ISSUE_TEMPLATE/` | Bug / feature / curriculum-change issue forms. |
 
 Do not create new top-level directories without a corresponding issue
-scoping them.
+scoping them. See `docs/architecture/repository-map.md` for the
+exhaustive, directory-by-directory description.
 
 ## Command table
 
@@ -50,6 +56,9 @@ table.
 | `bun run test:coverage` | `bun test --coverage`; enforces the 85% lines/functions gate in `bunfig.toml`. |
 | `bun run build` | `bun build ./src/index.ts --outdir dist --target bun`. |
 | `bun run validate` | `osn validate` — validates the whole `data/*.json` corpus (schema, structural invariants, referential integrity); exits 0 clean / 1 on any finding. See `docs/cli/README.md`. |
+| `bun run privacy-check` | `osn privacy-check` — recursively scans `data/` for direct-identifier-shaped keys (GR-04); exits 0 clean / 1 on any finding. |
+| `bun run check:requirements` | `bun run scripts/check-requirements.ts` — verifies the requirements register and traceability matrices are consistent and exhaustive. |
+| `bun run check:checklist-fidelity` | `bun run scripts/check-checklist-fidelity.ts` — verifies §14.1/§14.2 data matches the source syllabus verbatim. |
 | `bun run changeset` | Create a changeset (interactive). |
 | `bun run version` | Consume changesets into `CHANGELOG.md` / bump version. |
 
@@ -124,7 +133,9 @@ not duplicate that policy here; that document is the source of truth.
 - [ ] `bun run typecheck` passes.
 - [ ] `bun test` (or `bun run test:coverage`) passes, coverage gate met.
 - [ ] `bun run build` passes.
-- [ ] `bun run validate` passes (real corpus validation as of issue #19).
+- [ ] `bun run validate` passes (corpus validation).
+- [ ] `bun run privacy-check` passes (no direct-identifier-shaped key in `data/`).
+- [ ] `bun run check:requirements` passes if `docs/requirements/` was touched.
 - [ ] Every command and path mentioned in any doc you touched actually
       exists — verify, don't assume.
 - [ ] Tests added/updated for the change (per `docs/development/testing.md`).
