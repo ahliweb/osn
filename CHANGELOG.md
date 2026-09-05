@@ -16,6 +16,69 @@ two relate.
 
 Nothing yet.
 
+## [1.1.0] — 2026-09-05
+
+Toolchain and dependency modernisation. No curriculum content, schema shape
+or CLI behaviour changed; the corpus is byte-identical to v1.0.0.
+
+### Changed
+
+- **Zod 3 → 4** — the validation library backing all 26 schema modules. The
+  one deprecated call site (`z.string().url()`) is migrated to `z.url()` in
+  the same change, rather than left as fresh debt for Zod 5 to break.
+  Validation behaviour was verified unchanged by probing the schemas that
+  carry security or correctness weight, not by relying on the test suite
+  alone: the https URL validator still rejects `http:`, `javascript:`,
+  malformed input and the empty string; `parseDataFile` still reports every
+  issue at once and names the source file; and the learning-record guard
+  still rejects all five identifier-injection vectors from #15.
+- **TypeScript 5 → 7** — the native compiler rewrite. The risk with a
+  rewrite is strict options being accepted but silently ignored, which
+  would remove type safety while CI stayed green, so enforcement was probed
+  directly: `noUncheckedIndexedAccess` still errors. The full strict config
+  typechecks with no unsupported-option warnings.
+- **Biome 1 → 2** — `biome.json` migrated to the Biome 2 schema with
+  identical intent. The five findings from Biome 2's expanded recommended
+  rules are fixed in the code; no rule was disabled and no suppression
+  added.
+- **`actions/checkout` v4 → v7** in CI.
+
+### Added
+
+- `bun run assist:check` and a matching CI step, enforcing Biome's import
+  organization. See **Fixed** below.
+
+### Fixed
+
+- **An import standard that nothing enforced.** `biome.json` has declared
+  organize-imports on since the project began, but neither `format:check`
+  nor `lint` runs Biome's assist actions — only `biome check` does. 36 of
+  137 files had unsorted imports. The ordering is applied and the gap is
+  now closed by a dedicated CI step.
+- **Dependabot lockfile drift.** The `npm` ecosystem updates
+  `package.json` without touching `bun.lock`, so every dependency pull
+  request failed CI on `--frozen-lockfile` and needed manual regeneration.
+  Switched to the `bun` ecosystem, which maintains the lockfile itself.
+  Relaxing `--frozen-lockfile` was rejected: it is a supply-chain control
+  (RISK-05), and removing a security control to silence a build error is
+  the wrong trade.
+
+### Documentation
+
+- `CONTRIBUTING.md` records the lockfile discipline, including that
+  removing `--frozen-lockfile` is not an acceptable workaround.
+- `README.md`, `AGENTS.md`, `CONTRIBUTING.md` and
+  `docs/development/ci-cd.md` updated for the new `assist:check` command
+  and the now eleven-step CI pipeline.
+
+### Notes
+
+- No breaking changes. The version is `minor` rather than `patch` because
+  Zod 4's inferred types differ subtly from Zod 3's, and the exported
+  schemas are this library layer's public surface.
+- All known limitations recorded in the v1.0.0 notes below still stand,
+  unchanged.
+
 ## [1.0.0] — 2026-09-05
 
 Initial stable release. The *Silabus Operasional Pembinaan OSN Informatika
@@ -164,5 +227,6 @@ documentation the syllabus itself mandates.
   and the entry says so; the next check must perform the live verification
   per [`docs/operations/syllabus-check.md`](docs/operations/syllabus-check.md).
 
-[Unreleased]: https://github.com/ahliweb/osn/compare/v1.0.0...HEAD
+[Unreleased]: https://github.com/ahliweb/osn/compare/v1.1.0...HEAD
+[1.1.0]: https://github.com/ahliweb/osn/compare/v1.0.0...v1.1.0
 [1.0.0]: https://github.com/ahliweb/osn/releases/tag/v1.0.0
