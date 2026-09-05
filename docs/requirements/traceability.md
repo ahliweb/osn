@@ -27,16 +27,16 @@ mechanically; do not hand-edit one matrix without updating the other and `regist
 | §10 — [Regulasi Indonesia yang Relevan](../silabus/10-regulasi-indonesia.md) | FR-10, GR-01, GR-02, GR-03, GR-04, GR-05 | #12, #15, #23 | implemented |
 | §11 — [Pemetaan Standar ISO/IEC](../silabus/11-pemetaan-iso.md) | FR-11, GR-07, GR-08 | #12, #24 | implemented |
 | §12 — [Sumber Belajar dan Pustaka](../silabus/12-sumber-belajar.md) | FR-12 | #12 | implemented |
-| §13 — [Tata Kelola Implementasi AhliKoding.com](../silabus/13-tata-kelola.md) | TR-01, TR-02, TR-03, TR-04, TR-05, TR-06, TR-08, TR-09, TR-11, FR-15, FR-16, FR-20, FR-22, OR-04, OR-05, OR-12, GR-06, GR-09, GR-10 | #1, #2, #3, #4, #5, #7, #8, #9, #15, #18, #19, #24, #25, #26 | mixed |
+| §13 — [Tata Kelola Implementasi AhliKoding.com](../silabus/13-tata-kelola.md) | TR-01, TR-02, TR-03, TR-04, TR-05, TR-06, TR-08, TR-09, TR-11, FR-15, FR-16, FR-20, FR-22, OR-04, OR-05, OR-12, GR-06, GR-09, GR-10 | #1, #2, #3, #4, #5, #7, #8, #9, #15, #18, #19, #24, #25, #26 | implemented |
 | §14 — [Checklist Kesiapan dan Aturan Operasional](../silabus/14-checklist-dan-aturan-operasional.md) | FR-23, FR-26, TR-07, OR-01, OR-02, OR-03, OR-08, ER-16 | #18, #20, #25 | implemented |
-| §99 — [Daftar Referensi](../silabus/99-referensi.md) | FR-09, FR-13, OR-06, GR-12 | #12, #25, #26 | mixed |
+| §99 — [Daftar Referensi](../silabus/99-referensi.md) | FR-09, FR-13, OR-06, GR-12 | #12, #25, #26 | implemented |
 
 `Status` is `implemented` when every requirement in the row is `implemented`, `planned` when
-none is, and `mixed` otherwise. Issues #1-#25 are all closed; only issue #26 (this release) is
-still in progress, so only the two rows that cite #26 (§13, via OR-12; §99, via GR-12) are
-`mixed` — every other row is fully `implemented`. See `register.md`'s OR-12 and GR-12 rows: both
-require issue #26 itself to be done, which by definition is not yet true while this release is
-in progress.
+none is, and `mixed` otherwise. As of the v1.0.0 release every issue #1-#26 is closed and every
+row is `implemented`. The last two to close were OR-12 (the contributor/agent guide re-verified
+against the implementation) and GR-12 (the full verification suite passing from a clean state
+with version, CHANGELOG and tag updated together), both of which are satisfied by issue #26
+itself.
 
 ## Matrix 2 — Issue → requirements covered
 

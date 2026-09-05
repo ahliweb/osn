@@ -1,6 +1,6 @@
 {
   "name": "osn-informatika-2026",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "private": true,
   "type": "module",
   "description": "Curriculum-as-code for the OSN Informatika 2026 operational syllabus: schema, domain model, and rendering pipeline.",
