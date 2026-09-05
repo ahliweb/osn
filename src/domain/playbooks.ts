@@ -250,7 +250,7 @@ export function selectShortestPath(params: SelectShortestPathParams): ShortestPa
     return {
       recommended: "Bellman-Ford",
       alternatives: [],
-      reason: `Applicability condition (state this before coding, per §7.2): the graph carries at least one negative edge, so §7.2\'s "edge negatif -> Bellman-Ford" branch applies; Dijkstra is unsound with negative edges and must not be used here${
+      reason: `Applicability condition (state this before coding, per §7.2): the graph carries at least one negative edge, so §7.2's "edge negatif -> Bellman-Ford" branch applies; Dijkstra is unsound with negative edges and must not be used here${
         allPairs
           ? `, and N = ${n} exceeds Floyd-Warshall's practical all-pairs bound of ${FLOYD_WARSHALL_MAX_N}.`
           : "."

@@ -339,7 +339,10 @@ describe("buildCohortPlan: timezone independence", () => {
       expect(JSON.stringify(underKiritimati)).toBe(JSON.stringify(underGmtMinus12));
     } finally {
       if (originalTz === undefined) {
-        // biome-ignore lint/performance/noDelete: TZ must be actually unset here -- assigning `undefined` would coerce to the literal string "undefined" (an invalid TZ value), not remove it.
+        // TZ must be actually unset here -- assigning `undefined` would coerce
+        // to the literal string "undefined" (an invalid TZ value), not remove
+        // it. Biome's noDelete rule exempts `delete process.env.X`, so no
+        // suppression comment is needed (one would itself be flagged as unused).
         delete process.env.TZ;
       } else {
         process.env.TZ = originalTz;

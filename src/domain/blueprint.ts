@@ -483,7 +483,7 @@ function buildOsnPBlueprint(
     // data/assessment-bank.json ever drifted from that, fail loudly here
     // rather than silently returning a wrong scoring model.
     throw new Error(
-      `buildBlueprint: osn-p-style must use scoringModel "partial" per §2.2\'s "Partial scoring"; data/assessment-bank.json now has "${bankKind.scoringModel}".`,
+      `buildBlueprint: osn-p-style must use scoringModel "partial" per §2.2's "Partial scoring"; data/assessment-bank.json now has "${bankKind.scoringModel}".`,
     );
   }
 
