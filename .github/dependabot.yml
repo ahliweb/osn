@@ -9,9 +9,16 @@
 # (zod only), so the expected volume here is low. Grouping is enabled anyway so
 # that a burst of dev-tooling patches arrives as one reviewable pull request
 # rather than several, which keeps the atomic-issue workflow readable.
+#
+# Ecosystem note: this project uses Bun and commits `bun.lock`, and CI installs
+# with `--frozen-lockfile` as a supply-chain control (RISK-05). The `npm`
+# ecosystem updates `package.json` without touching `bun.lock`, so every such
+# pull request fails CI on lockfile drift and needs a manual regeneration. The
+# `bun` ecosystem maintains `bun.lock` itself, which removes that trap without
+# weakening the frozen-lockfile guarantee.
 version: 2
 updates:
-  - package-ecosystem: npm
+  - package-ecosystem: bun
     directory: /
     schedule:
       interval: weekly
