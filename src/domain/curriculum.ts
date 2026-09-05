@@ -13,11 +13,6 @@
  * fast rather than surfacing later as a lookup bug.
  */
 
-import { parseDataFile } from "../schema/common";
-import { type Gate, type GatesFile, gatesSchema } from "../schema/gate";
-import { type Week, type WeeksFile, weeksSchema } from "../schema/week";
-import { isTopicFamilyId } from "./topic-families";
-
 // `resolveJsonModule` is enabled in tsconfig.json, so a static import is a
 // deterministic, dependency-free way to bring the corpus files in — no
 // filesystem read, no async loader, and Bun/tsc both resolve it at build
@@ -25,6 +20,10 @@ import { isTopicFamilyId } from "./topic-families";
 // still parsed through the schema below before anything trusts its shape.
 import rawGates from "../../data/gates.json";
 import rawWeeks from "../../data/weeks.json";
+import { parseDataFile } from "../schema/common";
+import { type Gate, type GatesFile, gatesSchema } from "../schema/gate";
+import { type Week, type WeeksFile, weeksSchema } from "../schema/week";
+import { isTopicFamilyId } from "./topic-families";
 
 const WEEKS_SOURCE_NAME = "data/weeks.json";
 const GATES_SOURCE_NAME = "data/gates.json";

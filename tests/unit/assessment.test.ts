@@ -10,8 +10,8 @@
 
 import { describe, expect, test } from "bun:test";
 import {
-  DIAGNOSIS_DIMENSIONS,
   computeWeightedScore,
+  DIAGNOSIS_DIMENSIONS,
   followUpFor,
   getComponent,
   getStatus,
@@ -22,9 +22,9 @@ import {
 } from "../../src/domain/assessment";
 import {
   ASSESSMENT_COMPONENT_IDS,
-  TOTAL_ASSESSMENT_WEIGHT,
   assessmentComponentSchema,
   assessmentWeightsFileSchema,
+  TOTAL_ASSESSMENT_WEIGHT,
 } from "../../src/schema/assessment";
 import {
   PROBLEM_STATUS_CODES,

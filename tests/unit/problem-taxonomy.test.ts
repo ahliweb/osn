@@ -7,18 +7,18 @@
  * fixture is obviously synthetic (`problem-demo-*` ids), per ADR-0004.
  */
 
+import { describe, expect, test } from "bun:test";
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
-import { describe, expect, test } from "bun:test";
 import { listTopicFamilies } from "../../src/domain/topic-families";
 import {
   COMMON_TRAP_IDS,
+  complexityClassSchema,
   DIFFICULTY_BAND_IDS,
   DIFFICULTY_MAX,
   DIFFICULTY_MIN,
   EXPECTED_SOLUTION_CLASS_IDS,
   OFFICIAL_TOPIC_IDS,
-  complexityClassSchema,
   problemTagsSchema,
   problemTaxonomyVocabFileSchema,
 } from "../../src/schema/problem-taxonomy";

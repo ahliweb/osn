@@ -23,15 +23,14 @@
  * own. Loading happens once, at module load, and the result is memoised.
  */
 
-import { parseDataFile } from "../schema/common";
-import { type Playbook, type PlaybooksFile, playbooksFileSchema } from "../schema/playbook";
-
 // `resolveJsonModule` is enabled in tsconfig.json, so a static import is a
 // deterministic, dependency-free way to bring the corpus file in — no
 // filesystem read, no async loader, and Bun/tsc both resolve it at build
 // time. The value is `unknown` as far as validity is concerned; it is
 // still parsed through the schema below before anything trusts its shape.
 import rawPlaybooks from "../../data/playbooks.json";
+import { parseDataFile } from "../schema/common";
+import { type Playbook, type PlaybooksFile, playbooksFileSchema } from "../schema/playbook";
 
 const PLAYBOOKS_SOURCE_NAME = "data/playbooks.json";
 

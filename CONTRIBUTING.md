@@ -38,7 +38,7 @@ Every PR uses the existing template
 - Linked to an issue (`Closes #...`).
 - Scope is atomic — one issue, no unrelated changes bundled in.
 - Tests added/updated.
-- All local checks pass: `bun run format:check`, `bun run lint`, `bun run
+- All local checks pass: `bun run format:check`, `bun run lint`, `bun run assist:check`, `bun run
   typecheck`, `bun run test:coverage`, `bun run build`, `bun run validate`,
   `bun run privacy-check`.
 - Docs updated (`docs/`) if behavior, setup, or process changed.
@@ -82,6 +82,7 @@ Before opening a PR, run:
 bun install --frozen-lockfile
 bun run format:check
 bun run lint
+bun run assist:check
 bun run typecheck
 bun run test:coverage
 bun run build

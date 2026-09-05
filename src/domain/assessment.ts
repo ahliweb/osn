@@ -17,6 +17,13 @@
  * from `pedagogy.ts`, and vice versa.
  */
 
+// `resolveJsonModule` is enabled in tsconfig.json, so a static import is a
+// deterministic, dependency-free way to bring the corpus files in — no
+// filesystem read, no async loader, and Bun/tsc both resolve it at build
+// time. The value is `unknown` as far as validity is concerned; it is
+// still parsed through the schema below before anything trusts its shape.
+import rawAssessmentWeights from "../../data/assessment-weights.json";
+import rawProblemStatus from "../../data/problem-status.json";
 import {
   type AssessmentComponent,
   type AssessmentWeightsFile,
@@ -28,14 +35,6 @@ import {
   type ProblemStatusFile,
   problemStatusFileSchema,
 } from "../schema/problem-status";
-
-// `resolveJsonModule` is enabled in tsconfig.json, so a static import is a
-// deterministic, dependency-free way to bring the corpus files in — no
-// filesystem read, no async loader, and Bun/tsc both resolve it at build
-// time. The value is `unknown` as far as validity is concerned; it is
-// still parsed through the schema below before anything trusts its shape.
-import rawAssessmentWeights from "../../data/assessment-weights.json";
-import rawProblemStatus from "../../data/problem-status.json";
 
 const ASSESSMENT_WEIGHTS_SOURCE_NAME = "data/assessment-weights.json";
 const PROBLEM_STATUS_SOURCE_NAME = "data/problem-status.json";

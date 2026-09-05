@@ -49,11 +49,11 @@
 
 import { readFile } from "node:fs/promises";
 import { resolve } from "node:path";
-import { buildKpiReport, ReportRequestError, type ReportGroupBy } from "../../domain/report";
+import { buildKpiReport, type ReportGroupBy, ReportRequestError } from "../../domain/report";
 import {
   findDirectIdentifiers,
-  learningRecordSchema,
   type LearningRecord,
+  learningRecordSchema,
 } from "../../schema/learning-record";
 import type { Command } from "../command";
 import { EXIT_SUCCESS, EXIT_USAGE_ERROR, EXIT_VALIDATION_FAILURE } from "../command";

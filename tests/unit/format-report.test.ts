@@ -10,9 +10,9 @@
 
 import { describe, expect, test } from "bun:test";
 import { formatReportJson, formatReportMarkdown } from "../../src/cli/format-report";
+import { listKpiDefinitions } from "../../src/domain/kpi";
 import { parseLearningRecord } from "../../src/domain/learning-record";
 import { buildKpiReport } from "../../src/domain/report";
-import { listKpiDefinitions } from "../../src/domain/kpi";
 
 const BASE_RECORD = {
   learnerRef: "lr_fmttest01",

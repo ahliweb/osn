@@ -9,11 +9,11 @@
  * hand-shaped object that merely looks like one.
  */
 
+import { describe, expect, test } from "bun:test";
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
-import { describe, expect, test } from "bun:test";
-import { parseLearningRecord, parseLearningRecords } from "../../src/domain/learning-record";
 import { getKpiDefinition, listKpiDefinitions } from "../../src/domain/kpi";
+import { parseLearningRecord, parseLearningRecords } from "../../src/domain/learning-record";
 import {
   buildKpiReport,
   buildPostmortem,

@@ -36,9 +36,9 @@
  */
 
 import { z } from "zod";
-import { problemIdSchema } from "./problem-taxonomy";
-import { problemStatusCodeSchema } from "./problem-status";
 import { HINT_LEVEL_COUNT } from "./hint-policy";
+import { problemStatusCodeSchema } from "./problem-status";
+import { problemIdSchema } from "./problem-taxonomy";
 
 // --- privacy classification -------------------------------------------
 

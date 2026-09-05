@@ -12,6 +12,7 @@
 
 import { describe, expect, test } from "bun:test";
 import {
+  assertNoDanglingCitations,
   findDanglingCitations,
   findReference,
   getReference,
@@ -23,7 +24,6 @@ import {
   referencesByKind,
   resolveCitations,
   sourcePriority,
-  assertNoDanglingCitations,
 } from "../../src/domain/registers";
 import { referenceSchema, referencesFileSchema } from "../../src/schema/reference";
 import { regulationSchema } from "../../src/schema/regulation";

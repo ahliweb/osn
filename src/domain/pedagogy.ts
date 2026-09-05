@@ -18,24 +18,23 @@
  * `requiresResolve` below.
  */
 
-import { type HintLevel, type HintPolicyFile, hintPolicyFileSchema } from "../schema/hint-policy";
-import { type MentorSopFile, type SopStep, mentorSopFileSchema } from "../schema/mentor-sop";
-import { parseDataFile } from "../schema/common";
-import {
-  type Session,
-  type SessionTemplateFile,
-  type Segment,
-  sessionTemplateFileSchema,
-} from "../schema/session-template";
-
+import rawHintPolicy from "../../data/hint-policy.json";
+import rawMentorSop from "../../data/mentor-sop.json";
 // `resolveJsonModule` is enabled in tsconfig.json, so a static import is a
 // deterministic, dependency-free way to bring the corpus files in — no
 // filesystem read, no async loader, and Bun/tsc both resolve it at build
 // time. The value is `unknown` as far as validity is concerned; it is
 // still parsed through the schema below before anything trusts its shape.
 import rawSessionTemplate from "../../data/session-template.json";
-import rawMentorSop from "../../data/mentor-sop.json";
-import rawHintPolicy from "../../data/hint-policy.json";
+import { parseDataFile } from "../schema/common";
+import { type HintLevel, type HintPolicyFile, hintPolicyFileSchema } from "../schema/hint-policy";
+import { type MentorSopFile, mentorSopFileSchema, type SopStep } from "../schema/mentor-sop";
+import {
+  type Segment,
+  type Session,
+  type SessionTemplateFile,
+  sessionTemplateFileSchema,
+} from "../schema/session-template";
 
 const SESSION_TEMPLATE_SOURCE_NAME = "data/session-template.json";
 const MENTOR_SOP_SOURCE_NAME = "data/mentor-sop.json";

@@ -10,9 +10,9 @@
 
 import { describe, expect, test } from "bun:test";
 import {
-  TOLERATED_KEY,
   type PrivacyScanEntry,
   scanEntriesForDirectIdentifiers,
+  TOLERATED_KEY,
 } from "../../src/domain/privacy-scan";
 
 /** A sentinel value that must never appear anywhere in a finding's output -- findings carry only `file`/`path`/`key`, never the value found there. */

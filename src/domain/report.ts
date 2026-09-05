@@ -60,29 +60,29 @@
  * sections this module adds on top.
  */
 
+import { ERROR_TAXONOMY_CLASSES, type LearningRecord } from "../schema/learning-record";
 import {
   type ReimplementAndResolveSchedule,
   resolveSchedule,
   type ScheduledResolveSchedule,
 } from "./assessment";
 import {
-  complexitySelectionAccuracy,
   type ComplexitySelectionAccuracyResult,
-  contestTimeAllocation,
   type ContestTimeAllocationResult,
+  complexitySelectionAccuracy,
+  contestTimeAllocation,
   type KpiResult,
-  repeatSolveRetention,
   type RepeatSolveRetentionResult,
-  statusDistributionByTopic,
+  repeatSolveRetention,
   type StatusDistributionResult,
-  timeToFirstCorrect,
+  statusDistributionByTopic,
   type TimeToFirstCorrectResult,
-  upsolveCompletionRate,
+  timeToFirstCorrect,
   type UpsolveCompletionResult,
-  verdictFrequency,
+  upsolveCompletionRate,
   type VerdictFrequencyResult,
+  verdictFrequency,
 } from "./kpi";
-import { ERROR_TAXONOMY_CLASSES, type LearningRecord } from "../schema/learning-record";
 
 /**
  * The literal union of §13.1 step-4 postmortem error classes. Not exported
