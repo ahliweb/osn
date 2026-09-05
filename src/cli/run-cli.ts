@@ -16,9 +16,9 @@
  */
 
 import packageJson from "../../package.json";
-import { COMMANDS, COMMAND_REGISTRY } from "./commands";
 import type { CommandContext } from "./command";
 import { EXIT_SUCCESS, EXIT_USAGE_ERROR, EXIT_VALIDATION_FAILURE } from "./command";
+import { COMMAND_REGISTRY, COMMANDS } from "./commands";
 
 /** The I/O `runCli` needs, injected by the caller. See this module's docblock for why. */
 export interface RunCliIo {

@@ -20,6 +20,14 @@
  * itself.
  */
 
+// `resolveJsonModule` is enabled in tsconfig.json, so a static import is a
+// deterministic, dependency-free way to bring the corpus files in — no
+// filesystem read, no async loader, and Bun/tsc both resolve it at build
+// time. The value is `unknown` as far as validity is concerned; it is
+// still parsed through the schema below before anything trusts its shape.
+import rawOperationalRules from "../../data/operational-rules.json";
+import rawReadinessChecklist from "../../data/readiness-checklist.json";
+import rawSyllabusCheckLog from "../../data/syllabus-check-log.json";
 import { parseDataFile } from "../schema/common";
 import {
   type OperationalRule,
@@ -37,15 +45,6 @@ import {
   type SyllabusCheckLogFile,
   syllabusCheckLogFileSchema,
 } from "../schema/syllabus-check";
-
-// `resolveJsonModule` is enabled in tsconfig.json, so a static import is a
-// deterministic, dependency-free way to bring the corpus files in — no
-// filesystem read, no async loader, and Bun/tsc both resolve it at build
-// time. The value is `unknown` as far as validity is concerned; it is
-// still parsed through the schema below before anything trusts its shape.
-import rawOperationalRules from "../../data/operational-rules.json";
-import rawReadinessChecklist from "../../data/readiness-checklist.json";
-import rawSyllabusCheckLog from "../../data/syllabus-check-log.json";
 
 const READINESS_CHECKLIST_SOURCE_NAME = "data/readiness-checklist.json";
 const OPERATIONAL_RULES_SOURCE_NAME = "data/operational-rules.json";

@@ -9,8 +9,8 @@
 import { describe, expect, test } from "bun:test";
 import { z } from "zod";
 import {
-  citationRefSchema,
   CorpusValidationError,
+  citationRefSchema,
   nonEmptyString,
   parseDataFile,
   slugSchema,

@@ -49,6 +49,7 @@ table.
 | `bun install` | Install dependencies. |
 | `bun run typecheck` | `tsc --noEmit`. |
 | `bun run lint` | `biome lint .`. |
+| `bun run assist:check` | `biome check` with formatter and linter off — enforces import organization, which `lint` and `format:check` do not. |
 | `bun run lint:fix` | `biome lint --write .`. |
 | `bun run format` | `biome format --write .`. |
 | `bun run format:check` | `biome format .` (check-only). |
@@ -130,6 +131,7 @@ not duplicate that policy here; that document is the source of truth.
 
 - [ ] `bun run format:check` passes.
 - [ ] `bun run lint` passes.
+- [ ] `bun run assist:check` passes.
 - [ ] `bun run typecheck` passes.
 - [ ] `bun test` (or `bun run test:coverage`) passes, coverage gate met.
 - [ ] `bun run build` passes.

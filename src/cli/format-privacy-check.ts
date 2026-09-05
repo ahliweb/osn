@@ -5,8 +5,8 @@
  * audit.ts` provides for `osn validate`.
  */
 
-import type { PrivacyScanParseIssue } from "./privacy-scan-loader";
 import type { PrivacyScanFinding } from "../domain/privacy-scan";
+import type { PrivacyScanParseIssue } from "./privacy-scan-loader";
 
 /** The full result of one `osn privacy-check` run, ready to format. */
 export interface PrivacyCheckResult {

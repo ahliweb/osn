@@ -38,6 +38,7 @@ see `.github/workflows/ci.yml`).
 bun install
 bun run format:check
 bun run lint
+bun run assist:check
 bun run typecheck
 bun test
 ```
@@ -79,6 +80,7 @@ test`). This table matches `package.json` exactly.
 | `bun install` | Install dependencies | — |
 | `bun run typecheck` | `tsc --noEmit` | — |
 | `bun run lint` | `biome lint .` | — |
+| `bun run assist:check` | `biome check --formatter-enabled=false --linter-enabled=false .` | Enforces import organization. Neither `lint` nor `format:check` covers Biome's assist actions. |
 | `bun run lint:fix` | `biome lint --write .` | — |
 | `bun run format` | `biome format --write .` | — |
 | `bun run format:check` | `biome format .` | Check-only, no rewrite. |

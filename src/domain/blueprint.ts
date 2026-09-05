@@ -26,12 +26,18 @@
  * class and print an actionable message.
  */
 
+// `resolveJsonModule` is enabled in tsconfig.json, so a static import is a
+// deterministic, dependency-free way to bring the corpus file in — no
+// filesystem read, no async loader, and Bun/tsc both resolve it at build
+// time. The value is `unknown` as far as validity is concerned; it is
+// still parsed through the schema below before anything trusts its shape.
+import rawAssessmentBank from "../../data/assessment-bank.json";
 import {
   type AssessmentBankFile,
+  assessmentBankFileSchema,
+  BANK_KIND_IDS,
   type BankKind,
   type BankKindId,
-  BANK_KIND_IDS,
-  assessmentBankFileSchema,
 } from "../schema/assessment-bank";
 import { parseDataFile } from "../schema/common";
 import { GATE_WEEKS } from "../schema/gate";
@@ -40,13 +46,6 @@ import { MAX_WEEK, MIN_WEEK, type Week } from "../schema/week";
 import { gateAfter, getWeek, listWeeks } from "./curriculum";
 import { getStage } from "./structure";
 import { isTopicFamilyId, listTopicFamilies } from "./topic-families";
-
-// `resolveJsonModule` is enabled in tsconfig.json, so a static import is a
-// deterministic, dependency-free way to bring the corpus file in — no
-// filesystem read, no async loader, and Bun/tsc both resolve it at build
-// time. The value is `unknown` as far as validity is concerned; it is
-// still parsed through the schema below before anything trusts its shape.
-import rawAssessmentBank from "../../data/assessment-bank.json";
 
 const ASSESSMENT_BANK_SOURCE_NAME = "data/assessment-bank.json";
 
@@ -483,7 +482,7 @@ function buildOsnPBlueprint(
     // data/assessment-bank.json ever drifted from that, fail loudly here
     // rather than silently returning a wrong scoring model.
     throw new Error(
-      `buildBlueprint: osn-p-style must use scoringModel "partial" per §2.2\'s "Partial scoring"; data/assessment-bank.json now has "${bankKind.scoringModel}".`,
+      `buildBlueprint: osn-p-style must use scoringModel "partial" per §2.2's "Partial scoring"; data/assessment-bank.json now has "${bankKind.scoringModel}".`,
     );
   }
 

@@ -15,6 +15,25 @@
  * fast rather than surfacing later as a silent broken link.
  */
 
+import rawStages from "../../data/competition-stages.json";
+// The rest of the corpus, imported here purely so
+// {@link assertNoDanglingCitations} can walk it for stray `Rnn` citations.
+// Static imports (rather than a runtime directory scan) keep the check
+// deterministic and dependency-free, per issue #12's implementation notes.
+import rawCategories from "../../data/curriculum-categories.json";
+import rawGates from "../../data/gates.json";
+import rawLearningLoad from "../../data/learning-load.json";
+// `resolveJsonModule` is enabled in tsconfig.json, so a static import is a
+// deterministic, dependency-free way to bring the corpus files in — no
+// filesystem read, no async loader, and Bun/tsc both resolve it at build
+// time. The value is `unknown` as far as validity is concerned; it is
+// still parsed through the schema below before anything trusts its shape.
+import rawReferences from "../../data/references.json";
+import rawRegulations from "../../data/regulations.json";
+import rawSourcePriority from "../../data/source-priority.json";
+import rawStandards from "../../data/standards.json";
+import rawTopicFamilies from "../../data/topic-families.json";
+import rawWeeks from "../../data/weeks.json";
 import { parseDataFile } from "../schema/common";
 import {
   type Reference,
@@ -24,34 +43,13 @@ import {
 } from "../schema/reference";
 import { type Regulation, type RegulationsFile, regulationsFileSchema } from "../schema/regulation";
 import {
-  type PrimaryBook,
   type PracticePlatform,
+  type PrimaryBook,
   type SourcePriorityEntry,
   type SourcePriorityFile,
   sourcePriorityFileSchema,
 } from "../schema/source-priority";
 import { type Standard, type StandardsFile, standardsFileSchema } from "../schema/standard";
-
-// `resolveJsonModule` is enabled in tsconfig.json, so a static import is a
-// deterministic, dependency-free way to bring the corpus files in — no
-// filesystem read, no async loader, and Bun/tsc both resolve it at build
-// time. The value is `unknown` as far as validity is concerned; it is
-// still parsed through the schema below before anything trusts its shape.
-import rawReferences from "../../data/references.json";
-import rawRegulations from "../../data/regulations.json";
-import rawStandards from "../../data/standards.json";
-import rawSourcePriority from "../../data/source-priority.json";
-
-// The rest of the corpus, imported here purely so
-// {@link assertNoDanglingCitations} can walk it for stray `Rnn` citations.
-// Static imports (rather than a runtime directory scan) keep the check
-// deterministic and dependency-free, per issue #12's implementation notes.
-import rawCategories from "../../data/curriculum-categories.json";
-import rawStages from "../../data/competition-stages.json";
-import rawGates from "../../data/gates.json";
-import rawLearningLoad from "../../data/learning-load.json";
-import rawTopicFamilies from "../../data/topic-families.json";
-import rawWeeks from "../../data/weeks.json";
 
 const REFERENCES_SOURCE_NAME = "data/references.json";
 const REGULATIONS_SOURCE_NAME = "data/regulations.json";

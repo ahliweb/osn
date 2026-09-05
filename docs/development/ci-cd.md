@@ -19,13 +19,16 @@ The workflow is defined in `.github/workflows/ci.yml`. It has a single job,
 4. **Check formatting** — `bun run format:check` (Biome, check-only — does
    not rewrite files).
 5. **Lint** — `bun run lint` (Biome).
-6. **Typecheck** — `bun run typecheck` (`tsc --noEmit`).
-7. **Test with coverage** — `bun run test:coverage` (`bun test --coverage`).
+6. **Check import organization** — `bun run assist:check` (Biome assist
+   actions only, with the formatter and linter disabled so a failure here is
+   unambiguously about import order and nothing else).
+7. **Typecheck** — `bun run typecheck` (`tsc --noEmit`).
+8. **Test with coverage** — `bun run test:coverage` (`bun test --coverage`).
    This also enforces the coverage gate configured in `bunfig.toml` — see
    `docs/development/testing.md`.
-8. **Build** — `bun run build` (`bun build ./src/index.ts --outdir dist
+9. **Build** — `bun run build` (`bun build ./src/index.ts --outdir dist
    --target bun`).
-9. **Validate curriculum data** — `bun run validate` (`osn validate`).
+10. **Validate curriculum data** — `bun run validate` (`osn validate`).
    Parses every `data/*.json` file against its schema, checks
    the fixed structural invariants (28 weeks, 7 gates, 10 topic families,
    41 references, and so on), and checks referential integrity across the
@@ -33,7 +36,7 @@ The workflow is defined in `.github/workflows/ci.yml`. It has a single job,
    assessment-bank kind → competition stage, every `Rnn` citation → the
    reference register) — see `docs/cli/README.md` for the full command
    reference. Exits `0` on a clean corpus, `1` if any finding exists.
-10. **Privacy check** — `bun run privacy-check` (`osn privacy-check`,
+11. **Privacy check** — `bun run privacy-check` (`osn privacy-check`,
     GR-04). Recursively scans every `.json`/`.jsonl` file under `data/`
     (including `data/samples/`) for a direct-identifier-shaped key, and
     fails the build if any is found (beyond the documented `"name"`
@@ -112,6 +115,7 @@ Run the same steps CI runs, in the same order, with one command each:
 bun install --frozen-lockfile && \
 bun run format:check && \
 bun run lint && \
+bun run assist:check && \
 bun run typecheck && \
 bun run test:coverage && \
 bun run build && \

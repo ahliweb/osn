@@ -22,8 +22,8 @@
 
 import type { z } from "zod";
 import {
-  type LearningRecord,
   LEARNING_RECORD_CLASSIFICATION,
+  type LearningRecord,
   learningRecordSchema,
   type PrivacyClassification,
 } from "../schema/learning-record";

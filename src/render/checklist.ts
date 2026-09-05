@@ -18,7 +18,6 @@
  * the wall clock; this module never does.
  */
 
-import { escapeCell } from "./markdown-utils";
 import {
   daysSinceLastSyllabusCheck,
   latestSyllabusCheck,
@@ -27,6 +26,7 @@ import {
   operationsCorpusVersion,
   quickPointer,
 } from "../domain/operations";
+import { escapeCell } from "./markdown-utils";
 
 /** Renders the §14.1 readiness checklist as a numbered list with verification method and evidence for each item. */
 function renderReadinessSection(): string[] {

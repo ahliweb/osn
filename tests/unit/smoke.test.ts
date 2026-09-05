@@ -7,9 +7,9 @@
  * package.json/src drift before any schema or domain test would.
  */
 
+import { describe, expect, test } from "bun:test";
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
-import { describe, expect, test } from "bun:test";
 import { CURRICULUM_SOURCE, packageInfo } from "../../src/index";
 
 interface PackageJson {

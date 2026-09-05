@@ -6,6 +6,7 @@
  * for `osn plan` and `src/cli/format-audit.ts`'s for `osn validate`).
  */
 
+import type { KpiResult } from "../domain/kpi";
 import {
   type ComplexitySelectionAccuracyResult,
   type ContestTimeAllocationResult,
@@ -24,7 +25,6 @@ import {
   type KpiReportSection,
   type ScheduledResolveEntry,
 } from "../domain/report";
-import type { KpiResult } from "../domain/kpi";
 
 /** Escapes a value for safe embedding inside a Markdown table cell: no `|`, no newlines. */
 function escapeCell(value: string): string {

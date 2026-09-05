@@ -12,11 +12,11 @@
  */
 
 import { describe, expect, test } from "bun:test";
-import { parseLearningRecord } from "../../src/domain/learning-record";
 import {
   complexitySelectionAccuracy,
   contestTimeAllocation,
   getKpiDefinition,
+  type KpiResult,
   kpiCaveat,
   listKpiDefinitions,
   repeatSolveRetention,
@@ -24,8 +24,8 @@ import {
   timeToFirstCorrect,
   upsolveCompletionRate,
   verdictFrequency,
-  type KpiResult,
 } from "../../src/domain/kpi";
+import { parseLearningRecord } from "../../src/domain/learning-record";
 import {
   KPI_METRIC_IDS,
   kpiDefinitionSchema,
@@ -66,7 +66,9 @@ function assertAllFinite(value: unknown, path = "root"): void {
     return;
   }
   if (Array.isArray(value)) {
-    value.forEach((entry, index) => assertAllFinite(entry, `${path}[${index}]`));
+    value.forEach((entry, index) => {
+      assertAllFinite(entry, `${path}[${index}]`);
+    });
     return;
   }
   if (value !== null && typeof value === "object") {

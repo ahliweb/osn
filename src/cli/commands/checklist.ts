@@ -10,10 +10,10 @@
  */
 
 import { resolve } from "node:path";
-import { formatChecklistJson } from "../format-checklist";
 import { renderChecklist } from "../../render/checklist";
 import type { Command } from "../command";
 import { EXIT_SUCCESS, EXIT_USAGE_ERROR } from "../command";
+import { formatChecklistJson } from "../format-checklist";
 import { writeOutputFile } from "../output-writer";
 
 const HELP_TEXT = `osn checklist -- render the cohort readiness checklist and operational rules

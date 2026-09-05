@@ -10,7 +10,15 @@
  * own. Loading happens once, at module load, and the result is memoised.
  */
 
-import { type Category, type CategoriesFile, categoriesFileSchema } from "../schema/category";
+import rawStages from "../../data/competition-stages.json";
+// `resolveJsonModule` is enabled in tsconfig.json, so a static import is a
+// deterministic, dependency-free way to bring the corpus files in — no
+// filesystem read, no async loader, and Bun/tsc both resolve it at build
+// time. The value is `unknown` as far as validity is concerned; it is
+// still parsed through the schema below before anything trusts its shape.
+import rawCategories from "../../data/curriculum-categories.json";
+import rawLearningLoad from "../../data/learning-load.json";
+import { type CategoriesFile, type Category, categoriesFileSchema } from "../schema/category";
 import { parseDataFile } from "../schema/common";
 import {
   type LearningLoadComponent,
@@ -18,15 +26,6 @@ import {
   learningLoadFileSchema,
 } from "../schema/learning-load";
 import { type Stage, type StagesFile, stagesFileSchema } from "../schema/stage";
-
-// `resolveJsonModule` is enabled in tsconfig.json, so a static import is a
-// deterministic, dependency-free way to bring the corpus files in — no
-// filesystem read, no async loader, and Bun/tsc both resolve it at build
-// time. The value is `unknown` as far as validity is concerned; it is
-// still parsed through the schema below before anything trusts its shape.
-import rawCategories from "../../data/curriculum-categories.json";
-import rawStages from "../../data/competition-stages.json";
-import rawLearningLoad from "../../data/learning-load.json";
 
 const CATEGORIES_SOURCE_NAME = "data/curriculum-categories.json";
 const STAGES_SOURCE_NAME = "data/competition-stages.json";

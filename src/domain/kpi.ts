@@ -28,16 +28,15 @@
  * carries a non-empty, specific `reason` string.
  */
 
-import { type KpiDefinition, kpiDefinitionsFileSchema } from "../schema/kpi";
-import { parseDataFile } from "../schema/common";
-import type { LearningRecord } from "../schema/learning-record";
-
 // `resolveJsonModule` is enabled in tsconfig.json, so a static import is a
 // deterministic, dependency-free way to bring the corpus file in — no
 // filesystem read, no async loader, and Bun/tsc both resolve it at build
 // time. The value is `unknown` as far as validity is concerned; it is
 // still parsed through the schema below before anything trusts its shape.
 import rawKpiDefinitions from "../../data/kpi-definitions.json";
+import { parseDataFile } from "../schema/common";
+import { type KpiDefinition, kpiDefinitionsFileSchema } from "../schema/kpi";
+import type { LearningRecord } from "../schema/learning-record";
 
 const KPI_DEFINITIONS_SOURCE_NAME = "data/kpi-definitions.json";
 

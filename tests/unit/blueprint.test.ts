@@ -13,18 +13,18 @@
 import { describe, expect, test } from "bun:test";
 import {
   BlueprintRequestError,
-  DIAGNOSTIC_AREAS,
-  MIN_ALTERNATIVES_PER_TOPIC,
   buildBlueprint,
+  DIAGNOSTIC_AREAS,
   getBankKind,
   listBankKinds,
+  MIN_ALTERNATIVES_PER_TOPIC,
 } from "../../src/domain/blueprint";
 import { gateAfter } from "../../src/domain/curriculum";
 import { getStage } from "../../src/domain/structure";
 import {
+  assessmentBankFileSchema,
   BANK_KIND_IDS,
   type BankKindId,
-  assessmentBankFileSchema,
   bankKindSchema,
 } from "../../src/schema/assessment-bank";
 import { GATE_WEEKS } from "../../src/schema/gate";

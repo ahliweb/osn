@@ -9,27 +9,27 @@
  * comments.
  */
 
+import { describe, expect, test } from "bun:test";
 import { readdirSync, readFileSync } from "node:fs";
 import { join } from "node:path";
-import { describe, expect, test } from "bun:test";
 import {
-  LearningRecordsValidationError,
   classificationOf,
   isPersonalField,
+  LearningRecordsValidationError,
   parseLearningRecord,
   parseLearningRecords,
 } from "../../src/domain/learning-record";
 import {
+  assertNoDirectIdentifiers,
   DIRECT_IDENTIFIER_DENYLIST,
   ERROR_TAXONOMY_CLASSES,
-  LEARNING_RECORD_CLASSIFICATION,
-  RESOLVE_STATUSES,
-  VERDICTS,
-  assertNoDirectIdentifiers,
   findDirectIdentifiers,
   isDenylistedKey,
+  LEARNING_RECORD_CLASSIFICATION,
   learningRecordSchema,
   learningRecordShapeSchema,
+  RESOLVE_STATUSES,
+  VERDICTS,
 } from "../../src/schema/learning-record";
 import { PROBLEM_STATUS_CODES } from "../../src/schema/problem-status";
 

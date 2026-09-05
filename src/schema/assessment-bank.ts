@@ -67,7 +67,7 @@ export const SCORING_MODELS = ["binary", "partial", "rubric"] as const;
 export const scoringModelSchema = z
   .enum(SCORING_MODELS)
   .describe(
-    `A bank kind's scoring model: ${SCORING_MODELS.join(", ")}. "binary" is a plain accept/reject verdict per item; "partial" awards credit per subtask/case (mandatory for osn-p-style, per §2.2\'s "Partial scoring"); "rubric" grades against named mastery criteria rather than a single pass/fail or subtask signal.`,
+    `A bank kind's scoring model: ${SCORING_MODELS.join(", ")}. "binary" is a plain accept/reject verdict per item; "partial" awards credit per subtask/case (mandatory for osn-p-style, per §2.2's "Partial scoring"); "rubric" grades against named mastery criteria rather than a single pass/fail or subtask signal.`,
   );
 
 /** The static type inferred from {@link scoringModelSchema}. */

@@ -4,8 +4,8 @@
  */
 
 import { describe, expect, test } from "bun:test";
-import type { AuditResult } from "../../src/domain/corpus-audit";
 import { formatAuditJson, formatAuditText } from "../../src/cli/format-audit";
+import type { AuditResult } from "../../src/domain/corpus-audit";
 
 const OK_RESULT: AuditResult = {
   ok: true,

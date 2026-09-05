@@ -35,6 +35,9 @@ jobs:
       - name: Lint
         run: bun run lint
 
+      - name: Check import organization
+        run: bun run assist:check
+
       - name: Typecheck
         run: bun run typecheck
 

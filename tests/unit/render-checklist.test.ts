@@ -4,13 +4,13 @@
  */
 
 import { describe, expect, test } from "bun:test";
-import { renderChecklist } from "../../src/render/checklist";
 import {
   latestSyllabusCheck,
   listOperationalRules,
   listReadinessItems,
   quickPointer,
 } from "../../src/domain/operations";
+import { renderChecklist } from "../../src/render/checklist";
 
 const FIXED_ASOF = new Date("2026-09-10T00:00:00Z");
 

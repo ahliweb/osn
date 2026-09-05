@@ -23,15 +23,14 @@
  * own. Loading happens once, at module load, and the result is memoised.
  */
 
-import { parseDataFile } from "../schema/common";
-import { type Playbook, type PlaybooksFile, playbooksFileSchema } from "../schema/playbook";
-
 // `resolveJsonModule` is enabled in tsconfig.json, so a static import is a
 // deterministic, dependency-free way to bring the corpus file in — no
 // filesystem read, no async loader, and Bun/tsc both resolve it at build
 // time. The value is `unknown` as far as validity is concerned; it is
 // still parsed through the schema below before anything trusts its shape.
 import rawPlaybooks from "../../data/playbooks.json";
+import { parseDataFile } from "../schema/common";
+import { type Playbook, type PlaybooksFile, playbooksFileSchema } from "../schema/playbook";
 
 const PLAYBOOKS_SOURCE_NAME = "data/playbooks.json";
 
@@ -250,7 +249,7 @@ export function selectShortestPath(params: SelectShortestPathParams): ShortestPa
     return {
       recommended: "Bellman-Ford",
       alternatives: [],
-      reason: `Applicability condition (state this before coding, per §7.2): the graph carries at least one negative edge, so §7.2\'s "edge negatif -> Bellman-Ford" branch applies; Dijkstra is unsound with negative edges and must not be used here${
+      reason: `Applicability condition (state this before coding, per §7.2): the graph carries at least one negative edge, so §7.2's "edge negatif -> Bellman-Ford" branch applies; Dijkstra is unsound with negative edges and must not be used here${
         allPairs
           ? `, and N = ${n} exceeds Floyd-Warshall's practical all-pairs bound of ${FLOYD_WARSHALL_MAX_N}.`
           : "."

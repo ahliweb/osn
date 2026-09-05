@@ -57,48 +57,48 @@
 
 import type { z } from "zod";
 import {
-  type AssessmentBankFile,
-  assessmentBankFileSchema,
-  BANK_KIND_IDS,
-} from "../schema/assessment-bank";
-import {
   type AssessmentWeightsFile,
   assessmentWeightsFileSchema,
   TOTAL_ASSESSMENT_WEIGHT,
 } from "../schema/assessment";
-import { type CategoriesFile, CATEGORY_IDS, categoriesFileSchema } from "../schema/category";
-import { type GatesFile, GATE_WEEKS, gatesSchema } from "../schema/gate";
-import { type HintPolicyFile, HINT_LEVEL_COUNT, hintPolicyFileSchema } from "../schema/hint-policy";
-import { type KpiDefinitionsFile, KPI_METRIC_IDS, kpiDefinitionsFileSchema } from "../schema/kpi";
+import {
+  type AssessmentBankFile,
+  assessmentBankFileSchema,
+  BANK_KIND_IDS,
+} from "../schema/assessment-bank";
+import { CATEGORY_IDS, type CategoriesFile, categoriesFileSchema } from "../schema/category";
+import { GATE_WEEKS, type GatesFile, gatesSchema } from "../schema/gate";
+import { HINT_LEVEL_COUNT, type HintPolicyFile, hintPolicyFileSchema } from "../schema/hint-policy";
+import { KPI_METRIC_IDS, type KpiDefinitionsFile, kpiDefinitionsFileSchema } from "../schema/kpi";
 import { learningLoadFileSchema } from "../schema/learning-load";
 import { mentorSopFileSchema } from "../schema/mentor-sop";
 import {
-  type OperationalRulesFile,
   OPERATIONAL_RULE_COUNT,
+  type OperationalRulesFile,
   operationalRulesFileSchema,
   QUICK_POINTER_STAGE_COUNT,
 } from "../schema/operational-rules";
-import { type PlaybooksFile, PLAYBOOK_IDS, playbooksFileSchema } from "../schema/playbook";
+import { PLAYBOOK_IDS, type PlaybooksFile, playbooksFileSchema } from "../schema/playbook";
 import {
-  type ProblemStatusFile,
   PROBLEM_STATUS_CODES,
+  type ProblemStatusFile,
   problemStatusFileSchema,
 } from "../schema/problem-status";
 import { OFFICIAL_TOPIC_IDS, problemTaxonomyVocabFileSchema } from "../schema/problem-taxonomy";
 import {
-  type ReadinessChecklistFile,
   READINESS_ITEM_COUNT,
+  type ReadinessChecklistFile,
   readinessChecklistFileSchema,
 } from "../schema/readiness-checklist";
 import { type ReferencesFile, referencesFileSchema } from "../schema/reference";
 import { regulationsFileSchema } from "../schema/regulation";
 import {
-  type SessionTemplateFile,
   SESSION_TOTAL_MINUTES,
+  type SessionTemplateFile,
   sessionTemplateFileSchema,
 } from "../schema/session-template";
 import { sourcePriorityFileSchema } from "../schema/source-priority";
-import { type StagesFile, STAGE_IDS, stagesFileSchema } from "../schema/stage";
+import { STAGE_IDS, type StagesFile, stagesFileSchema } from "../schema/stage";
 import { standardsFileSchema } from "../schema/standard";
 import type { SyllabusCheckLogFile } from "../schema/syllabus-check";
 import { syllabusCheckLogFileSchema } from "../schema/syllabus-check";
