@@ -90,5 +90,19 @@ bun run validate
 bun run privacy-check
 ```
 
+### Dependency updates and `bun.lock`
+
+CI installs with `--frozen-lockfile`, which fails if `bun.lock` has drifted
+from `package.json`. This is deliberate: reproducible installs are a
+supply-chain control (RISK-05 in `docs/governance/security.md`), not a
+convenience.
+
+The practical consequence is that **any dependency change must land with a
+matching `bun.lock`**. If an automated dependency pull request arrives with
+only `package.json` changed, run `bun install` on that branch and commit the
+regenerated lockfile before merging. Never work around the failure by
+removing `--frozen-lockfile`.
+
+
 These are the exact steps CI runs, in the same order (see
 `docs/development/ci-cd.md`).
