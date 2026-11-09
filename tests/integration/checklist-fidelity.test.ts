@@ -153,6 +153,43 @@ describe("check-checklist-fidelity pure functions (unit-level, fixture-driven)",
     expect(problems.some((p) => p.context.includes("quickPointer.extensionCondition"))).toBe(true);
   });
 
+  test("checkFidelity reports a mismatched rule text when the rule count matches", () => {
+    const problems = checkFidelity(
+      FIXTURE_MARKDOWN,
+      {
+        items: [
+          { id: "one", item: "Bullet one." },
+          { id: "two", item: "Bullet two." },
+        ],
+      },
+      {
+        rules: [
+          { order: 1, rule: "Rule one." },
+          { order: 2, rule: "WRONG RULE." },
+        ],
+        quickPointer: { stages: ["Stage A", "Stage B"], extensionCondition: "Closing condition." },
+      },
+    );
+    expect(
+      problems.some(
+        (p) =>
+          p.context.includes("rules[1]") &&
+          p.expected === "Rule two." &&
+          p.actual === "WRONG RULE.",
+      ),
+    ).toBe(true);
+    expect(problems.some((p) => p.context.includes("rule count"))).toBe(false);
+  });
+
+  test("extract functions throw when a section marker is missing", () => {
+    expect(() => extractReadinessBullets("# nothing here\n")).toThrow(
+      /marker .*14\.1 Checklist sebelum memulai cohort.* not found/,
+    );
+    expect(() =>
+      extractReadinessBullets("## 14.1 Checklist sebelum memulai cohort\n- a\n"),
+    ).toThrow(/marker "## 14\.2" not found/);
+  });
+
   test("extractQuickPointerLine throws if no callout line is present", () => {
     expect(() => extractQuickPointerLine("# nothing here\n")).toThrow(/Pointer cepat/);
   });

@@ -106,7 +106,7 @@ coverageThreshold = { lines = 0.85, functions = 0.85 }
   Note the key names: Bun's threshold table uses the plural `lines` /
   `functions` (not `line` / `function`) — the singular keys are silently
   ignored rather than rejected, so a typo there would silently disable the
-  gate. This has been verified empirically against Bun 1.4.0: an
+  gate. This has been verified empirically against Bun 1.4.0 and 1.4.4: an
   out-of-range value under the correct plural keys reliably fails the
   build, and the CLI-reported "% Funcs" / "% Lines" columns are what the
   threshold is checked against.
