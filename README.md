@@ -31,7 +31,7 @@ version-controlled, testable artefacts.
 
 ## Quick start
 
-Prerequisites: [Bun](https://bun.sh) (the project pins `1.4.0` in CI —
+Prerequisites: [Bun](https://bun.sh) (the project pins `1.4.4` in CI —
 see `.github/workflows/ci.yml`).
 
 ```sh

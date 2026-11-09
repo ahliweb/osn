@@ -41,7 +41,7 @@ body:
     attributes:
       label: Environment
       description: Bun version, OS, and any other relevant environment details.
-      placeholder: "Bun 1.4.0, Ubuntu 24.04"
+      placeholder: "Bun 1.4.4, Ubuntu 24.04"
     validations:
       required: false
 
